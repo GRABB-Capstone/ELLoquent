@@ -127,8 +127,6 @@
 			</div>
 			
 			
-			<img src="<%= category.icon %>" alt="" />
-			
 			<p><%= category.description %></p>
 					
 			<%= category.article %>		
@@ -184,8 +182,16 @@
 				<% _.each(data.pattern.pattern, function(field) { %>
 					<% if ( field && !{"textarea": 1, "hidden": 1}[field.type] ) { %>
 						<td>
-							<% if ( {"google drive image": 1}[field.type] && item[field.name] ) { %>						
-								<img src="<%= item[field.name] %>" width="50px" alt="" />								
+							<% if ( {"google drive image": 1}[field.type] && item[field.name] ) { %>
+							
+							<div class="row">
+							<div class="col-xs-6 col-md-3">
+							<a href="#" class="thumbnail">
+      								<img src="<%= item[field.name] %>" width="50px" alt="" />
+    							</a>
+				 			</div>
+
+							</div>
 							<% } else  if ( {"google drive file": 1}[field.type] && item[field.name] ) { %>
 								<a href="<%= item[field.name] %>">Link</a>
 							<% } else { %>								
