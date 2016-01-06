@@ -65,18 +65,9 @@
 		</script>
 
 	
-		<!-- Don't remove it if you need the loader. -->
-		<div id="baascms-loader" style="display:none; position:fixed; top:20px; left:50%; margin-left:-30px; font-weight:bold;">Loading...</div>
+	
 		
-		
-		<!--
-			Don't remove it if you need the pop-up messages on your site. 
-			Variable "type" can be "danger", "success", "info"
-		-->
-		<div id="baascms-messages" style="display:none; position:fixed; top:50px; left:50%; margin-left:-200px; width:400px; font-weight:bold;"></div>
-		<script id="template-baascms-message" type="text/template">
-			<div style="<%= type === "danger" ? "color: red;" : "" %>"><%= message %></div>
-		</script>
+	
 		
 		
 		<!-- Template for home page. -->
@@ -217,21 +208,7 @@
 		</script>
 		
 		
-		<!-- Default template for breadcrumbs wrap. -->
-		<script id="template-baascms-breadcrumbs-wrap" type="text/template">
-			<ul>
-				<li><a href="#">Home</a></li>
-				<%= htmlElements %>
-			</ul>		
-		</script>
 		
-		
-		<!-- Default template for breadcrumbs element. -->
-		<script id="template-baascms-breadcrumbs-element" type="text/template">
-			<li>
-				<a href="#/baascms/category/<%= category.id %>"><%= _.escape(category.name) %></a>
-			</li>	
-		</script>
 
     </body>
 </html>
