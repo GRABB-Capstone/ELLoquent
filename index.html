@@ -31,7 +31,12 @@
 			
 			BaasCMS.init({
 				baas: 'Parse'
-			});			
+			});	
+			
+			var GameScore = Parse.Object.extend("GameScore");
+			var gameScore = new GameScore();
+
+			gameScore.set("score", 1337);
 		</script>
 		<!-- BaasCMS END -->
 		
@@ -39,12 +44,7 @@
    </head>
     <body>
     	
-    	<script>
-			var GameScore = Parse.Object.extend("GameScore");
-			var gameScore = new GameScore();
-
-			gameScore.set("score", 1337);
-		</script>
+  
 	
  
 	<div class="panel panel-default">
