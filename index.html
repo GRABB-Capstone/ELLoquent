@@ -79,7 +79,6 @@
 		var query = new Parse.Query(Book);
 		query.find({
   		success: function(results) {
-  			alert("ok");
 			bookList = results;
   		},
   		error: function(error) {
