@@ -78,7 +78,7 @@
 
 	};
 	$scope.trouble = function(){
-		alert(fixedBooks.length);
+		alert("hi" + fixedBooks.length);
 	}
 	
     }]);
@@ -99,7 +99,7 @@
 
 
 
-<div ng-controller="ExampleController" onload="trouble()" >
+<div ng-controller="ExampleController" data-ng-init="trouble()" >
 
 <div class="container">
 <div class="jumbotron">
