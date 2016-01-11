@@ -112,7 +112,7 @@
   
 <div class="container" data-ng-init="show()">
     <label for="repeatSelect"> Choose Book: </label>
-    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect" ng-click="show()">
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect" >
       <option ng-repeat="option in books" value="{{option.get("title"}}">{{option.get("title")}}</option>
     </select>
 </div>
