@@ -104,10 +104,15 @@
 
   
   
-
+<div class="container">
+    <label for="repeatSelect"> Repeat select: </label>
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect">
+      <option ng-repeat="option in books" value="{{option.title}}">{{option.title}}</option>
+    </select>
+</div>
    	 
  
-  <div class="container" ng-controller="ExampleController" ng-show="showme">
+  <div class="container"  ng-show="showme">
   <table class="table table-hover">
     <tr>
       <th>Title</th>
