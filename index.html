@@ -73,6 +73,7 @@
 
 	};
 	$scope.getTitle = function(obj){
+		
        		return obj.get("title");
        	
        }
@@ -120,7 +121,7 @@
 <div class="container" data-ng-init="show()" data-ng-init="show()">
     <label for="repeatSelect"> Choose Book: </label>
     <select ng-model="myColor"
-          ng-options="book as getTitle(book) for book in books">
+          ng-options="book as book.get("title) for book in books">
 	</select>
   
 </div>
