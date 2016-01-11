@@ -56,7 +56,6 @@
 	var query = new Parse.Query(Book);
 	query.find({
   	success: function(results) {
-  		alert("ok");
 		$scope.books = results;
   	},
   	error: function(error) {
