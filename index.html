@@ -46,7 +46,6 @@
       $scope.data;
       $scope.leader=false;
       $scope.name;
-      $scope.now = Math.floor(Date.now()/60000/60);
       $scope.friends = [];
       $scope.key = function(){
       	$scope.leader = true;
@@ -111,7 +110,7 @@
   
   
 <div class="container">
-    <label for="repeatSelect"> Repeat select: </label>
+    <label for="repeatSelect"> Choose Book: </label>
     <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect" ng-click="show()">
       <option ng-repeat="option in books" value="{{option.get("title"}}">{{option.get("title")}}</option>
     </select>
