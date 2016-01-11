@@ -1,13 +1,25 @@
+Skip to content
+This repository  
+Search
+Pull requests
+Issues
+Gist
+ @benlin1994
+ Unwatch 1
+  Star 0
+ Fork 0 Murray12/murray12
+ Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs  Settings
+Branch: gh-pages Find file Copy pathmurray12/index.html
+9acdbd0  4 days ago
+@benlin1994 benlin1994 Update index.html
+1 contributor
+RawBlameHistory     165 lines (118 sloc)  4.53 KB
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>BaasCMS</title>
-		
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta charset="utf-8" /> 
-		
-		
-		<!-- BaasCMS START -->
+<html ng-app="submitExample">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
 		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
 		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -15,9 +27,9 @@
 		<script src="//www.parsecdn.com/js/parse-1.2.19.min.js"></script>		
 		<script src="//cdn.rawgit.com/Artod/baascms/master/dist/baascms-1.0.0.min.js"></script>
 		<script src="//cdn.rawgit.com/Artod/baascms/master/dist/baascms-adapter-parse-1.0.0.min.js"></script>
-		
-		
-		<!-- Latest compiled and minified CSS -->
+    		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    		
+    		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 		<!-- jQuery library -->
@@ -25,238 +37,144 @@
 
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		
-		<script>
-			Parse.initialize('X2OtQJt6k4BF3mxtqJxWajyPnhEu9Pmu1PznyJXs', 'MGkTXABPz325R7WrXH2WkFRR1JVtrwPZJDUYPYD7');
+    		
+    		<script>
+			Parse.initialize('lbPrJLH38jokUIjcHFfs2oSU6iEYzPLGrxSpC5YO', 'ThPVIHKZICbSayMVEneWW0FJXs2fbDBFscHJrwQv');
 			
 			BaasCMS.init({
 				baas: 'Parse'
-			});	
+			});
 			
-			var GameScore = Parse.Object.extend("GameScore");
-var gameScore = new GameScore();
-
-gameScore.set("score", 1337);
-gameScore.set("playerName", "Sean Plott");
-gameScore.set("cheatMode", false);
-
-gameScore.save(null, {
-  success: function(gameScore) {
-    // Execute any logic that should take place after the object is saved.
-    alert('New object created with objectId: ' + gameScore.id);
-  },
-  error: function(gameScore, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and message.
-    alert('Failed to create new object, with error code: ' + error.message);
-  }
-});
+			
 		</script>
-		<!-- BaasCMS END -->
+		<script>
+  angular.module('submitExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.list = [];
+      $scope.visitors;
+      $scope.leader=false;
+      $scope.name;
+      $scope.now = Math.floor(Date.now()/60000/60);
+      $scope.friends = [];
+      $scope.key = function(){
+      	$scope.leader = true;
+      }
+      $scope.show = function(){
+	var Visitor = Parse.Object.extend("Visitor");
+	var query = new Parse.Query(Visitor);
+	query.find({
+  	success: function(results) {
+		$scope.visitors = results;
+		for (var i = 0; i < results.length; i++) {
+			$scope.friends.push({name:results[i].get("name"),date:results[i].get("date"),visits:results[i].get("visits")});
+		}
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+	});
+      }
+      $scope.show();
+      $scope.submit = function() {
+      	
+      	var Visitor= Parse.Object.extend("Visitor");
+	var query = new Parse.Query(Visitor);
+	query.equalTo("name", $scope.name);
+	query.find({
+  		success: function(results) {
+  			if (results.length == 0){
+  				alert("Welcome " + $scope.name + ". You are a new visitor!");
+  				var visitor = new Visitor();
+  				visitor.set("name",$scope.name);
+  				visitor.set("date",Math.floor(Date.now()/60000/60));//hour
+  				visitor.set("visits",1);
+  				visitor.save();
+  			}
+  			else {
+  				
+  				if(($scope.now - results[0].get("date")) < 12){
+  					alert("You signed in less than 12 hours ago, please wait before signing in again");
+  				}
+  				else{
+  					alert("Welcome Back! You have visited " + results[0].get("visits") + " times!");
+  				results[0].increment("visits");
+  				results[0].set("date",Math.floor(Date.now()/60000/60));//hour
+  				results[0].save();
+  				}
+  			}
+  			
+    			
+  		},
+  		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+  		}
+	});
+	};
+    }]);
+    
+</script>
+</head>
+
+
+
+<body >
+	
+
+
+
+
+
+
+
+<div ng-controller="ExampleController">
+
+<div class="container">
+<div class="jumbotron">
+  <h1 class="text-center"> Murray 12 </h2>
+</div>	
+</div>
+
+<div class="container">
+	<h3>Sign in Here:</h3>
 		
-		
-   </head>
-    <body>
-    	<script>
-    		
-    		var GameScore = Parse.Object.extend("GameScore");
-var query = new Parse.Query(GameScore);
-query.find({
-  success: function(results) {
-    alert("Successfully retrieved " + results.length + " scores.");
-    // Do something with the returned Parse.Object values
-    for (var i = 0; i < results.length; i++) {
-      var object = results[i];
-      alert(object.id + ' - ' + object.get('playerName'));
-    }
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
-  }
-});
-    	</script>
+      <input class="form-control"  type="text"  placeholder="Example: John Smith" ng-model="name" name="name" />
+      <p></p>
+      <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name"/>
+      
+
+	<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Leaderboard" ng-click="showme=false"ng-show = "showme"/>
+        <input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Leaderboard" ng-click="showme=true" ng-hide = "showme"/>
+</div>
+
+
   
-	
+  
+
+   	 
  
-	<div class="panel panel-default">
-  	<div class="panel-heading">Categories</div>
-		 <div class="panel-body">
-    			
-  		</div>
-	</div>
-		
-	
-		<div  id="place-for-categories"></div>		
-		<script>
-			new BaasCMS.widgets.Categories({
-				elementSelector: '#place-for-categories',
-				onRoute: function(route) {
-					this.$el.find('a').css('font-weight', 'normal');
-					$('#category-' + route.params['cid']).css('font-weight', 'bold');
-				}
-			});
-		</script>
-		
-		
-		<div  id="main-place"></div>		
-		<script>
-			new BaasCMS.widgets.Main({
-				elementSelector: '#main-place'
-			});
-		</script>
+  <div class="container" ng-controller="ExampleController" ng-show="showme">
+  <table class="table table-hover">
+    <tr>
+      <th>Name</th>
+      <th>Visits</th>
+      <th>Last Visited (Hours)</th>
+    </tr>
+    <tr ng-repeat="friend in friends | orderBy:'-visits' ">
+      <td>{{friend.name}}</td>
+      <td>{{friend.visits}}</td>
+      <td>{{now - friend.date }} </td>
+    </tr>
+  </table>
+</div>
+</div>
 
-	
-	
-		
-	
-		
-		
-		<!-- Template for home page. -->
-		<script id="template-baascms-home" type="text/template">	
-			<h1>Home page!</h1>
-			Home page!
-		</script>
-		
-		
-		<!-- Default template for the categories wrap. -->
-		<script id="template-baascms-categories-wrap" type="text/template">
-			<ul>
-				<%= htmlElements %>
-			</ul>
-		</script>
 
-		
-		<!-- Default template for the categories element. -->
-		<script id="template-baascms-categories-element" type="text/template">
-			<li>
-				<a href="#/baascms/category/<%= category.id %>" id="category-<%= category.id %>" <%= routeParams["cid"] === category.id ? " style='font-weight:bold;'" : "" %>><%= _.escape(category.name) %></a>
-				
-				<%= category.count || category.count == 0 ? "(" + category.count + ")" : "" %>
-				
-				<%= htmlChildren %>
-			</li>
-		</script>
-		
-		
-		<!-- Default template for the category detail. -->
-		<script id="template-baascms-category" type="text/template">
-			<h1><%= category.name %></h1>
-			
-			<% if (data.children.length) { %>
-				Children:
-				<ul>
-					<% _.each(data.children, function(child) { %>
-						<li>
-							<a href="#/baascms/category/<%= child.id %>"><%= _.escape(child.name) %></a>
-						</li>
-					<% }) %>
-				</ul>
-			<% } %>
-			
-			
-			
-			
-      			<img src="<%= category.icon %>" alt="" />
-    			
-			
-			
-			<p><%= category.description %></p>
-					
-			<%= category.article %>		
-		</script>
-		
-		
-		<!--
-			Default template for the items wrap.
-			You can create a template with id "template-baascms-{DASHERIZED-PATTERN-NAME}-items-wrap" for customizing the items wrap of specific pattern
-		-->
-		<script id="template-baascms-items-wrap" type="text/template">			
-			<h1><%= _.str.humanize(data.pattern.name) %></h1>
-			
-			<table>
-				<thead>
-					<tr>
-						<th>Detail</th>
-						<% _.each(data.pattern.pattern, function(field) { %>
-							<% if ( field && !{"textarea": 1, "hidden": 1}[field.type] ) { %>
-								<th><a href="#/baascms/category/<%= data.category.id %>/page/<%= data.page %>/sort/<%= 
-									_.str.ltrim(opts.sort, "-") !== field.name
-										? field.name
-										: (opts.sort === field.name ? "-" + field.name : field.name)
-									%>"><%= _.str.humanize(field.name)%><%= _.str.ltrim(opts.sort, "-") !== field.name
-										? ""
-										: (opts.sort === field.name ? " ↑" : " ↓") %></a></th>
-							<% } %>
-						<% }) %>
-					</tr>
-				</thead>
-				<tbody>
-					<%= htmlElements %>
-				</tbody>
-			</table>			
 
-			<% if (data.pages > 1) { %>
-				<div>	
-					<% for (var i = 1; data.pages >= i; i++) { %>
-						<a href="#/baascms/category/<%= data.category.id %>/page/<%= i %>/sort/<%= opts.sort %>"<%= data.page == i ? " style='font-weight:bold;'" : "" %>><%= i %></a>
-					<% } %>
-				</div>
-			<% } %>
-		</script>
-		
-		
-		<!--
-			Default template for the items element.
-			You can create a template with id "template-baascms-{DASHERIZED-PATTERN-NAME}-items-element" for customizing the items element of specific pattern
-		-->
-		<script id="template-baascms-items-element" type="text/template">			
-			<tr id="item<%= _.str.dasherize(data.category.pattern_name) %>-<%= item.id %>">
-				<td><a href="#/baascms/category/<%= data.category.id %>/item/<%= item.id %>">detail</a></td>
-				<% _.each(data.pattern.pattern, function(field) { %>
-					<% if ( field && !{"textarea": 1, "hidden": 1}[field.type] ) { %>
-						<td>
-							<% if ( {"google drive image": 1}[field.type] && item[field.name] ) { %>
-							
-      								<img src="<%= item[field.name] %>" width="50px" alt="" />
-    							
-							<% } else  if ( {"google drive file": 1}[field.type] && item[field.name] ) { %>
-								<a href="<%= item[field.name] %>">Link</a>
-							<% } else { %>								
-								<%= _.escape(item[field.name]) %>								
-							<% } %>
-						</td>
-					<% } %>
-				<% }) %>
-			</tr>
-		</script>		
-		
-		
-		<!--
-			Default template for the item detail.
-			You can create a template with id "template-baascms-{DASHERIZED-PATTERN-NAME}-item" for customizing the item detail of specific pattern
-		-->
-		<script id="template-baascms-item" type="text/template">			
-			<h1><%= item.name %></h1>
-			
-			<ul>
-				<% _.each(data.pattern.pattern, function(field) { %>
-					<% if (field && field.name !== "name" && item[field.name]) { %>
-						<li>
-							<% if ( {"google drive image": 1}[field.type] && item[field.name] ) { %>						
-								<img src="<%= item[field.name] %>" width="50px" alt="" />								
-							<% } else  if ( {"google drive file": 1}[field.type] && item[field.name] ) { %>
-								<a href="<%= item[field.name] %>">Link</a>
-							<% } else { %>								
-								<%= item[field.name] %>								
-							<% } %>
-						</li>
-					<% } %>
-				<% }) %>
-			</ul>	
-		</script>
-		
-		
-		
 
-    </body>
+
+
+
+</body>
 </html>
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
