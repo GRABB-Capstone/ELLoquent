@@ -46,6 +46,8 @@
       	$scope.leader = true;
       }
       $scope.show = function(){
+      	            alert('ok');
+
 	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	query.find({
