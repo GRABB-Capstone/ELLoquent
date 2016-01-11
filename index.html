@@ -120,7 +120,7 @@
       <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name"/>
       
 
-	<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false"ng-show = "showme"/>
+	<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false" ng-show = "showme"/>
         <input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-click="showme=true" ng-hide = "showme"/>
 </div>
 
@@ -128,9 +128,9 @@
   
   
   
-<div class="container" data-ng-init="show()">
+<div class="container" data-ng-init="show()" ng-click="show()">
     <label for="repeatSelect"> Choose Book: </label>
-    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect" >
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect"  ng-click="show()">
       <option ng-repeat="option in books" value="{{option.get("title"}}">{{option.get("title")}}</option>
     </select>
 </div>
