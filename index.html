@@ -43,6 +43,7 @@
     .controller('ExampleController', ['$scope', function($scope) {
       $scope.list = [];
       $scope.books =["one","two"];
+      $scope.fixedBooks=[];
       $scope.data;
       $scope.leader=false;
       $scope.name;
@@ -57,6 +58,9 @@
 	query.find({
   	success: function(results) {
 		$scope.books = results;
+		for (var i = 0; i < results.length; i++) {
+			$scope.fixedBooks.push({title:results[i].get("title"));
+		}
   	},
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
@@ -117,7 +121,7 @@
 <div class="container" data-ng-init="show()" data-ng-init="show()">
     <label for="repeatSelect"> Choose Book: </label>
     <select ng-model="myColor"
-          ng-options="book as book.get("title") for book in books">
+          ng-options="book.title for book in fixedBooks">
 	</select>
   
 </div>
@@ -129,8 +133,8 @@
       <th>Title</th>
       <th>Author</th>
     </tr>
-    <tr ng-repeat="friend in bookList">
-      <td>{{friend.get("title")}}</td>
+    <tr ng-repeat="friend in fixedBooks">
+      <td>{{friend.title}}</td>
       <td>John Carabou</td>
     </tr>
   </table>
