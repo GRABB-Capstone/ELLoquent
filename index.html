@@ -75,23 +75,27 @@
 
 	};
     }]);
-        var bookList;
+       
+// and fire it after definition
+	init();
+    
+</script>
+
+<script type='text/javascript'>
+    bookList;
     // at the bottom of your controller
 	var init = function () {
 		var Book = Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
 		query.find({
   		success: function(results) {
-			this.bookList = results;
+			bookList = results;
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
 		}
 		});
 	};
-// and fire it after definition
-	init();
-    
 </script>
 
 
@@ -131,7 +135,7 @@
 <div class="container" data-ng-init="show()" ng-click="show()">
     <label for="repeatSelect"> Choose Book: </label>
     <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect"  ng-click="show()">
-      <option ng-repeat="option in books" value="{{option.get("title"}}">{{option.get("title")}}</option>
+      <option ng-repeat="option in bookList" value="{{option.get("title"}}">{{option.get("title")}}</option>
     </select>
 </div>
    	 
@@ -142,7 +146,7 @@
       <th>Title</th>
       <th>Author</th>
     </tr>
-    <tr ng-repeat="friend in this.bookList">
+    <tr ng-repeat="friend in bookList">
       <td>{{friend.get("title")}}</td>
       <td>John Carabou</td>
     </tr>
