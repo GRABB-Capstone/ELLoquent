@@ -63,9 +63,7 @@
 	}
 	});
       }
-      $scope.$on('$viewContentLoaded', function() {
-	    show();
-	});
+      
       $scope.submit = function() {
       	
       	var Book= Parse.Object.extend("Book");
@@ -74,12 +72,13 @@
 	book.save();
 
 	};
-    }]);
-       
-       getTitle = function(obj){
+	$scope.getTitle = function(obj){
        		return obj.get("title");
        	
        }
+    }]);
+       
+       
 // and fire it after definition
 
 </script>
