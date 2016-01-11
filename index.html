@@ -114,10 +114,10 @@
 
   
   
-<div class="container" data-ng-init="show()" ng-click="show()">
+<div class="container" data-ng-init="show()" data-ng-init="show()">
     <label for="repeatSelect"> Choose Book: </label>
     <select ng-model="myColor"
-          ng-options="book for book in books">
+          ng-options="book.name for book in books">
 	</select>
   
 </div>
