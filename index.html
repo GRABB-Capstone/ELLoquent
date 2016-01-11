@@ -77,6 +77,9 @@
 	book.save();
 
 	};
+	$scope.trouble = function(){
+		alert(fixedBooks.length);
+	}
 	
     }]);
        
@@ -96,7 +99,7 @@
 
 
 
-<div ng-controller="ExampleController" onload="show()" >
+<div ng-controller="ExampleController" onload="trouble()" >
 
 <div class="container">
 <div class="jumbotron">
