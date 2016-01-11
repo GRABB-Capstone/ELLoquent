@@ -36,7 +36,7 @@
   angular.module('submitExample', [])
     .controller('ExampleController', ['$scope', function($scope) {
       $scope.list = [];
-      $scope.visitors;
+      $scope.books;
       $scope.leader=false;
       $scope.name;
       $scope.now = Math.floor(Date.now()/60000/60);
@@ -45,14 +45,11 @@
       	$scope.leader = true;
       }
       $scope.show = function(){
-	var Visitor = Parse.Object.extend("Visitor");
-	var query = new Parse.Query(Visitor);
+	var Book = Parse.Object.extend("Book");
+	var query = new Parse.Query(Book);
 	query.find({
   	success: function(results) {
-		$scope.visitors = results;
-		for (var i = 0; i < results.length; i++) {
-			$scope.friends.push({name:results[i].get("name"),date:results[i].get("date"),visits:results[i].get("visits")});
-		}
+		$scope.books = results;
   	},
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
@@ -114,14 +111,12 @@
   <div class="container" ng-controller="ExampleController" ng-show="showme">
   <table class="table table-hover">
     <tr>
-      <th>Name</th>
-      <th>Visits</th>
-      <th>Last Visited (Hours)</th>
+      <th>Title</th>
+      <th>Author</th>
     </tr>
-    <tr ng-repeat="friend in friends | orderBy:'-visits' ">
-      <td>{{friend.name}}</td>
-      <td>{{friend.visits}}</td>
-      <td>{{now - friend.date }} </td>
+    <tr ng-repeat="friend in books">
+      <td>{{friend.get("name")}}</td>
+      <td>John Smith</td>
     </tr>
   </table>
 </div>
