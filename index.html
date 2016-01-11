@@ -79,7 +79,7 @@
 		var query = new Parse.Query(Book);
 		query.find({
   		success: function(results) {
-			bookList = results;
+			this.bookList = results;
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -128,7 +128,7 @@
 <div class="container" data-ng-init="show()">
     <label for="repeatSelect"> Choose Book: </label>
     <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect" >
-      <option ng-repeat="option in books" value="{{option.get("title"}}">{{option.get("title")}}</option>
+      <option ng-repeat="option in this.bookList" value="{{option.get("title"}}">{{option.get("title")}}</option>
     </select>
 </div>
    	 
@@ -139,7 +139,7 @@
       <th>Title</th>
       <th>Author</th>
     </tr>
-    <tr ng-repeat="friend in bookList">
+    <tr ng-repeat="friend in this.bookList">
       <td>{{friend.get("title")}}</td>
       <td>John Carabou</td>
     </tr>
