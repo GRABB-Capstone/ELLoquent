@@ -114,7 +114,7 @@
   
 <div class="container">
     <label for="repeatSelect"> Repeat select: </label>
-    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect">
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.repeatSelect" ng-click="show()">
       <option ng-repeat="option in books" value="{{option.get("title"}}">{{option.get("title")}}</option>
     </select>
 </div>
