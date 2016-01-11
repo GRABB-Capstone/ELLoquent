@@ -63,6 +63,9 @@
 	}
 	});
       }
+      $scope.$on('$viewContentLoaded', function() {
+	    show();
+	});
       $scope.submit = function() {
       	
       	var Book= Parse.Object.extend("Book");
