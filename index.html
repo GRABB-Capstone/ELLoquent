@@ -62,38 +62,12 @@
       $scope.show();
       $scope.submit = function() {
       	
-      	var Visitor= Parse.Object.extend("Visitor");
-	var query = new Parse.Query(Visitor);
+      	var Book= Parse.Object.extend("Book");
+	var book= new Book();
+	book.set("name",$scope.name);
+	book.save();
 	query.equalTo("name", $scope.name);
-	query.find({
-  		success: function(results) {
-  			if (results.length == 0){
-  				alert("Welcome " + $scope.name + ". You are a new visitor!");
-  				var visitor = new Visitor();
-  				visitor.set("name",$scope.name);
-  				visitor.set("date",Math.floor(Date.now()/60000/60));//hour
-  				visitor.set("visits",1);
-  				visitor.save();
-  			}
-  			else {
-  				
-  				if(($scope.now - results[0].get("date")) < 12){
-  					alert("You signed in less than 12 hours ago, please wait before signing in again");
-  				}
-  				else{
-  					alert("Welcome Back! You have visited " + results[0].get("visits") + " times!");
-  				results[0].increment("visits");
-  				results[0].set("date",Math.floor(Date.now()/60000/60));//hour
-  				results[0].save();
-  				}
-  			}
-  			
-    			
-  		},
-  		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-  		}
-	});
+	
 	};
     }]);
     
