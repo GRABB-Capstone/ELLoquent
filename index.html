@@ -59,7 +59,7 @@
   	success: function(results) {
 		$scope.books = results;
 		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title"));
+			$scope.fixedBooks.push({title:results[i].get("title")});
 		}
   	},
   	error: function(error) {
