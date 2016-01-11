@@ -73,8 +73,7 @@
 
 
 
-<body >
-	
+<body onload="show();">
 
 
 
@@ -83,10 +82,7 @@
 
 
 <div ng-controller="ExampleController">
-<script>
-	
-	$scope.show();
-</script>
+
 <div class="container">
 <div class="jumbotron">
   <h1 class="text-center"> Elloquent </h2>
@@ -124,7 +120,7 @@
     </tr>
     <tr ng-repeat="friend in books">
       <td>{{friend.get("title")}}</td>
-      <td>John Manziel</td>
+      <td>John Carabou</td>
     </tr>
   </table>
 </div>
