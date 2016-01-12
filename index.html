@@ -43,7 +43,21 @@
     .controller('ExampleController', ['$scope', function($scope) {
       $scope.list = [];
       $scope.books =["one","two"];
-      $scope.fixedBooks=["bob","joe","frank","johnn"];
+	var Book = Parse.Object.extend("Book");
+	var query = new Parse.Query(Book);
+	query.find({
+  	success: function(results) {
+		$scope.books = results;
+		$scope.fixedBooks = [];
+		for (var i = 0; i < results.length; i++) {
+			$scope.fixedBooks.push({title:results[i].get("title")});
+		}
+		alert("populated array" + $scope.fixedBooks[0].title);
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+  
       $scope.data;
       $scope.leader=false;
       $scope.name;
