@@ -99,6 +99,7 @@
 		query.find({
   		success: function(results) {
   			results[0].addUnique("words",$scope.word);
+  			results[0].save();
   			alert("added word" + $scope.word);
 
 			
