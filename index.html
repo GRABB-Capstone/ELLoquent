@@ -110,6 +110,13 @@
 
 
 	};
+	$scope.clickOnUpload = function ($event) {    
+    $event.stopPropagation(); // <-- this is important
+
+    $timeout(function() {
+        angular.element(domElement).trigger('click');
+    }, 0);
+};
 	$scope.trouble = function(){
 		alert("hi");
 	}
@@ -162,7 +169,7 @@
 
   
   
-<div class="container">
+<div id="domElement" class="container">
 	<div class="drowndown">
 	<label for="repeatSelect"> Choose Book: </label>
     	<select ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
