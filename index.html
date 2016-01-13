@@ -79,11 +79,11 @@
   	success: function(results) {
 		$scope.books = results;
 		$scope.fixedBooks = [];
-		/*for (var i = 0; i < results.length; i++) {
+		for (var i = 0; i < results.length; i++) {
 			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade")});
 			
-		}*/
-		$scope.fixedBooks = _.map(results, function(item){ return{title: item.get("title")}});
+		}
+		//$scope.fixedBooks = _.map(results, function(item){ return{title: item.get("title")}});
   	},
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
