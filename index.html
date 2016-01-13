@@ -99,14 +99,14 @@
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
-	user.setUsername("username", $scope.user);
-	acl.setPublicReadAccess(false);
-	acl.setPublicWriteAccess(false);
+	//user.setUsername("username", $scope.user);
+	//acl.setPublicReadAccess(false);
+	//acl.setPublicWriteAccess(false);
 	//acl.setReadAccess(user, true);
 	//acl.setWriteAccess(user, true);
 	//book.setACL(acl);
 	book.save();
-	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade,ACL:acl});
+	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 
 
 	};
@@ -182,14 +182,6 @@
     </tr>
   </table>
 </div>
-
-
-<div class="container">
-	<h3>Add Word:</h3>
-      <input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-
-</div>
-
 </div>
 
 
