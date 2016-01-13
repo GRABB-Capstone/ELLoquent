@@ -160,13 +160,13 @@
   
   
 <div class="container" data-ng-init="show()" >
+	<div class="dropdown">
     <label for="repeatSelect"> Choose Book: </label>
     <select ng-model="fixedBooks.title"
           ng-options="book.title for book in fixedBooks">
-    		
-	</select>
+    </select>
 	{{fixedBooks.length}}
-  
+  </div>
 </div>
    	 
  
