@@ -105,7 +105,7 @@
 	acl.setWriteAccess(user, true);
 	book.setACL(acl);
 	book.save();
-	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade,ACL:acl});
 
 
 	};
@@ -164,7 +164,7 @@
 <div class="container">
 	<div class="drowndown">
 	<label for="repeatSelect"> Choose Book: </label>
-    	<select ng-model="fixedBooks" ng-options="book.title for book in fixedBooks"></select>
+    	<select ng-model="fixedBooks[0].title" ng-options="book.title for book in fixedBooks"></select>
 	</div>
 </div>
    	 
