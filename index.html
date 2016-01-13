@@ -92,16 +92,15 @@
       $scope.submit = function() {
       	
       	var Book= Parse.Object.extend("Book");
-      	var User= Parse.Object.extend("User");
       	var acl= new Parse.ACL();
 	var book= new Book();
-	var user= new User();
+	var user= new Parse.User();
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
-	user.set("username", $scope.user);
-	//acl.setReadAccess(user, true);
-	//book.setACL(acl);
+	user.setUsername("username", $scope.user);
+	acl.setReadAccess(user, true);
+	book.setACL(acl);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 
@@ -160,13 +159,13 @@
   
   
 <div class="container" data-ng-init="show()" >
-	<div class="dropdown">
     <label for="repeatSelect"> Choose Book: </label>
     <select ng-model="fixedBooks.title"
           ng-options="book.title for book in fixedBooks">
-    </select>
+    		
+	</select>
 	{{fixedBooks.length}}
-  </div>
+  
 </div>
    	 
  
