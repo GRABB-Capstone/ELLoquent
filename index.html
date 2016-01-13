@@ -61,6 +61,7 @@
       $scope.data;
       $scope.leader=false;
       $scope.name;
+      $scope.user;
       $scope.friends = [];
       $scope.key = function(){
       	$scope.leader = true;
@@ -86,8 +87,10 @@
       $scope.submit = function() {
       	
       	var Book= Parse.Object.extend("Book");
+      	//var user = new Parse.ACL();
 	var book= new Book();
 	book.set("title",$scope.name);
+	//user.set("user", $scope.user);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name});
 
@@ -125,14 +128,14 @@
 <div class="container">
 	<h3>Add Book:</h3>
 		
-      <input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name" />
+      <input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name2" />
       <p></p>
       <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name"/>
       
 
 	<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false" ng-show = "showme"/>
         <input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-click="showme=true" ng-hide = "showme"/>
-</div>
+</div >
 
 
   
