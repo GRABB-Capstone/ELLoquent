@@ -102,8 +102,8 @@
 	user.setUsername("username", $scope.user);
 	acl.setPublicReadAccess(false);
 	acl.setPublicWriteAccess(false);
-	//acl.setReadAccess(user, true);
-	//acl.setWriteAccess(user, true);
+	acl.setReadAccess(user, true);
+	acl.setWriteAccess(user, true);
 	//book.setACL(acl);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
