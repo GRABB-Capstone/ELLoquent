@@ -59,6 +59,7 @@
 	});
   
       $scope.data;
+      $scope.fixedBooks = [];
       $scope.leader=false;
       $scope.name;
       $scope.user;
@@ -90,9 +91,11 @@
       	//var user = new Parse.ACL();
 	var book= new Book();
 	book.set("title",$scope.name);
-	//user.set("user", $scope.user);
+	book.set("author",$scope.author);
+	user.set("grade", $scope.user);
 	book.save();
-	$scope.fixedBooks.push({title:$scope.name});
+	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+
 
 	};
 	$scope.trouble = function(){
@@ -126,9 +129,14 @@
 </div>
 
 <div class="container">
-	<h3>Add Book:</h3>
-		
+	
+      <h3>Book Title:</h3>
       <input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name2" />
+      <h3>Author:</h3>
+      <input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
+      <h3>Grade Level:</h3>
+      <input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
+
       <p></p>
       <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name"/>
       
@@ -140,9 +148,9 @@
 
   
   
-<div class="container" d ng-mouseover="show()" >
+<div class="container" data-ng-init="show()" >
     <label for="repeatSelect"> Choose Book: </label>
-    <select ng-model="myColor"
+    <select ng-model="fixedBooks"
           ng-options="book.title for book in fixedBooks">
     		
 	</select>
