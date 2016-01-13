@@ -92,6 +92,7 @@
       $scope.addWord = function(){
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
+		alert($scope.selectedBook);
 		query.equalTo("title", $scope.selectedBook);
 		query.find({
   		success: function(results) {
