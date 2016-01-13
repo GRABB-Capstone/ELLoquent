@@ -43,7 +43,7 @@
     .controller('ExampleController', ['$scope', function($scope) {
       $scope.list = [];
       $scope.books =["one","two"];
-	var Book = Parse.Object.extend("Book");
+/*	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	query.find({
   	success: function(results) {
@@ -58,7 +58,7 @@
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
 	}
-	});
+	});*/
   
       $scope.data;
       $scope.fixedBooks = [];
@@ -67,7 +67,7 @@
       $scope.user;
       $scope.friends = [];
       $scope.key = function(){
-      	$scope.leader = true;
+      $scope.leader = true;
       }
       $scope.show = function(){
 
@@ -78,7 +78,8 @@
 		$scope.books = results;
 		$scope.fixedBooks = [];
 		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title")});
+			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade")});
+			
 		}
   	},
   	error: function(error) {
