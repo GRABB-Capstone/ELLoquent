@@ -66,7 +66,6 @@
       $scope.name;
       $scope.grade;
       $scope.user;
-      $scope.selectedBook;
       $scope.friends = [];
       $scope.key = function(){
       $scope.leader = true;
@@ -165,8 +164,7 @@
 <div class="container">
 	<div class="drowndown">
 	<label for="repeatSelect"> Choose Book: </label>
-    	<select ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
-    	{{ fixedBooks.length }}
+    	<select ng-model="fixedBooks[0].title" ng-options="book.title for book in fixedBooks"></select>
 	</div>
 </div>
    	 
