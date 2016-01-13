@@ -160,7 +160,7 @@
   
 <div class="container" data-ng-init="show()" >
     <label for="repeatSelect"> Choose Book: </label>
-    <select ng-model="fixedBooks.title"
+    <select ng-model="fixedBooks.title" ng-mouseover="show()" data-ng-init="show">
           ng-options="book.title for book in fixedBooks">
     		
 	</select>
