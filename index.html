@@ -66,7 +66,6 @@
       $scope.name;
       $scope.grade;
       $scope.user;
-      $scope.selectedBook;
       $scope.friends = [];
       $scope.key = function(){
       $scope.leader = true;
@@ -106,7 +105,7 @@
 	//acl.setWriteAccess(user, true);
 	//book.setACL(acl);
 	book.save();
-	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade,ACL:acl});
+	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 
 
 	};
@@ -165,7 +164,7 @@
 <div class="container">
 	<div class="drowndown">
 	<label for="repeatSelect"> Choose Book: </label>
-    	<select ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
+    	<select ng-model="fixedBooks[0].title" ng-options="book.title for book in fixedBooks"></select>
 	</div>
 </div>
    	 
