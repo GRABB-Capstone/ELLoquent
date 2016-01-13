@@ -61,6 +61,7 @@
 	});*/
   
       $scope.data;
+      $scope.selectedBook;
       $scope.fixedBooks = [];
       $scope.leader=false;
       $scope.name;
@@ -98,12 +99,12 @@
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
-	//user.setUsername("username", $scope.user);
+	user.setUsername("username", $scope.user);
 	acl.setPublicReadAccess(false);
 	acl.setPublicWriteAccess(false);
 	//acl.setReadAccess(user, true);
 	//acl.setWriteAccess(user, true);
-	book.setACL(acl);
+	//book.setACL(acl);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 
@@ -164,7 +165,7 @@
 <div class="container">
 	<div class="drowndown">
 	<label for="repeatSelect"> Choose Book: </label>
-    	<select ng-model="fixedBooks[0].title" ng-options="book.title for book in fixedBooks"></select>
+    	<select ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
 	</div>
 </div>
    	 
