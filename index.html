@@ -93,7 +93,7 @@
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
 		alert($scope.selectedBook);
-		query.equalTo("title", $scope.selectedBook);
+		query.equalTo("title", $scope.selectedBook.get("title"));
 		query.find({
   		success: function(results) {
   			alert("size" + results.length);
