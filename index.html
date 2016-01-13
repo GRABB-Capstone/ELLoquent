@@ -64,6 +64,7 @@
       $scope.fixedBooks = [];
       $scope.leader=false;
       $scope.name;
+      $scope.grade;
       $scope.user;
       $scope.friends = [];
       $scope.key = function(){
@@ -91,11 +92,16 @@
       $scope.submit = function() {
       	
       	var Book= Parse.Object.extend("Book");
-      	//var user = new Parse.ACL();
+      	var User= Parse.Object.extend("User");
+      	var acl= new Parse.ACL();
 	var book= new Book();
+	var user= new User();
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
-	user.set("grade", $scope.user);
+	book.set("grade", $scope.grade);
+	user.set("username", $scope.user);
+	acl.setReadAccess(user, true);
+	book.setACL(acl);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 
@@ -139,6 +145,8 @@
       <input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
       <h3>Grade Level:</h3>
       <input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
+      <h3>Username:</h3>
+      <input class="form-control"  type="text"  placeholder="Example: bronan" ng-model="user"/>
 
       <p></p>
       <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name"/>
