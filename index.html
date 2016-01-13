@@ -83,6 +83,7 @@
 			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade")});
 			
 		}
+		console.log($scope.fixedBooks);
   	},
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
