@@ -104,19 +104,12 @@
 	acl.setPublicWriteAccess(false);
 	//acl.setReadAccess(user, true);
 	//acl.setWriteAccess(user, true);
-	book.setACL(acl);
+	//book.setACL(acl);
 	book.save();
-	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade,ACL:acl});
 
 
 	};
-	$scope.clickOnUpload = function ($event) {    
-    $event.stopPropagation(); // <-- this is important
-
-    $timeout(function() {
-        angular.element(domElement).trigger('click');
-    }, 0);
-};
 	$scope.trouble = function(){
 		alert("hi");
 	}
@@ -169,7 +162,7 @@
 
   
   
-<div id="domElement" class="container">
+<div class="container">
 	<div class="drowndown">
 	<label for="repeatSelect"> Choose Book: </label>
     	<select ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
@@ -185,15 +178,10 @@
     </tr>
     <tr ng-repeat="book in fixedBooks">
       <td>{{book.title}}</td>
-      <td>John Caribou</td>
+      <td>John Carabou</td>
     </tr>
   </table>
 </div>
-
-<div class="container">
-	<h3>Add Word:</h3>
-        <input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-        </div>
 </div>
 
 
