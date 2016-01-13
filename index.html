@@ -65,6 +65,7 @@
       $scope.fixedBooks = [];
       $scope.leader=false;
       $scope.name;
+      $scope.word;
       $scope.grade;
       $scope.user;
       $scope.friends = [];
@@ -97,9 +98,9 @@
 		query.equalTo("title", $scope.selectedBook.title);
 		query.find({
   		success: function(results) {
-  			alert("size" + results.length);
+  			results[0].addUnique("words",$scope.word);
+  			alert("added word" + $scope.word);
 
-			
 			
   		},
   		error: function(error) {
