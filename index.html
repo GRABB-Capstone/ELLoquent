@@ -153,7 +153,7 @@
   
 <div class="container" data-ng-init="show()" >
     <label for="repeatSelect"> Choose Book: </label>
-    <select ng-model="fixedBooks"
+    <select ng-model="fixedBooks.title"
           ng-options="book.title for book in fixedBooks">
     		
 	</select>
@@ -168,8 +168,8 @@
       <th>Title</th>
       <th>Author</th>
     </tr>
-    <tr ng-repeat="friend in fixedBooks">
-      <td>{{friend.title}}</td>
+    <tr ng-repeat="book in fixedBooks">
+      <td>{{book.title}}</td>
       <td>John Carabou</td>
     </tr>
   </table>
