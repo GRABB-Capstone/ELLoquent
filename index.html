@@ -99,8 +99,8 @@
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
 	user.setUsername("username", $scope.user);
-	//acl.setPublicReadAccess(false);
-	//acl.setPublicWriteAccess(false);
+	acl.setPublicReadAccess(false);
+	acl.setPublicWriteAccess(false);
 	acl.setReadAccess(user, true);
 	acl.setWriteAccess(user, true);
 	book.setACL(acl);
@@ -164,7 +164,7 @@
 <div class="container" data-ng-init="show()">
 	<div class="drowndown">
     <label for="repeatSelect"> Choose Book: </label>
-    <select ng-model="fixedBooks.title"
+    <select
           ng-options="book.title for book in fixedBooks">
     		
 	</select>
