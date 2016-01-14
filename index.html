@@ -123,12 +123,12 @@
       	var Book= Parse.Object.extend("Book");
       	//var acl= new Parse.ACL();
 	var book= new Book();
-	var user= new Parse.User();
+	//var user= new Parse.User();
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
 	book.set("bookPhoto", parseFile);
-	user.setUsername("username", $scope.user);
+	//user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
 	//acl.setPublicWriteAccess(false);
 	//acl.setReadAccess(user, true);
