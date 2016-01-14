@@ -128,11 +128,12 @@
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
 	book.set("bookPhoto", parseFile);
-	user.setUsername("username", $scope.user);
+	//user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
 	acl.setPublicWriteAccess(false);
 	//acl.setReadAccess(user, true);
 	//acl.setWriteAccess(user, true);
+	window.alert(user.getUsername());
 	book.setACL(new Parse.ACL(user));
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
