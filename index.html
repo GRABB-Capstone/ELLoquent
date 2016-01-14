@@ -170,6 +170,8 @@
       <input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
       <h3>Username:</h3>
       <input class="form-control"  type="text"  placeholder="Example: bronan" ng-model="user"/>
+      <h3>Book Cover:</h3>
+      <input type="file" id="pic">
 
       <p></p>
       <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name"/>
@@ -178,11 +180,6 @@
 	<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false" ng-show = "showme"/>
         <input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-click="showme=true" ng-hide = "showme"/>
 </div >
-
-<div>
-	TEST
-	<input type="file" id="pic">
-</div>
   
   
 <div class="container">
