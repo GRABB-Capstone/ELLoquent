@@ -111,6 +111,14 @@
 	}
       
       $scope.submit = function() {
+      	var fileUploadControl = $("#pic")[0];
+      	var parseFile;
+      	
+      	if (fileUploadControl.files.length > 0) {
+	   var file = fileUploadControl.files[0];
+   	   var name = "photo.png";
+   	   parseFile = new Parse.File(name, file);
+      	}
       	
       	var Book= Parse.Object.extend("Book");
       	var acl= new Parse.ACL();
@@ -119,6 +127,7 @@
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
+	book.set("bookPhoto", parseFile);
 	user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
 	acl.setPublicWriteAccess(false);
@@ -127,13 +136,7 @@
 	book.setACL(acl);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
-
-
-	};
-	$scope.trouble = function(){
-		alert("hi");
-	}
-	
+      };
     }]);
        
        
