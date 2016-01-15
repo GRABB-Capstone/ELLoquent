@@ -129,12 +129,12 @@
 	$scope.login = function(){
 		var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
-    		alert("loggedIn");
-		$scope.loggedIn = true;
+    			alert("loggedIn");
+			$scope.loggedIn = true;
    
-		 }
-		 });
-  		}
+		}
+		});
+  	}
 
 		
 		
@@ -190,12 +190,7 @@
 
 <div ng-controller="ExampleController" data-ng-init="show()">
 
-<div class="container">
-<div class="jumbotron">
-  <h1 class="text-center"> Elloquent 2.4 </h2>
-</div>	
 
-</div>
 <div class = "container" ng-hide="loggedIn == true">
         <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
         <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
@@ -205,7 +200,12 @@
 
 <div ng-show="loggedIn == true">
 
+<div class="container">
+<div class="jumbotron">
+  <h1 class="text-center"> Elloquent 2.4 </h2>
+</div>	
 
+</div>
 
 <div class="container">
 	
