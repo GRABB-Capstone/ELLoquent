@@ -107,6 +107,7 @@
 	}
 	});
       }
+      $scope.show();
       $scope.addWord = function(){
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
@@ -135,7 +136,7 @@
   	var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
     			alert("loggedIn");
-			login();
+			$scope.login();
    
 		}
 		});	
