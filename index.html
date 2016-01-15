@@ -132,7 +132,7 @@
 			loggedIn = true;
 		else
 			loggedIn = false;
-		
+		alert(loggedIn);
 	}
       
       $scope.submit = function() {
@@ -183,13 +183,13 @@
 
 <div ng-controller="ExampleController" data-ng-init="show()">
 
-<div ng-hide="loggedIn">
+<div ng-hide="loggedIn == true">
         <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="passCode" />
 	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()"  />
         {{passCode}}
 </div>
 
-<div ng-show="loggedIn">
+<div ng-show="loggedIn == true">
 
 <div class="container">
 <div class="jumbotron">
