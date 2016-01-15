@@ -127,10 +127,22 @@
 		});
 	}
 	$scope.login = function(){
-		alert("loggedin");
+		var user = Parse.User.logIn($scope.username, $scope.password, {
+  		success: function(user) {
+    		alert("loggedin");
 		if($scope.passCode == "bronan")
 			$scope.loggedIn = true;
 		alert($scope.loggedIn);
+   
+		 }
+		 });
+  		}
+
+		
+		
+		
+		alert("loggedin");
+		$scope.loggedin = true;
 	}
       
       $scope.submit = function() {
@@ -181,19 +193,23 @@
 
 <div ng-controller="ExampleController" data-ng-init="show()">
 
-<div ng-hide="loggedIn == true">
-        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="passCode" />
+<div class="container">
+<div class="jumbotron">
+  <h1 class="text-center"> Elloquent 2.4 </h2>
+</div>	
+
+</div>
+<div class = "container" ng-hide="loggedIn == true">
+        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="username" />
+                <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
+
 	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()"  />
         {{passCode}}
 </div>
 
 <div ng-show="loggedIn == true">
 
-<div class="container">
-<div class="jumbotron">
-  <h1 class="text-center"> Elloquent 2.4 </h2>
-</div>	
-</div>
+
 
 <div class="container">
 	
