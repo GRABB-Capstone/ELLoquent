@@ -130,9 +130,7 @@
 		var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
     		alert("loggedin");
-		if($scope.passCode == "bronan")
-			$scope.loggedIn = true;
-		alert($scope.loggedIn);
+		$scope.loggedin = true;
    
 		 }
 		 });
@@ -141,9 +139,8 @@
 		
 		
 		
-		alert("loggedin");
-		$scope.loggedin = true;
-	}
+		
+	
       
       $scope.submit = function() {
       	var fileUploadControl = $("#pic")[0];
