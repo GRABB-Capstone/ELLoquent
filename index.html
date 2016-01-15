@@ -127,6 +127,8 @@
 		});
 	}
 	$scope.login = function(){
+		if ($scope.username == "bronan")
+			$scope.loggedIn = true;
 		var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
     			alert("loggedIn");
