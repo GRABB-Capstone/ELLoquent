@@ -127,7 +127,10 @@
 		});
 	}
 	$scope.login = function(){
-		loggedIn = true;
+		if(passCode == "bronan")
+			loggedIn = true;
+		else
+			loggedIn = false;
 		
 	}
       
@@ -179,9 +182,9 @@
 
 <div ng-controller="ExampleController" data-ng-init="show()">
 
-<div>
+<div ng-hide="loggedIn">
         <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="passCode" />
-	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="passcode != "bronan" "/>
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()"  />
 
 </div>
 
