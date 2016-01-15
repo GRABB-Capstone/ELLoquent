@@ -61,6 +61,7 @@
 	});*/
   
       $scope.data;
+      $scope.loggedIn = false;
       $scope.selectedBook = "";
       $scope.fixedBooks = [];
       $scope.leader=false;
@@ -125,6 +126,10 @@
 		}
 		});
 	}
+	$scope.login = function(){
+		loggedIn = true;
+		
+	}
       
       $scope.submit = function() {
       	var fileUploadControl = $("#pic")[0];
@@ -174,9 +179,17 @@
 
 <div ng-controller="ExampleController" data-ng-init="show()">
 
+<div>
+        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="passCode" />
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="passcode != "bronan" "/>
+
+</div>
+
+<div ng-show="loggedIn">
+
 <div class="container">
 <div class="jumbotron">
-  <h1 class="text-center"> Elloquent 2.2 </h2>
+  <h1 class="text-center"> Elloquent 2.4 </h2>
 </div>	
 </div>
 
@@ -245,7 +258,7 @@
   </table>
 </div>
 
-
+</div>
 </div>
 
 
