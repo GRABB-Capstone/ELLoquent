@@ -128,10 +128,8 @@
 	}
 	$scope.login = function(){
 		alert("loggedin");
-		if(passCode == "bronan")
+		if($scope.passCode == "bronan")
 			loggedIn = true;
-		else
-			loggedIn = false;
 		alert(loggedIn);
 	}
       
