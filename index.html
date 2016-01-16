@@ -97,6 +97,7 @@
 			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade")});
 			
 		}
+		//$scope.fixedBooks = _.map(results, function(item){ return{title: item.get("title")}});
   	},
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
@@ -124,16 +125,8 @@
 	$scope.login = function(){
 		if ($scope.username == "bronan")
 			$scope.loggedIn = true;
+		
 	
-  	}
-  	$scope.tryLogin = function(){
-  	var user = Parse.User.logIn($scope.username, $scope.password, {
-  		success: function(user) {
-    			alert("loggedIn");
-			$scope.login();
-   
-		}
-		});	
   	}
 		
 		
@@ -179,6 +172,8 @@
 
 </head>
 
+
+
 <body>
 
 
@@ -187,9 +182,14 @@
 <div ng-controller="ExampleController" data-ng-init="show()">
 
 
+<div class = "container" ng-hide="loggedIn == true">
+        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
+        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
 
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled = "!username || !password"  />
+</div>
 
-<div>
+<div ng-show="loggedIn == true">
 
 <div class="container">
 <div class="jumbotron">
