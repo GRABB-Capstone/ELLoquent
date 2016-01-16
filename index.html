@@ -235,7 +235,7 @@
       				<input type="file" id="pic" ng-model="cover"/>
 
       				<p></p>
-      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name "/>
+      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !grade || !user || !cover"/>
       
 
 					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false" ng-show = "showme"/>
