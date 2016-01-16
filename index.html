@@ -111,7 +111,7 @@
 		query.equalTo("title", $scope.selectedBook.title);
 		query.find({
   		success: function(results) {
-  			$scope.wordList.push($scope.word);
+  			$scope.wordList.push("$scope.word");
   			results[0].addUnique("words",$scope.word);
   			results[0].save();
   			alert("added word" + $scope.word);
