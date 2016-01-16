@@ -23,10 +23,11 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     		
     		<script>
-			Parse.initialize('XlZQi8Z0dAIDNWjBmqWmNctcEjVA3NTNSVDF2fin', 'YlBsos14dteWEK9Ug2AsA8TpNiHCuPQQbDZMQcfh');
-				BaasCMS.init({
-			baas: 'Parse'
-		});
+			Parse.initialize('X2OtQJt6k4BF3mxtqJxWajyPnhEu9Pmu1PznyJXs', 'MGkTXABPz325R7WrXH2WkFRR1JVtrwPZJDUYPYD7');
+			
+			BaasCMS.init({
+				baas: 'Parse'
+			});
 			
 			
 		</script>
@@ -65,7 +66,7 @@
       $scope.leader=false;
       $scope.name;
       $scope.word;
-      $scope.wordList  = [];
+      $scope.wordList;
       $scope.grade;
       $scope.user;
       $scope.friends = [];
@@ -79,7 +80,6 @@
 		query.find({
   		success: function(results) {
   			$scope.wordList = results[0].get("words");
-  		
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -131,7 +131,7 @@
   	var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
     			alert("loggedIn");
-			$scope.login();
+			login();
    
 		}
 		});	
@@ -160,7 +160,6 @@
 	book.set("author",$scope.author);
 	book.set("grade", $scope.grade);
 	book.set("bookPhoto", parseFile);
-	book.set("words",[]);
 	//user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
 	//acl.setPublicWriteAccess(false);
@@ -188,23 +187,22 @@
 
 <div ng-controller="ExampleController" data-ng-init="show()">
 
+
+<div class = "container" ng-hide="loggedIn == true">
+        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
+        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
+
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled = "!username || !password"  />
+</div>
+
+<div ng-show="loggedIn == true">
+
 <div class="container">
 <div class="jumbotron">
   <h1 class="text-center"> Elloquent 2.4 </h2>
 </div>	
 
 </div>
-
-<div class = "container" ng-hide="loggedIn == true">
-        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
-        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
-
-	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="tryLogin()" ng-disabled = "!username || !password"  />
-</div>
-
-<div ng-show="loggedIn == true">
-
-
 
 <div class="container">
 	
@@ -253,10 +251,13 @@
 	<h3>Add Word:</h3>
       <input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
             <input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
-<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
-<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/>
+
 </div>
 
+<div class="container">
+<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Words" ng-click="showmeWords=false; updateWords()" ng-show = "showmeWords"/>
+<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Words" ng-click="showmeWords=true; updateWords()" ng-hide = "showmeWords"/>
+</div>
 <div class="container"  ng-show="showmeWords">
   <table class="table table-hover">
     <tr>
@@ -266,8 +267,6 @@
       <td>{{word}}</td>
     </tr>
   </table>
-
-
 </div>
 
 </div>
