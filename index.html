@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html ng-app="submitExample">
 <head>
@@ -81,7 +80,6 @@
 		query.find({
   		success: function(results) {
   			$scope.wordList = results[0].get("words");
-
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -89,7 +87,6 @@
 		});
 	}
       $scope.show = function(){
-
 	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	query.find({
@@ -118,7 +115,6 @@
   			results[0].addUnique("words",$scope.word);
   			results[0].save();
   			alert("added word" + $scope.word);
-
 			
   		},
   		error: function(error) {
@@ -132,18 +128,14 @@
 	
   	}
   	$scope.tryLogin = function(){
-  		Parse.User.logIn("$scope.username", "$scope.password", {
-		 success: function(user) {
-		 	alert("logged In");
-			  $scope.login();
-		 },
-		 error: function(user, error) {
-			  alert("failed loggin");
-		 }
+  	var user = Parse.User.logIn($scope.username, $scope.password, {
+  		success: function(user) {
+    			alert("loggedIn");
+			$scope.login();
+   
+		}
 		});	
   	}
-  	
-
 		
 		
 		
@@ -182,7 +174,6 @@
        
        
 // and fire it after definition
-
 </script>
 
 
@@ -194,14 +185,14 @@
 
 
 
-<div ng-controller="ExampleController" >
+<div ng-controller="ExampleController" data-ng-init="show()">
 
 
 <div class = "container" ng-hide="loggedIn == true">
         <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
         <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
 
-	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="tryLogin()" ng-disabled = "!username || !password"  />
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled = "!username || !password"  />
 </div>
 
 <div ng-show="loggedIn == true">
