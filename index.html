@@ -261,7 +261,7 @@
     <tr>
       <th>Words</th>
     </tr>
-    <tr ng-repeat="word in wordList">
+    <tr ng-repeat="word in wordList track by $index">
       <td>{{word}}</td>
     </tr>
   </table>
