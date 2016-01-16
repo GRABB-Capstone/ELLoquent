@@ -200,8 +200,8 @@
 </div>
 
 <div class = "container" ng-hide="loggedIn == true">
-        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
-        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
+        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" /> {{username}}
+        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" /> {{password}}
 
 	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="tryLogin()" ng-disabled = "!username || !password"  />
 </div>
