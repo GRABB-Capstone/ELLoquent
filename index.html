@@ -14,7 +14,11 @@
     		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script
     		
     	
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
     		
     		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -235,8 +239,7 @@
   
 <div class="container">
 	<label for="repeatSelect"> Choose Book: </label>
-    	<select  ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
-	</div>
+    	<select class="selectpicker" ng-model="selectedBook" ng-options="book.title for book in fixedBooks"></select>
 </div>
 
 
@@ -278,7 +281,7 @@
 
 </div>
 
-
+</div>
 
 
 
