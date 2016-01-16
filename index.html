@@ -207,7 +207,7 @@
 		<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="tryLogin()" ng-disabled = "!username || !password"  />
 	</div>
 
-	<div ng-show="loggedIn == true">
+	<div ng-show="loggedIn == true" data-ng-init="show()">
 
 		<div class="container">
   		<h2>Dynamic Tabs</h2>
