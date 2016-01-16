@@ -105,12 +105,13 @@
 	});
       }
       $scope.addWord = function(){
+      	  	$scope.wordList.push($scope.word);
+
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
 		query.equalTo("title", $scope.selectedBook.title);
 		query.find({
   		success: function(results) {
-  			$scope.wordList.push($scope.word);
   			results[0].addUnique("words",$scope.word);
   			results[0].save();
 
