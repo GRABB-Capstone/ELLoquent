@@ -133,7 +133,6 @@
   	$scope.tryLogin = function(){
   	var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
-    			alert("loggedIn");
 			$scope.login();
    
 		}
