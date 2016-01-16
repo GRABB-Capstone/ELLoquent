@@ -79,6 +79,8 @@
 		query.find({
   		success: function(results) {
   			$scope.wordList = results[0].get("words");
+  			if ($scope.wordList == null)
+  				$scope.wordList = [];
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
