@@ -194,6 +194,29 @@
 
 
 
+
+
+
+
+<div ng-controller="ExampleController" data-ng-init="show()">
+
+<div class="container">
+<div class="jumbotron">
+  <h1 class="text-center"> Elloquent 2.4 </h2>
+</div>	
+
+</div>
+
+<div class = "container" ng-hide="loggedIn == true">
+        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
+        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
+
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="tryLogin()" ng-disabled = "!username || !password"  />
+</div>
+
+<div ng-show="loggedIn == true">
+
+
 <div class="container" ng-controller="ExampleController" >
   <h2>Dynamic Tabs</h2>
   <ul class="nav nav-tabs">
@@ -298,112 +321,8 @@
     </div>
     
     
-    
-    
-    
-    
-    
-    
-    
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-</div>
 
 
-
-
-
-<div ng-controller="ExampleController" data-ng-init="show()">
-
-<div class="container">
-<div class="jumbotron">
-  <h1 class="text-center"> Elloquent 2.4 </h2>
-</div>	
-
-</div>
-
-<div class = "container" ng-hide="loggedIn == true">
-        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
-        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
-
-	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="tryLogin()" ng-disabled = "!username || !password"  />
-</div>
-
-<div ng-show="loggedIn == true">
-
-
-
-<div class="container">
-	
-      <h3>Book Title:</h3>
-      <input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name2" />
-      <h3>Author:</h3>
-      <input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
-      <h3>Grade Level:</h3>
-      <input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
-      <h3>Username:</h3>
-      <input class="form-control"  type="text"  placeholder="Example: bronan" ng-model="user"/>
-      <h3>Book Cover:</h3>
-      <input type="file" id="pic" ng-model="cover"/>
-
-      <p></p>
-      <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name "/>
-      
-
-	<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false" ng-show = "showme"/>
-        <input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-click="showme=true" ng-hide = "showme"/>
-</div >
-  
-  
-<div class="container">
-	<label for="repeatSelect"> Choose Book: </label>
-    	<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-    		<option value="">Select one</option>
-    	</select>
-</div>
-
-   	 
- 
-<div class="container"  ng-show="showme">
-  <table class="table table-hover">
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-    </tr>
-    <tr ng-repeat="book in fixedBooks">
-      <td>{{book.title}}</td>
-      <td>{{book.author}}</td>
-    </tr>
-  </table>
-</div>
-
-<div class = "container">
-	<h3>Add Word:</h3>
-      <input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-            <input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
-<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
-<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/>
-</div>
-
-<div class="container"  ng-show="showmeWords">
-  <table class="table table-hover">
-    <tr>
-      <th>Words</th>
-    </tr>
-    <tr ng-repeat="word in wordList track by $index">
-      <td>{{word}}</td>
-    </tr>
-  </table>
-
-
-</div>
 
 </div>
 
