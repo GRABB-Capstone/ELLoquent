@@ -107,15 +107,13 @@
       $scope.addWord = function(){
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
-		alert($scope.selectedBook.title);
 		query.equalTo("title", $scope.selectedBook.title);
 		query.find({
   		success: function(results) {
-  			$scope.wordList.push("$scope.word");
+  			$scope.wordList.push($scope.word);
   			results[0].addUnique("words",$scope.word);
   			results[0].save();
-  			alert("added word" + $scope.word);
-			
+
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
