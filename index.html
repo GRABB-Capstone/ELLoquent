@@ -67,6 +67,7 @@
       $scope.leader=false;
       $scope.name;
       $scope.word;
+      $scope.fileName;
       $scope.wordList  = [];
       $scope.grade;
       $scope.user;
@@ -150,10 +151,12 @@
       	var fileUploadControl = $("#pic")[0];
       	var parseFile;
       	alert("cover"  + $scope.cover);
+      	$scope.fileName = $scope.cover.slice(12,-1);
       	if (fileUploadControl.files.length > 0) {
 	   var file = fileUploadControl.files[0];
-   	   var name = "photo.png";
+   	   var name = $scope.fileName;
    	   parseFile = new Parse.File(name, file);
+   	   alert("name: " + name);
       	}
       	
       	var Book= Parse.Object.extend("Book");
