@@ -132,14 +132,17 @@
 	
   	}
   	$scope.tryLogin = function(){
-  	var user = Parse.User.logIn($scope.username, $scope.password, {
-  		success: function(user) {
-    			alert("loggedIn");
-			$scope.login();
-   
-		}
+  		Parse.User.logIn("myname", "mypass", {
+		 success: function(user) {
+		 	alert("logged In");
+			  $scope.login();
+		 },
+		 error: function(user, error) {
+		  // The login failed. Check error to see why.
+		 }
 		});	
   	}
+  	
 
 		
 		
