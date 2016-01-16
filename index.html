@@ -150,8 +150,7 @@
       $scope.submit = function() {
       	var fileUploadControl = $("#pic")[0];
       	var parseFile;
-      	alert("cover"  + $scope.cover);
-      	$scope.fileName = $scope.cover.slice(12,-1);
+      	$scope.fileName = $scope.cover.slice(12);
       	if (fileUploadControl.files.length > 0) {
 	   var file = fileUploadControl.files[0];
    	   var name = $scope.fileName;
