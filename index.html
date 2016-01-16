@@ -250,13 +250,10 @@
 	<h3>Add Word:</h3>
       <input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
             <input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord();updateWords();" ng-disabled="!word"/>
-
-</div>
-
-<div class="container">
 <input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
 <input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/>
 </div>
+
 <div class="container"  ng-show="showmeWords">
   <table class="table table-hover">
     <tr>
@@ -266,6 +263,8 @@
       <td>{{word}}</td>
     </tr>
   </table>
+
+
 </div>
 
 </div>
