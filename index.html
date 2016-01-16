@@ -105,7 +105,11 @@
 	});
       }
       $scope.addWord = function(){
-      	  	$scope.wordList.push($scope.word);
+      		if ($scope.wordList.contains($scope.word)){
+      			alert("Word Already Exists");
+      		}
+      		else
+      	  		$scope.wordList.push($scope.word);
 
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
