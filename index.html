@@ -188,14 +188,9 @@
 <div ng-controller="ExampleController" data-ng-init="show()">
 
 
-<div class = "container" ng-hide="loggedIn == true">
-        <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
-        <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
 
-	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled = "!username || !password"  />
-</div>
 
-<div ng-show="loggedIn == true">
+<div>
 
 <div class="container">
 <div class="jumbotron">
