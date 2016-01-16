@@ -239,7 +239,7 @@
   
 <div class="container">
 	<label for="repeatSelect"> Choose Book: </label>
-    	<select class="selectpicker" ng-model="selectedBook" ng-options="book.title for book in fixedBooks" ng-click="show()" toggle-dropdown>
+    	<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
     		<option value="">Select one</option>
     	</select>
 </div>
