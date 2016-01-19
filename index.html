@@ -133,15 +133,7 @@
 	}
 		
 		
-        var fileUploadControl = $("#pic")[0];
-      	var parseFile;
-      	$scope.fileName = $scope.cover.slice(12);
-      	if (fileUploadControl.files.length > 0) {
-	   var file = fileUploadControl.files[0];
-   	   var name = $scope.fileName;
-   	   parseFile = new Parse.File(name, file);
-   	   alert("Uploaded: " + name);
-      	}	
+       	
       }
       $scope.addWord = function(){
       		if ($scope.wordList.includes($scope.word)){
