@@ -124,8 +124,13 @@
    		 	alert("Uploaded Image: " + parseImage);
       		}	
   		
-  		results[0].addUnique("images",parseImage);
+  		results[0].addUnique("images",parseImage.id);
   		results[0].save();
+  		var Image= Parse.Object.extend("Image");
+		var image= new Image();
+  		image.set("image", parseImage);
+  		image.set("name",imageName);
+  		image.save();
 
   	},
   	error: function(error) {
