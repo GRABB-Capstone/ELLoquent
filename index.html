@@ -328,7 +328,9 @@
 
 				<div class = "container">
 					<h3>Add Image:</h3>
-		     	 		<input  type="file" id="pic" ng-model="cover"/>
+		     	 		<input  type="file" id="pic" ng-model="image"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image"/>
+
 				</div>
 
 			
