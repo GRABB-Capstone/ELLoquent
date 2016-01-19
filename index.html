@@ -385,7 +385,7 @@
 		     	 		<input  type="file" id="image" ng-model="image"/>
 		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image"/>
 		     	 		<input class="btn btn-primary btn-block form-control" type="submit" id="hideImage" value="Remove Images" ng-click="showmeImages=false;updateImages(); " ng-show = "showmeImages"/>
-							<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images" ng-click="showmeImages=true;updateImages();" ng-hide = "showmeImages"/ ng-disabled="!selectedBook.title">
+					<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images" ng-click="showmeImages=true;updateImages();" ng-hide = "showmeImages"/ ng-disabled="!selectedBook.title">
 
 
 				</div>
@@ -399,8 +399,8 @@
       						<th>Image</th>
 		 					</tr>
     					<tr ng-repeat="image in imageList track by $index">
-      						<td>{{word.get("name")}}</td>
-      						<td>{{word.get("image")}}</td>
+      						<td>{{image.get("name")}}</td>
+      						<td>{{image.get("image")}}</td>
     					</tr>
   					</table>
 
