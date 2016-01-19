@@ -142,8 +142,17 @@
       		}
       		else
       	  		$scope.wordList.push($scope.word);
-
-		
+		var Book= Parse.Object.extend("Book");
+		var query = new Parse.Query(Book);
+		query.equalTo("title", $scope.selectedBook.title);
+		query.find({
+  		success: function(results) {
+  			results[0].addUnique("words",$scope.word);
+  			results[0].save();
+  		},
+  		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		}
 		});
 	}
 	$scope.login = function(){
