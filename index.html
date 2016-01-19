@@ -89,6 +89,19 @@
 		}
 		});
 	}
+	$scope.updateImages = function(){
+		var Image= Parse.Object.extend("Image");
+		var query = new Parse.Query(Image);
+		query.equalTo("book", $scope.selectedBook.title);
+		query.find({
+  		success: function(results) {
+  			$scope.imageList = results;
+  		},
+  		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		}
+		});
+	}
       $scope.show = function(){
 	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
@@ -127,6 +140,7 @@
 		var image= new Image();
   		image.set("image", parseImage);
   		image.set("name",imageName);
+  		image.set("book",$scope.selectedBook.title);
   		image.save();
   		
   		results[0].addUnique("images",imageName);
@@ -148,18 +162,18 @@
       		}
       		else
       	  		$scope.wordList.push($scope.word);
-		var Book= Parse.Object.extend("Book");
-		var query = new Parse.Query(Book);
-		query.equalTo("title", $scope.selectedBook.title);
-		query.find({
-  		success: function(results) {
-  			results[0].addUnique("words",$scope.word);
-  			results[0].save();
-  		},
-  		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
-		});
+							var Book= Parse.Object.extend("Book");
+							var query = new Parse.Query(Book);
+							query.equalTo("title", $scope.selectedBook.title);
+							query.find({
+  						success: function(results) {
+  							results[0].addUnique("words",$scope.word);
+  							results[0].save();
+  						},
+  						error: function(error) {
+								alert("Error: " + error.code + " " + error.message);
+							}
+					});
 	}
 	$scope.login = function(){
 		if ($scope.username == "bronan")
@@ -339,7 +353,7 @@
 
 				<div class="container"  ng-show="showmeWords">
   					<table class="table table-hover">
-    				<tr>
+    					<tr>
       					<th>Words</th>
 		 			</tr>
     				<tr ng-repeat="word in wordList track by $index">
@@ -370,7 +384,28 @@
 					<h3>Add Image:</h3>
 		     	 		<input  type="file" id="image" ng-model="image"/>
 		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image"/>
+		     	 		<input class="btn btn-primary btn-block form-control" type="submit" id="hideImage" value="Remove Images" ng-click="showmeWords=false;updateImages(); " ng-show = "showmeImages"/>
+							<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images" ng-click="showmeWords=true;updateImages();" ng-hide = "showmeImages"/ ng-disabled="!selectedBook.title">
 
+
+				</div>
+				
+				<div class = "container" ng-show="showmeImages">
+					<h3>Images:</h3>
+					<div class="container">
+  					<table class="table table-hover">
+    					<tr>
+      						<th>File Name</th>
+      						<th>Image</th>
+		 					</tr>
+    					<tr ng-repeat="image in imageList track by $index">
+      						<td>{{word.get("name")}}</td>
+      						<td>{{word.get("image")}}</td>
+    					</tr>
+  					</table>
+
+
+				</div>
 				</div>
 
 			
