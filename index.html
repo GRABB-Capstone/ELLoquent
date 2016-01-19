@@ -114,7 +114,7 @@
 	query.equalTo("title", $scope.selectedBook.title);
 	query.find({
   	success: function(results) {
-  		var imageUploadControl = $("#pic")[0];
+  		var imageUploadControl = $("#image")[0];
       		var parseImage;
       		$scope.imageName = $scope.image.slice(12);
       		if (imageUploadControl.files.length > 0) {
@@ -362,7 +362,7 @@
 
 				<div class = "container">
 					<h3>Add Image:</h3>
-		     	 		<input  type="file" id="pic" ng-model="image"/>
+		     	 		<input  type="file" id="image" ng-model="image"/>
 		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image"/>
 
 				</div>
