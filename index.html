@@ -97,7 +97,7 @@
   		success: function(results) {
   			$scope.imageList =[];
   			for (var i = 0; i < results.length; i++) {
-				$scope.imageList.push(results[0].get("image").url());
+				$scope.imageList.push(results[i].get("image").url());
 			}
 
   		},
