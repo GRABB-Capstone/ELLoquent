@@ -97,7 +97,7 @@
   		success: function(results) {
   			$scope.imageList =[];
   			for (var i = 0; i < results.length; i++) {
-				$scope.imageList.push(results[i].get("image").url());
+				$scope.imageList.push({name:results[i].get("name"),url:results[i].get("image").url()});
 			}
 
   		},
@@ -399,10 +399,12 @@
 					<div class="container">
   					<table class="table table-hover">
     					<tr>
+    						<th>Name</th>
       						<th>Image</th>
 		 					</tr>
     					<tr ng-repeat="image in imageList track by $index" >
-    						<td><img ng-src="{{image}}" style="width:128px;height:128px;" />	</td>
+    						<td>{{image.name}}</td>
+    						<td><img ng-src="{{image.url}}" style="width:128px;height:128px;" />	</td>
     					</tr>
   					</table>
 
