@@ -205,14 +205,14 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1 class="text-center"> Elloquent 2.4 </h1>
-			<h3 class="text-center"> Quick Login Enabled, just click log in </h3>
+			<h3 class="text-center"> Quick Login Enabled, just click log in</h3>
 		</div>	
 	</div>
 
 	<div class = "container" ng-hide="loggedIn == true">
         <input class="form-control"  type="text"  placeholder="Example: myUsername " ng-model="username" />
         <input class="form-control"  type="text"  placeholder="Example: myPassword " ng-model="password" />
-	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="quickLogin()" ng-disabled = "!username || !password"  />
+	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="quickLogin()"  />
 	</div>
 
 	<div ng-show="loggedIn == true" data-ng-init="show()">
