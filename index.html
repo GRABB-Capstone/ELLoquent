@@ -95,7 +95,11 @@
 		query.equalTo("book", $scope.selectedBook.title);
 		query.find({
   		success: function(results) {
-  			$scope.imageList = results;
+  			$scope.imageList =[];
+  			for (var i = 0; i < results.length; i++) {
+				$scope.imageList.push(results[0].get("image").url)
+			}
+
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -395,13 +399,10 @@
 					<div class="container">
   					<table class="table table-hover">
     					<tr>
-      						<th>File Name</th>
       						<th>Image</th>
 		 					</tr>
     					<tr ng-repeat="image in imageList track by $index">
-      						<td>{{image.get("name")}}</td>
-      						<td>{{image.get("image")}}</td>
-      						<img ng-src="{{image.get("image").url}}"/>
+    						<td>{{image}}</td>
     					</tr>
   					</table>
 
