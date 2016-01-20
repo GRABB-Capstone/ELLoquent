@@ -298,49 +298,7 @@
       					<td>
       						
       						
-      						<h3>Add a Book</h3>
-      
-			 	<div class="container">
-      				<h3>Book Title:</h3>
-      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name2" />
-      				<h3>Author:</h3>
-      				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
-    				<h3>Grade Level:</h3>
-      				<input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
-      				<h3>Username:</h3>
-    			 	<input class="form-control"  type="text"  placeholder="Example: bronan" ng-model="user"/>
-      				<h3>Book Cover:</h3>
-      				<input type="file" id="pic" ng-model="cover"/>
-
-      				<p></p>
-      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !grade || !user || !cover"/>
-      
-
-					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-mouseover = "show()" ng-click="showme=false" ng-show = "showme"/>
-        			<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-mouseover = "show()" ng-click="showme=true" ng-hide = "showme"/>
-				</div >
-  
-
-
-   	 
- 
-			<div class="container"  ng-show="showme">
-  				<table class="table table-hover">
-    				<tr>
-      					<th>Title</th>
-      					<th>Author</th>
-					 </tr>
-    				<tr ng-repeat="book in fixedBooks">
-      					<td>{{book.title}}</td>
-      					<td>{{book.author}}</td>
-			 		</tr>
-  				</table>
-			</div>
-      
-      
-    		</div>
-    		<div id="menu1" class="tab-pane fade">
-      			<h3>Add Words to a Book </h3>
+      	<h3>Add Words to a Book </h3>
  
 	 			<div class="container">
 					<label for="repeatSelect"> Choose Book: </label>
