@@ -299,8 +299,8 @@
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !grade || !user || !cover"/>
       
 
-					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-click="showme=false" ng-show = "showme"/>
-        			<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-click="showme=true" ng-hide = "showme"/>
+					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-mouseover = "show()" ng-click="showme=false" ng-show = "showme"/>
+        			<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-mouseover = "show()" ng-click="showme=true" ng-hide = "showme"/>
 				</div >
   
 
@@ -351,8 +351,8 @@
 					<h3>Add Word:</h3>
 		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
 		     	 	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
-					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
-					<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/ ng-disabled="!selectedBook.title">
+					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" ng-mouseover = "updateWords()" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
+					<input class="btn btn-primary btn-block form-control" type="submit" id="key" ng-mouseover = "updateWords()" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/ ng-disabled="!selectedBook.title">
 				</div>
 
 				<div class="container"  ng-show="showmeWords">
@@ -388,8 +388,8 @@
 					<h3>Add Image:</h3>
 		     	 		<input  type="file" id="image" ng-model="image"/>
 		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image"/>
-		     	 		<input class="btn btn-primary btn-block form-control" type="submit" id="hideImage" value="Remove Images" ng-click="showmeImages=false;updateImages(); " ng-show = "showmeImages"/>
-					<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images" ng-click="showmeImages=true;updateImages();" ng-hide = "showmeImages"/ ng-disabled="!selectedBook.title">
+		     	 		<input class="btn btn-primary btn-block form-control" type="submit" id="hideImage" value="Remove Images" ng-mouseover = "updateImages()" ng-click="showmeImages=false;updateImages(); " ng-show = "showmeImages"/>
+					<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images"  ng-mouseover = "updateImages()" ng-click="showmeImages=true;updateImages();" ng-hide = "showmeImages"/ ng-disabled="!selectedBook.title">
 
 
 				</div>
@@ -403,7 +403,7 @@
       						<th>Image</th>
 		 					</tr>
     					<tr ng-repeat="image in imageList track by $index" >
-    						<td>{{image.name}}</td>
+    						<td ng-mouseover = "alert("moused" + image)">{{image.name}} </td>
     						<td><img ng-src="{{image.url}}" style="height:128px;" />	</td>
     					</tr>
   					</table>
