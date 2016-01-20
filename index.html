@@ -301,55 +301,29 @@
       					<td>
       						
       						
-      	<h3>Add Words to a Book </h3>
- 
-	 			<div class="container">
-					<label for="repeatSelect"> Choose Book: </label>
-    				<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks" ng-mouseover= "updateWords()">
-    					<option value="">Select one</option>
-    				</select>
-				</div>
-
-   	 
- 
-				<div class="container"  ng-show="showme">
-  					<table class="table table-hover">
-	  					<tr>
-		  					<th>Title</th>
-      						<th>Author</th>
-	 					</tr>
-    					<tr ng-repeat="book in fixedBooks">
-      						<td>{{book.title}}</td>
-      						<td>{{book.author}}</td>
-    					</tr>
-					</table>
-				</div>
-
-				<div class = "container">
-					<h3>Add Word:</h3>
-		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
-					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" ng-mouseover = "updateWords()" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
-					<input class="btn btn-primary btn-block form-control" type="submit" id="key" ng-mouseover = "updateWords()" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/ ng-disabled="!selectedBook.title">
-				</div>
-
-				<div class="container"  ng-show="showmeWords">
-  					<table class="table table-hover">
-    					<tr>
-      					<th>Words</th>
-		 			</tr>
-    				<tr ng-repeat="word in wordList track by $index">
-      					<td>{{word}}</td>
-    				</tr>
-  					</table>
-
-
-				</div>
+      						
+      					<a href="#" rel="popover" data-popover-content="#myPopover">My Popover</a>
+	
+      						
+      					<div id="myPopover" class="hide">
+					This is a popover list:
+					<ul>
+						<li>List item 1</li>
+						<li>List item 2</li>
+						<li>List item 3</li>
+					</ul>
+					</div>	
+      				
       						
       						
       						
       						
       					</td>
+      					
+      					
+      					
+      					
+      					
 			 		</tr>
   				</table>
 			</div>
