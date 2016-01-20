@@ -307,28 +307,26 @@
     				<tr>
     					
       					<th>Title</th>
+      					<th>Author</th>
       					<th>Button</th>
+      					
 					 </tr>
     				<tr ng-repeat="book in fixedBooks">
       					<td>{{book.title}}</td>
+      					<td>{{book.author}}</td>
       					<td>
       						
       						
-      						
-      					<a href="#" rel="popover" data-popover-content="#myPopover">My Popover</a>
-	
-      						
-      					<div id="myPopover" class="hide">
-					This is a popover list:
-					<ul>
-						<li>List item 1</li>
-						<li>List item 2</li>
-						<li>List item 3</li>
-					</ul>
-					</div>	
       				
       						
       						
+      					<h3>Add Word:</h3>
+		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
+      					
+      				
+      						
+ 
       						
       						
       					</td>
