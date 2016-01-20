@@ -276,13 +276,19 @@
 		<div class="container">
   		<h2>Navigation Bar</h2>
 		<ul class="nav nav-tabs">
-    			<li class="active"><a data-toggle="tab" href="#home">Books</a></li>
+    			<li class="active"><a data-toggle="tab" href="#content">View Content</a></li>
+    			<li><a data-toggle="tab" href="#home" ng-click="showme = false">Books</a></li>
 		 	<li><a data-toggle="tab" href="#menu1" ng-click="showme = false">Words</a></li>
     			<li><a data-toggle="tab" href="#menu2" ng-click="showme = false">Images</a></li>
     			<li><a data-toggle="tab" href="#menu3" ng-click="showme = false">Search?</a></li>
   		</ul>
 
+
   		<div class="tab-content">
+  		<div id="content" class="tab-pane fade">
+      		<h3>View Content </h3>
+      		
+      		</div>
     		<div id="home" class="tab-pane fade in active">
       			<h3>Add a Book</h3>
       
