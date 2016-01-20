@@ -197,6 +197,9 @@
 		}
 		});	
   	}
+  	$scope.test = function (x){
+  		alert("test" + x);
+  	}
   	
 		
 		
@@ -403,7 +406,7 @@
       						<th>Image</th>
 		 					</tr>
     					<tr ng-repeat="image in imageList track by $index" >
-    						<td ng-mouseover = "alert("moused" + image)">{{image.name}} </td>
+    						<td ng-mouseover = "test(image.name)">{{image.name}} </td>
     						<td><img ng-src="{{image.url}}" style="height:128px;" />	</td>
     					</tr>
   					</table>
