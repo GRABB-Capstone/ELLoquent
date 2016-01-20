@@ -213,6 +213,12 @@
   	$scope.test = function (x){
   		alert("test" + x);
   	}
+  	$scope.trigger = function (){
+  		
+  		$timeout(function(){
+  			angular.element('#trigger1').triggerHandler('click)');
+  		},100);
+  	}
   	
 		
 		
@@ -291,7 +297,7 @@
 		<ul class="nav nav-tabs">
     			<li class="active"><a data-toggle="tab" href="#content">View Content</a></li>
     			<li><a data-toggle="tab" href="#home" ng-click="showme = false">Books</a></li>
-		 	<li><a data-toggle="tab" href="#menu1" ng-click="showme = false">Words</a></li>
+		 	<li><a data-toggle="tab" id = "trigger1" href="#menu1" ng-click="showme = false">Words</a></li>
     			<li><a data-toggle="tab" href="#menu2" ng-click="showme = false">Images</a></li>
     			<li><a data-toggle="tab" href="#menu3" ng-click="showme = false">Search?</a></li>
   		</ul>
@@ -322,7 +328,7 @@
       						
       					<h3>Add Word:</h3>
 		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="trigger()" ng-disabled="!word"/>
       					
       				
       						
