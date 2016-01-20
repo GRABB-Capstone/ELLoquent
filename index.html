@@ -287,6 +287,20 @@
   		<div class="tab-content">
   		<div id="content" class="tab-pane fade in active">
       		<h3>View Content </h3>
+      			<div class="container"  >
+  				<table class="table table-hover">
+    				<tr>
+      					<th>Title</th>
+      					<th>Button</th>
+					 </tr>
+    				<tr ng-repeat="book in fixedBooks">
+      					<td>{{book.title}}</td>
+      					<td>
+      						<input class="btn btn-primary btn-block" type="submit" id="test" value=test" ng-click="test()" />
+      					</td>
+			 		</tr>
+  				</table>
+			</div>
       		
       		</div>
     		<div id="home" class="tab-pane fade">
