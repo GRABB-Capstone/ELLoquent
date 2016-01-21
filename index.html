@@ -216,17 +216,7 @@
   	$scope.trig = function (selBook){
   		
 
-  		var Book= Parse.Object.extend("Book");
-							var query = new Parse.Query(Book);
-							query.equalTo("title", selBook);
-							query.find({
-  						success: function(results) {
-  							$scope.selectedBook = results[0];
-  						},
-  						error: function(error) {
-								alert("Error: " + error.code + " " + error.message);
-							}
-					});
+  		$scope.selectedBook = book;
 					
   		activaTab('menu1');
   	}
@@ -384,7 +374,7 @@ activaTab('ccc');
       						
       					</td>
       					<td>
-      	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book.title)" >Add Word!</button>
+      	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)" >Add Word!</button>
       						
       					</td>
       					
