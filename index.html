@@ -330,7 +330,7 @@ activaTab('ccc');
       					<th>Grade </th>
       					<th>Add Word</th>
       					<th>Add Image</th>
-      					
+      					<th>Jump to Edit</th>
 					 </tr>
     				<tr ng-repeat="book in fixedBooks">
       					<td>{{book.title}}</td>
@@ -371,7 +371,10 @@ activaTab('ccc');
       						
       						
       					</td>
-      					
+      					<td>
+      	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig()" ng-disabled="!image">Add Word!</button>
+      						
+      					</td>
       					
       					
       					
