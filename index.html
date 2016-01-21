@@ -326,19 +326,18 @@
       						
       						
       					<h3>Add Word:</h3>
-		   			<input class="col-sm-3"  type="text"  placeholder="Example: Technology" ng-model="word"/>
 		     	 		<input class="btn btn-primary" type="submit" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!word"/>
       					
       				
       						
  <form class="form-inline">
   <div class="form-group">
-    <label for="exampleInputName2">Add Word</label>
-    <input type="text" class="form-control" id="addwordtemp" placeholder="Wizard">
+    <input type="text" class="form-control" id="addwordtemp" placeholder="Wizard" ng-model ="word">
   </div>
   
-  <button type="submit" class="btn btn-primary">Add Word</button>
+  <button type="submit" class="btn btn-primary" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!word"></button>
 </form>
+ 
  
  
       						
