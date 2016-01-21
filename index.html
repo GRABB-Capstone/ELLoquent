@@ -215,7 +215,19 @@
   	}
   	$scope.trig = function (selBook){
   		
-  		$scope.selectedBook.title = selBook;
+
+  		var Book= Parse.Object.extend("Book");
+							var query = new Parse.Query(Book);
+							query.equalTo("title", selBook);
+							query.find({
+  						success: function(results) {
+  							$scope.selectedBook = results[0];
+  						},
+  						error: function(error) {
+								alert("Error: " + error.code + " " + error.message);
+							}
+					});
+					
   		activaTab('menu1');
   	}
   	
