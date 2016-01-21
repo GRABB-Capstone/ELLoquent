@@ -213,10 +213,10 @@
   	$scope.test = function (x){
   		alert("test" + x);
   	}
-  	$scope.trigger = function (){
+  	$scope.trig = function (){
   		
   	
-  			angular.element('#menu1').triggerHandler('click');
+  			angular.element('#menu1').trigger('click');
   	}
   	
 		
@@ -327,7 +327,7 @@
       						
       					<h3>Add Word:</h3>
 		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="trigger()" ng-disabled="!word"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!word"/>
       					
       				
       						
