@@ -466,7 +466,7 @@ activaTab('ccc');
 				<div class = "container">
 					<h3>Add Word:</h3>
 		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word"/>
+		     	 	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
 					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" ng-mouseover = "updateWords()" value="Remove Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
 					<input class="btn btn-primary btn-block form-control" type="submit" id="key" ng-mouseover = "updateWords()" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/ ng-disabled="!selectedBook.title">
 				</div>
