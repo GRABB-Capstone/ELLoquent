@@ -127,7 +127,7 @@
 		$scope.books = results;
 		$scope.fixedBooks = [];
 		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade")});
+			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade"),url:results[i].get("bookPhoto").url()});
 			
 		}
 		//$scope.fixedBooks = _.map(results, function(item){ return{title: item.get("title")}});
@@ -312,12 +312,17 @@
     					
       					<th>Title</th>
       					<th>Author</th>
+      					<th>Cover</th>
+      					<th>Grade </th>
       					<th>Button</th>
       					
 					 </tr>
     				<tr ng-repeat="book in fixedBooks">
       					<td>{{book.title}}</td>
       					<td>{{book.author}}</td>
+ 
+      					<td>{{book.grade}}</td>
+      					<td><img ng-src="{{book.url}}" style="height:128px;" />	</td>
       					<td>
       						
       						
@@ -337,6 +342,17 @@
 </form>
       	
 
+      						
+      						
+      					</td>
+      					<td>
+<form class="form-inline">
+  <div class="form-group">
+  	<input  type="file" id="image" ng-model="image"/>
+  </div>
+  <button type="submit" class="btn" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!image">Add Image</button>
+
+</form>
       						
       						
       					</td>
