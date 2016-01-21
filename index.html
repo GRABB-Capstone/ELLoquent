@@ -216,13 +216,17 @@
   	$scope.trig = function (){
   		
   	
-  			angular.element('#menu1').trigger('click');
+  		activaTab('menu1');
   	}
   	
 		
 		
 		
+	$scope.activaTab = function activaTab(tab){
+    		$('.nav-tabs a[href="#' + tab + '"]').tab('show');
 		
+		
+	}	
 	
       
       $scope.submit = function() {
@@ -261,7 +265,17 @@
        
 // and fire it after definition
 </script>
+<script>
+	
+function activaTab(tab){
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+};
 
+activaTab('bbb');
+activaTab('ccc');
+
+
+</script>
 
 
 </head>
