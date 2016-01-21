@@ -314,7 +314,8 @@
       					<th>Author</th>
       					<th>Cover</th>
       					<th>Grade </th>
-      					<th>Button</th>
+      					<th>Add Word</th>
+      					<th>Add Image</th>
       					
 					 </tr>
     				<tr ng-repeat="book in fixedBooks">
@@ -348,7 +349,7 @@
       					<td>
 <form class="form-inline">
   <div class="form-group">
-  	<input  type="file" id="image" ng-model="image"/>
+  	<input class="form-control" type="file" id="image" ng-model="image"/>
   </div>
   <button type="submit" class="btn" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!image">Add Image</button>
 
