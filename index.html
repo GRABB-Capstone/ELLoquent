@@ -330,6 +330,16 @@ activaTab('ccc');
   		<div class="tab-content">
   		<div id="content" class="tab-pane fade in active">
       		<h3>View Content </h3>
+      		
+      		<div class="container">
+				<label for="repeatSelect"> Filter by Grade: </label>
+    				<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
+    					<option value="">Select one</option>
+    				</select>
+    				<button type="submit" class="btn" id="filter" value="filter"  >Filter!</button>
+
+    		</div>
+    		
       			<div class="container"  >
   				<table class="table table-hover">
   				
