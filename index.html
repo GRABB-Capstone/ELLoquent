@@ -347,10 +347,14 @@ activaTab('ccc');
   				<div class="form-group">
     					<label for="repeatSelect"> Filter by Grade: </label>
     					<select class="form-control" ng-model="filterGrades" ng-options="grade in grades">
+    					<option value="">Select one</option>
+
     					</select>
     					
     					<label for="repeatSelect"> Filter by Subject: </label>
     					<select class="form-control" ng-model="filterSubjects" ng-options="subject in subjects">
+    					<option value="">Select one</option>
+
     					</select>
   				</div>
   				<button type="submit" class="btn" id="filter" value="filter"  >Filter!</button>
