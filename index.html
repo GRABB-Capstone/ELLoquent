@@ -80,6 +80,8 @@
       $scope.leader=false;
       $scope.name;
       $scope.word;
+      $scope.grades = ["Any","K","1","2","3","4","5","6"];
+      $scope.subjects = ["Any","Language Arts","Social Studies","Math","Science"];
       $scope.fileName;
       $scope.wordList  = [];
       $scope.grade;
@@ -344,13 +346,11 @@ activaTab('ccc');
       				<form class="form-inline">
   				<div class="form-group">
     					<label for="repeatSelect"> Filter by Grade: </label>
-    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-    						<option value="">Select one</option>
+    					<select class="form-control" ng-model="selectedBook" ng-options="grade in grades">
     					</select>
     					
-    					<label for="repeatSelect"> Filter by Grade: </label>
-    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-    						<option value="">Select one</option>
+    					<label for="repeatSelect"> Filter by Subject: </label>
+    					<select class="form-control" ng-model="selectedBook" ng-options="subject in subjects">
     					</select>
   				</div>
   				<button type="submit" class="btn" id="filter" value="filter"  >Filter!</button>
@@ -363,6 +363,8 @@ activaTab('ccc');
       			
     			</div>
     		</div>
+    		
+    		<p></p>
     		
     		
     		
