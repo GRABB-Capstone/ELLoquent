@@ -338,7 +338,7 @@ activaTab('ccc');
       		
       		
       		<div class="container">
-      			<div class="col-sm-3">
+      			<div class="col-sm-6">
       				
       				
       				<form class="form-inline">
@@ -347,22 +347,20 @@ activaTab('ccc');
     					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
     						<option value="">Select one</option>
     					</select>
-  					</div>
-  				    	<button type="submit" class="btn" id="filter" value="filter"  >Filter!</button>
+    					
+    					<label for="repeatSelect"> Filter by Grade: </label>
+    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
+    						<option value="">Select one</option>
+    					</select>
+  				</div>
+  				<button type="submit" class="btn" id="filter" value="filter"  >Filter!</button>
 
 				</form>
       				
       				
       				
       				
-      				
-      				
-      				
-      				
-				<label for="repeatSelect"> Filter by Grade: </label>
-    				<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-    					<option value="">Select one</option>
-    				</select>
+      			
     			</div>
     		</div>
     		
