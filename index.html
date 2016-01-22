@@ -339,8 +339,7 @@ activaTab('ccc');
       					<th>Author</th>
       					<th>Cover</th>
       					<th>Grade </th>
-      					<th>Add Word</th>
-      					<th>Add Image</th>
+      				
       					<th>Jump to Edit</th>
 					 </tr>
     				<tr ng-repeat="book in fixedBooks">
@@ -349,39 +348,12 @@ activaTab('ccc');
  
       					<td>{{book.grade}}</td>
       					<td><img ng-src="{{book.url}}" style="height:128px;" />	</td>
-      					<td>
+      					
       						
       						
       				
-      						
-      						
-      					<h3>Add Word:</h3>
-
-      
-      
-<form class="form-inline">
-  <div class="form-group">
-    <input type="text"  id="addwordtemp" placeholder="Wizard" ng-model ="word">
-  </div>
-  <button type="submit" class="btn" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!word">Add Word</button>
-
-</form>
-      	
-
-      						
-      						
-      					</td>
-      					<td>
-<form class="form-inline">
-  <div class="form-group">
-  	<input class="form-control" type="file" id="image" ng-model="image"/>
-  </div>
-  <button type="submit" class="btn" id="addWord" value="Add Word" ng-click="trig()" ng-disabled="!image">Add Image</button>
-
-</form>
-      						
-      						
-      					</td>
+      				
+      				
       					<td>
       	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)" >Add  Word!</button>
       	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig2(book)" >Add Image!</button>
