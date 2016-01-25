@@ -56,23 +56,6 @@
     .controller('ExampleController', ['$scope', function($scope) {
       $scope.list = [];
       $scope.books =["one","two"];
-/*	var Book = Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	query.find({
-  	success: function(results) {
-		$scope.books = results;
-		$scope.fixedBooks = [];
-		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title"),author:results[i].get("author"),grade:results[i].get("grade")});
-			
-			
-		}
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
-	});*/
-  
       $scope.data;
       $scope.loggedIn = false;
       $scope.selectedBook = "";
