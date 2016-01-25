@@ -267,7 +267,7 @@
       $scope.removeWord = function(word){
       	alert("removed word: " + word);
       }
-      $scope.submit = function() {
+      $scope.addBook = function() {
       	var fileUploadControl = $("#pic")[0];
       	var parseFile;
       	$scope.fileName = $scope.cover.slice(12);
@@ -277,6 +277,12 @@
    	   parseFile = new Parse.File(name, file);
    	   alert("Uploaded: " + name);
       	}
+      	
+      	
+      	if ($scope.fixedBooks.includes($scope.name)){
+      		alert("Book Already Exists");
+      	}
+      	else{
       	
       	var Book= Parse.Object.extend("Book");
       	//var acl= new Parse.ACL();
@@ -298,6 +304,7 @@
 	//book.setACL(acl);
 	book.save();
 	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+      	}
       };
     }]);
        
@@ -469,7 +476,7 @@ function activaTab(tab){
       				<input type="file" id="pic" ng-model="cover"/>
 
       				<p></p>
-      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !pickedGrade || !user || !cover || !pickedSubject"/>
+      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="addBook()" ng-disabled="!name || !author || !pickedGrade || !user || !cover || !pickedSubject"/>
       
 
 					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-mouseover = "updateBooks()" ng-click="showme=false" ng-show = "showme"/>
