@@ -349,12 +349,12 @@ activaTab('ccc');
       				<form class="form-inline">
   				<div class="form-group">
     					<label for="repeatSelect"> Filter by Grade: </label>
-    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
+    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in gradesPick" ng-init="filterGrades = grades[0]">
 
     					</select>
     					
     					<label for="repeatSelect"> Filter by Subject: </label>
-    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjectsPick" ng-init="filterSubjects = subjects[0]">
 
     					</select>
   				</div>
