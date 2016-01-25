@@ -423,6 +423,12 @@ activaTab('ccc');
       				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
     				<h3>Grade Level:</h3>
       				<input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
+      				<h3>Subject:</h3>
+      				
+      				<label for="repeatSelect"> Pick Subject: </label>
+    				<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+      				
+      				
       				<h3>Username:</h3>
     			 	<input class="form-control"  type="text"  placeholder="Example: bronan" ng-model="user"/>
       				<h3>Book Cover:</h3>
