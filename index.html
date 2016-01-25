@@ -350,7 +350,6 @@ function activaTab(tab){
     			<li><a data-toggle="tab" href="#home" ng-click="showme = false;">Books</a></li>
 		 	<li><a data-toggle="tab" href="#menu1" ng-click="showme = false;">Words</a></li>
     			<li><a data-toggle="tab" href="#menu2" ng-click="showme = false;">Images</a></li>
-    			<li><a data-toggle="tab" href="#menu3" ng-click="showme = false;">Search?</a></li>
   		</ul>
 
 
@@ -543,19 +542,13 @@ function activaTab(tab){
     				<tr ng-repeat="word in wordList track by $index">
       					<td>{{word}}</td>
       					<td>      	
-      			Hello	//		<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >Remove Word</button>
+      					<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >Remove Word</button>
 					</td>
     				</tr>
     				
     				
-    				
-    				
-    				
-    			
-				
-				
-			
 
+	 		</div>
 	 		</div>
 	 		
 	 		<div id="menu2" class="tab-pane fade">
