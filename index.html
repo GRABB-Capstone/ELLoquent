@@ -75,6 +75,33 @@
       $scope.key = function(){
       $scope.leader = true;
       }
+      $scope.filterBooks = function(){
+      	var Book = Parse.Object.extend("Book");
+	var query = new Parse.Query(Book);
+	if($scope.pickedSubject != "Any")
+		query.equalTo("Subject",$scope.pickedSubject);
+	if($scope.pickedGrade != "Any")	
+		query.equalTo("Subject",$scope.pickedGrade);
+	query.find({
+  	success: function(results) {
+		$scope.books = results;
+		$scope.fixedBooks = [];
+		for (var i = 0; i < results.length; i++) {
+			$scope.fixedBooks.push({title:results[i].get("title"),
+						author:results[i].get("author"),
+						grade:results[i].get("grade"),
+						subject:results[i].get("subject"),
+						url:results[i].get("bookPhoto").url()});
+			
+		}
+		$scope.$apply();
+
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+	});
+      }
       $scope.updateWords = function(){
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
