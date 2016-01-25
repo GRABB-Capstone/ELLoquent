@@ -72,9 +72,12 @@
       $scope.grade;
       $scope.user;
       $scope.friends = [];
-      $scope.key = function(){
-      $scope.leader = true;
+      $scope. resetFilter = function(){
+      $scope.filterSubjects = "Any";
+      $scope.Grades = "Any";
+
       }
+      
       $scope.filterBooks = function(){
       	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
@@ -379,7 +382,7 @@ function activaTab(tab){
     					</select>
   				</div>
   				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
-
+  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
 				</form>
       				
       				
