@@ -109,7 +109,7 @@
 		$scope.$apply();
 
 	}
-      $scope.show = function(){
+      $scope.updateBooks = function(){
 	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	query.find({
@@ -294,7 +294,7 @@ function activaTab(tab){
 
 
 
-<div ng-controller="ExampleController" data-ng-init="show()">
+<div ng-controller="ExampleController">
 
 	<div class="container">
 		<div class="jumbotron">
@@ -309,7 +309,7 @@ function activaTab(tab){
 	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="quickLogin()"  />
 	</div>
 
-	<div ng-show="loggedIn == true" data-ng-init="show()">
+	<div ng-show="loggedIn == true" data-ng-init="updateBooks()">
 
 		<div class="container">
   		<h2>Navigation Bar</h2>
@@ -441,8 +441,8 @@ function activaTab(tab){
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !pickedGrade || !user || !cover || !pickedSubject"/>
       
 
-					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-mouseover = "show()" ng-click="showme=false" ng-show = "showme"/>
-        			<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-mouseover = "show()" ng-click="showme=true" ng-hide = "showme"/>
+					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-mouseover = "updateBooks()" ng-click="showme=false" ng-show = "showme"/>
+        			<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Books" ng-mouseover = "updateBooks()" ng-click="showme=true" ng-hide = "showme"/>
 				</div >
   
 
