@@ -471,7 +471,7 @@ function activaTab(tab){
  
 	 			<div class="container">
 					<label for="repeatSelect"> Choose Book: </label>
-    				<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
+    				<select class="form-control" ng-model="selectedBook" ng-click ="updateWords()" ng-options="book.title for book in fixedBooks">
     					<option value="">Select one</option>
     				</select>
 				</div>
