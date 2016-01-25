@@ -109,13 +109,14 @@
 		query.find({
   		success: function(results) {
   			$scope.wordList = results[0].get("words");
+  			$scope.$apply();
   		
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
 		}
 		});
-		$scope.$apply();
+		
 	}
 	$scope.updateImages = function(){
 		var Image= Parse.Object.extend("Image");
@@ -127,13 +128,13 @@
   			for (var i = 0; i < results.length; i++) {
 				$scope.imageList.push({name:results[i].get("name"),url:results[i].get("image").url()});
 			}
+			$scope.$apply();
 
   		},
   		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
 		}
 		});
-		$scope.$apply();
 
 	}
       $scope.updateBooks = function(){
