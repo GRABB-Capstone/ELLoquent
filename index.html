@@ -491,10 +491,15 @@ function activaTab(tab){
 				<div class="container"  ng-show="showmeWords">
   					<table class="table table-hover">
     					<tr>
-      					<th>Words</th>
+      						<th>Words</th>
 		 			</tr>
+		 			
     				<tr ng-repeat="word in wordList track by $index">
       					<td>{{word}}</td>
+    				</tr>
+    				
+    				
+    				<tr ng-options="word for word in wordList">
     				</tr>
   					</table>
 
