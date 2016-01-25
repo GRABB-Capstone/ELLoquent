@@ -79,9 +79,9 @@
       	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	if($scope.filterSubjects != "Any")
-		query.equalTo("Subject",$scope.filterSubjects);
+		query.equalTo("subject",$scope.filterSubjects);
 	if($scope.filterGrades != "Any")	
-		query.equalTo("Subject",$scope.filterGrades);
+		query.equalTo("grade",$scope.filterGrades);
 	query.find({
   	success: function(results) {
 		$scope.books = results;
