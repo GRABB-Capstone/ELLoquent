@@ -72,10 +72,9 @@
       $scope.grade;
       $scope.user;
       $scope.friends = [];
-      $scope. resetFilter = function(){
-      $scope.filterSubjects = "Any";
-      $scope.Grades = "Any";
-
+      $scope.resetFilter = function(){
+	 $scope.filterSubjects = "Any";
+      	 $scope.Grades = "Any";
       }
       
       $scope.filterBooks = function(){
@@ -544,7 +543,7 @@ function activaTab(tab){
     				<tr ng-repeat="word in wordList track by $index">
       					<td>{{word}}</td>
       					<td>      	
-      						<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >Remove Word</button>
+      			Hello	//		<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >Remove Word</button>
 					</td>
     				</tr>
     				
