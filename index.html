@@ -285,8 +285,13 @@
    	   alert("Uploaded: " + name);
       	}
       	
+      	var found = 0;
+      	for (var i = 0; i < $scope.fixedBooks.length; i++) {
+		if ($scope.fixedBooks[i].title == $scope.name)
+			found = 1;
+	}
       	
-      	if ($scope.fixedBooks.includes($scope.name)){
+      	if (found)){
       		alert("Book Already Exists");
       	}
       	else{
