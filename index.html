@@ -496,7 +496,7 @@ function activaTab(tab){
     		<div id="menu1" class="tab-pane fade">
       			<h3>Add Words to a Book </h3>
       			
-      			<div class="col-sm-6">
+      			<div class="container">
       			<form class="form-inline">
   				<div class="form-group">
     					<label for="repeatSelect"> Pick Book: </label>
@@ -569,19 +569,24 @@ function activaTab(tab){
 	 		
 	 		<div id="menu2" class="tab-pane fade">
       				<h3>Add Images to a Book</h3>
+      				
+      			<div class="container">
+      			<form class="form-inline">
+  				<div class="form-group">
+    					<label for="repeatSelect"> Pick Book: </label>
+    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
+						<option value="">Select one</option>
 
-      				<div class="container">
-					<label for="repeatSelect"> Choose Book: </label>
-					
-					
-					
-    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks" ng-mouseover = "updateImages()">
+    					</select>
     					
-    					
-    					
-    					<option value="">Select one</option>
-    				</select>
-				</div>
+    		
+  				</div>
+  				<button type="submit" class="btn" id="updateImages" value="updateImages" ng-disabled = "!selectedBook" ng-click = "updateImages()" >Update Images</button>
+
+			</form>
+ 			</div>
+
+      				
 
    	 
  
