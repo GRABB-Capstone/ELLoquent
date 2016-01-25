@@ -57,6 +57,7 @@
       $scope.list = [];
       $scope.books =["one","two"];
       $scope.data;
+      $scope.currentBook;
       $scope.loggedIn = false;
       $scope.selectedBook = "";
       $scope.fixedBooks = [];
@@ -111,6 +112,7 @@
 		query.find({
   		success: function(results) {
   			$scope.wordList = results[0].get("words");
+  			$scope.currentBook = results[0];
   			$scope.$apply();
   		
   		},
@@ -130,6 +132,7 @@
   			for (var i = 0; i < results.length; i++) {
 				$scope.imageList.push({name:results[i].get("name"),url:results[i].get("image").url()});
 			}
+			
 			$scope.$apply();
 
   		},
@@ -265,6 +268,8 @@
 	}	
 	
       $scope.removeWord = function(word){
+      	
+      	$scope.currentBook.remove("words",word);
       	alert("removed word: " + word);
       }
       $scope.addBook = function() {
