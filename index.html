@@ -499,12 +499,28 @@ function activaTab(tab){
     				</tr>
     				
     				
-    				<tr ng-options="word for word in wordList">
-    				</tr>
+    				
+    				
+    				
+    				///table
+    				
   					</table>
 
 
 				</div>
+				
+				<table class="table table-hover">
+    					<tr>
+      						<th>Words</th>
+		 			</tr>
+		 			
+    				<tr ng-repeat="word in wordList track by $index">
+      					<td>{{word}}</td>
+    				</tr>
+    				
+    				
+    				
+  					</table>
 				
 				
 			
