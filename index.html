@@ -81,7 +81,9 @@
       $scope.name;
       $scope.word;
       $scope.grades = ["Any","K","1","2","3","4","5","6"];
+      $scope.gradesPick = ["K","1","2","3","4","5","6"];
       $scope.subjects = ["Any","Language Arts","Social Studies","Math","Science"];
+      $scope.subjectsPick = ["Language Arts","Social Studies","Math","Science"];
       $scope.fileName;
       $scope.wordList  = [];
       $scope.grade;
@@ -259,7 +261,8 @@
 	//var user= new Parse.User();
 	book.set("title",$scope.name);
 	book.set("author",$scope.author);
-	book.set("grade", $scope.grade);
+	book.set("grade", $scope.pickedGrade);
+	book.set("subject",$scope.pickedSubject);
 	book.set("bookPhoto", parseFile);
 	book.set("words",[]);
 	book.set("images",[]);
@@ -422,11 +425,21 @@ activaTab('ccc');
       				<h3>Author:</h3>
       				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
     				<h3>Grade Level:</h3>
+    				
+    				
+    				<label for="repeatSelect"> Pick Grade: </label>
+    					<select class="form-control" ng-model="pickedGrade" ng-options="grade for grade in grades">
+    					<option value="">Select one</option>
+
+    				</select>
+    				
+    				
       				<input class="form-control"  type="text"  placeholder="Example: Grade 4" ng-model="grade"/>
       				<h3>Subject:</h3>
       				
       				<label for="repeatSelect"> Pick Subject: </label>
-    				<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+    				<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjects">
+    					<option value="">Select one</option>
       				</select>
       				
       				<h3>Username:</h3>
@@ -435,7 +448,7 @@ activaTab('ccc');
       				<input type="file" id="pic" ng-model="cover"/>
 
       				<p></p>
-      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !grade || !user || !cover"/>
+      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="submit()" ng-disabled="!name || !author || !pickedGrade || !user || !cover || !pickedSubject"/>
       
 
 					<input class="btn btn-primary btn-block form-control" type="submit" id="remove" value="Remove Books" ng-mouseover = "show()" ng-click="showme=false" ng-show = "showme"/>
