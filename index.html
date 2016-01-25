@@ -262,7 +262,9 @@
 		
 	}	
 	
-      
+      $scope.removeWord = function(word){
+      	alert("removed word: " + word);
+      }
       $scope.submit = function() {
       	var fileUploadControl = $("#pic")[0];
       	var parseFile;
@@ -533,10 +535,14 @@ function activaTab(tab){
   					<table class="table table-hover">
     					<tr>
       						<th>Words</th>
+      						<th>Remove Word</th>
 		 			</tr>
 		 			
     				<tr ng-repeat="word in wordList track by $index">
       					<td>{{word}}</td>
+      					<td>      	
+      						<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >Remove Word</button>
+					</td>
     				</tr>
     				
     				
