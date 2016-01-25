@@ -339,12 +339,12 @@ function activaTab(tab){
       				<form class="form-inline">
   				<div class="form-group">
     					<label for="repeatSelect"> Filter by Grade: </label>
-    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in gradesPick" ng-init="filterGrades = grades[0]">
+    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
 
     					</select>
     					
     					<label for="repeatSelect"> Filter by Subject: </label>
-    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjectsPick" ng-init="filterSubjects = subjects[0]">
+    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
 
     					</select>
   				</div>
@@ -419,7 +419,7 @@ function activaTab(tab){
     				
     				
     				<label for="repeatSelect"> Pick Grade: </label>
-    					<select class="form-control" ng-model="pickedGrade" ng-options="grade for grade in grades">
+    					<select class="form-control" ng-model="pickedGrade" ng-options="grade for grade in gradesPick">
     					<option value="">Select one</option>
 
     				</select>
@@ -428,7 +428,7 @@ function activaTab(tab){
       				<h3>Subject:</h3>
       				
       				<label for="repeatSelect"> Pick Subject: </label>
-    				<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjects">
+    				<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjectsPick">
     					<option value="">Select one</option>
       				</select>
       				
