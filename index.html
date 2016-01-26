@@ -130,7 +130,9 @@
   		success: function(results) {
   			$scope.imageList =[];
   			for (var i = 0; i < results.length; i++) {
-				$scope.imageList.push({name:results[i].get("name"),url:results[i].get("image").url()});
+				$scope.imageList.push({name:results[i].get("name"),
+							id:results[i].id,
+							url:results[i].get("image").url()});
 			}
 			
 			$scope.$apply();
@@ -274,6 +276,28 @@
       	$scope.updateWords();
       	alert("removed word: " + word);
       }
+      $scope.removeImage = function(image){
+      	
+      	var Image= Parse.Object.extend("Image");
+		var query = new Parse.Query(Image);
+		query.equalTo("book", $scope.selectedBook.title);
+		query.find({
+  		success: function(results) {
+  			$scope.imageList =[];
+  			for (var i = 0; i < results.length; i++) {
+				$scope.imageList.push({name:results[i].get("name"),
+						       id:results[i].id,
+						       url:results[i].get("image").url()});
+			}
+			
+			$scope.$apply();
+
+  		},
+  		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		}
+		});
+      }
       $scope.addBook = function() {
       	var fileUploadControl = $("#pic")[0];
       	var parseFile;
@@ -291,7 +315,7 @@
 			found = 1;
 	}
       	
-      	if (found)){
+      	if (found){
       		alert("Book Already Exists");
       	}
       	else{
