@@ -299,6 +299,18 @@
 		});
       }
       $scope.addBook = function() {
+      	
+      	
+      	for (var i = 0; i < $scope.fixedBooks.length; i++) {
+		if ($scope.fixedBooks[i].title == $scope.name)
+			found = 1;
+	}
+      	
+      	if (found){
+      		alert("Book Already Exists, Upload Stopped");
+      	}
+      	else{
+      	
       	var fileUploadControl = $("#pic")[0];
       	var parseFile;
       	$scope.fileName = $scope.cover.slice(12);
@@ -310,15 +322,6 @@
       	}
       	
       	var found = 0;
-      	for (var i = 0; i < $scope.fixedBooks.length; i++) {
-		if ($scope.fixedBooks[i].title == $scope.name)
-			found = 1;
-	}
-      	
-      	if (found){
-      		alert("Book Already Exists");
-      	}
-      	else{
       	
       	var Book= Parse.Object.extend("Book");
       	//var acl= new Parse.ACL();
