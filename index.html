@@ -283,7 +283,7 @@
 	query.equalTo("title", bookTitle);
 	query.find({
   	success: function(results) {
-		results[i].destroy({
+		results[0].destroy({
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed book: " + bookTitle);
