@@ -272,7 +272,7 @@
       $scope.removeWord = function(word){
       	
       	$scope.currentBook.remove("words",word);
-      	$scope.currentBook.;
+      	$scope.currentBook.save();
       	$scope.updateWords();
       	alert("removed word: " + word);
       }
