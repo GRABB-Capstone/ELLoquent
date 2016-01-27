@@ -287,6 +287,8 @@
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed book: " + bookTitle);
+		  if (bookTitle == $scope.selectedBook.title)
+			 $scope.selectedBook = "";
   		},
   		error: function(myObject, error) {
     		// The delete failed.
