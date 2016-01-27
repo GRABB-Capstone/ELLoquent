@@ -304,6 +304,7 @@
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed book: " + bookTitle);
 		  if (bookTitle == $scope.selectedBook.title){
+		  	$scope.wordList = [];
 			$scope.showmeWords=false;
 			$scope.selectedBook = "";
 		  }
