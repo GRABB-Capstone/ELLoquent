@@ -244,9 +244,18 @@
 			$scope.loggedIn = true;
 			$scope.$apply();
    
-		}
+		},
+		error: function(user, error) {
+    			// The login failed. Check error to see why.
+    			alert("Incorrect Username or Password");
+  		}
 		});	
   	}
+  	
+  
+
+
+  	
   	$scope.test = function (x){
   		alert("test" + x);
   	}
