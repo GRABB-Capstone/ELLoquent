@@ -601,6 +601,35 @@ function activaTab(tab){
       			<h3>Add Words to a Book </h3>
       			
       			<div class="container">
+      			<div class="col-sm-6">
+      				
+      				
+      				<form class="form-inline">
+  				<div class="form-group">
+    					<label for="repeatSelect"> Filter by Grade: </label>
+    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
+
+    					</select>
+    					
+    					<label for="repeatSelect"> Filter by Subject: </label>
+    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+
+    					</select>
+  				</div>
+  				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
+  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
+				</form>
+      				
+      				
+      				
+      				
+      			
+    			</div>
+    		</div>
+    		
+    		<p></p>
+      			
+      			<div class="container">
       			<form class="form-inline">
   				<div class="form-group">
     					<label for="repeatSelect"> Pick Book: </label>
@@ -654,6 +683,35 @@ function activaTab(tab){
 	 		
 	 		<div id="menu2" class="tab-pane fade">
       				<h3>Add Images to a Book</h3>
+      				
+      			<div class="container">
+      			<div class="col-sm-6">
+      				
+      				
+      				<form class="form-inline">
+  				<div class="form-group">
+    					<label for="repeatSelect"> Filter by Grade: </label>
+    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
+
+    					</select>
+    					
+    					<label for="repeatSelect"> Filter by Subject: </label>
+    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+
+    					</select>
+  				</div>
+  				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
+  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
+				</form>
+      				
+      				
+      				
+      				
+      			
+    			</div>
+    		</div>
+    		
+    		<p></p>
       				
       			<div class="container">
       			<form class="form-inline">
