@@ -278,21 +278,34 @@
       }
       $scope.removeBook = function(bookTitle){
       	
-       	$scope.currentBook.destroy({
-	 success: function(myObject) {
+     	var Book = Parse.Object.extend("Book");
+	var query = new Parse.Query(Book);
+	query.equalTo("book", bookTitle);
+	query.find({
+  	success: function(results) {
+		results[i].destroy({
+	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
-		  alert("removed book");
-  	},
-  	error: function(myObject, error) {
+		  alert("removed book: " + bookTitle);
+  		},
+  		error: function(myObject, error) {
     		// The delete failed.
     		// error is a Parse.Error with an error code and message.
-    		alert("error removing book");
+    				  alert("error removing book");
 
   		}
 	});
-      	
-      	$scope.updateBooks();
-      	alert("removed book: " + bookTitle);
+		
+		
+
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+	});
+	$scope.updateBooks();
+     	
+     	
       }
       $scope.removeImage = function(imageID){
       	
