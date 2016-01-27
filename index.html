@@ -194,6 +194,8 @@
   		results[0].addUnique("images",imageName);
   		results[0].save();
   		$scope.image = "";
+  		$scope.$apply();
+
   	
 
   	},
@@ -219,6 +221,7 @@
   							results[0].addUnique("words",$scope.word);
   							results[0].save();
   							$scope.word = "";
+  							$scope.$apply();
   						},
   						error: function(error) {
 								alert("Error: " + error.code + " " + error.message);
@@ -392,6 +395,8 @@
 	$scope.grade = "";
 	$scope.pickedGrade ="";
 	$scope.pickedSubject = "";
+	$scope.$apply();
+
 	
       	}
       };
