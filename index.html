@@ -76,6 +76,7 @@
       $scope.resetFilter = function(){
 	 $scope.filterSubjects = "Any";
       	 $scope.filterGrades = "Any";
+      	 $scope.filterBooks();
       }
       
       $scope.filterBooks = function(){
@@ -521,12 +522,12 @@ function activaTab(tab){
       					</td>
       					<td>
       						
-      						
+      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book.title)" >Remove Book</button>
+	
       						
       					</td>
       					
       					
-      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book.title)" >Remove Book</button>
 
       					
 			 		</tr>
