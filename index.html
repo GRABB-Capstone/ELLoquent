@@ -280,7 +280,7 @@
       	
      	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
-	query.equalTo("book", bookTitle);
+	query.equalTo("title", bookTitle);
 	query.find({
   	success: function(results) {
 		results[i].destroy({
