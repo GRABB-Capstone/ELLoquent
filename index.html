@@ -305,6 +305,8 @@
 		  alert("removed book: " + bookTitle);
 		  if (bookTitle == $scope.selectedBook.title)
 			 $scope.selectedBook = "";
+		  	$scope.updateBooks();
+
   		},
   		error: function(myObject, error) {
     		// The delete failed.
@@ -321,8 +323,7 @@
 		alert("Error: " + error.code + " " + error.message);
 	}
 	});
-	$scope.updateBooks();
-     	
+
      	
       }
       $scope.removeImage = function(imageID){
