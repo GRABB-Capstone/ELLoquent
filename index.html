@@ -194,7 +194,7 @@
   		results[0].addUnique("images",imageName);
   		results[0].save();
   		$scope.image = "";
-  		$scope.$apply();
+  		//$scope.$apply();
 
   	
 
@@ -221,7 +221,7 @@
   							results[0].addUnique("words",$scope.word);
   							results[0].save();
   							$scope.word = "";
-  							$scope.$apply();
+  						//	$scope.$apply();
   						},
   						error: function(error) {
 								alert("Error: " + error.code + " " + error.message);
