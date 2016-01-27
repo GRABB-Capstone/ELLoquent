@@ -276,27 +276,36 @@
       	$scope.updateWords();
       	alert("removed word: " + word);
       }
-      $scope.removeImage = function(image){
+      $scope.removeImage = function(imageID){
       	
-      	var Image= Parse.Object.extend("Image");
-		var query = new Parse.Query(Image);
-		query.equalTo("book", $scope.selectedBook.title);
-		query.find({
-  		success: function(results) {
-  			$scope.imageList =[];
-  			for (var i = 0; i < results.length; i++) {
-				$scope.imageList.push({name:results[i].get("name"),
-						       id:results[i].id,
-						       url:results[i].get("image").url()});
-			}
-			
-			$scope.$apply();
+      	var Image = Parse.Object.extend("Image");
+	var query = new Parse.Query(Image);
+	query.get(imageID, {
+  	success: function(foundImage) {
+	 // The object was retrieved successfully.
 
-  		},
-  		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
-		});
+	 foundImage.destroy({
+	 success: function(myObject) {
+		  // The object was deleted from the Parse Cloud.
+		  alert("removed image");
+  	},
+  	error: function(myObject, error) {
+    		// The delete failed.
+    		// error is a Parse.Error with an error code and message.
+    				  alert("error removing image");
+
+  		}
+	});
+	 
+	 },
+  	error: function(object, error) {
+    // The object was not retrieved successfully.
+    // error is a Parse.Error with an error code and message.
+  	}
+	});
+      	
+      	
+      
       }
       $scope.addBook = function() {
       	
@@ -640,10 +649,14 @@ function activaTab(tab){
     					<tr>
     						<th>Name</th>
       						<th>Image</th>
+      						<th>Remove Image</th>
 		 					</tr>
     					<tr ng-repeat="image in imageList track by $index" >
     						<td>{{image.name}} </td>
     						<td><img ng-src="{{image.url}}" style="height:128px;" />	</td>
+    						<td>
+    							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image.id)" >Remove Word</button>
+						</td>
     					</tr>
   					</table>
 
