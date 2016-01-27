@@ -303,8 +303,10 @@
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed book: " + bookTitle);
-		  if (bookTitle == $scope.selectedBook.title)
+		  if (bookTitle == $scope.selectedBook.title){
 			$scope.showmeWords=false;
+			$scope.selectedBook = "";
+		  }
 		  $scope.updateBooks();
 
   		},
