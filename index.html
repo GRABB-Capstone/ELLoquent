@@ -392,6 +392,7 @@
 	book.set("subject",$scope.pickedSubject);
 	book.set("bookPhoto", parseFile);
 	book.set("words",[]);
+	book.set("user",$scope.user);
 	//user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
 	//acl.setPublicWriteAccess(false);
@@ -406,7 +407,9 @@
 	$scope.grade = "";
 	$scope.pickedGrade ="";
 	$scope.pickedSubject = "";
-	$scope.$apply();
+	$scope.cover = "";
+	$scope.user = "";
+	$scope.updateBooks();
 
 	
       	}
