@@ -648,7 +648,7 @@ function activaTab(tab){
 				
 				
 				<div class="form-group">
-    					<h3>Pick Book: </h3>
+    					<label for="repeatSelect"> Pick Book: </label>
     					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
 						<option value="">Select one</option>
 
@@ -668,21 +668,7 @@ function activaTab(tab){
     		<p></p>
     		<p></p>
       			
-      			<div class="container">
-      			<form>
-  				<div class="form-group">
-    					<h3>Pick Book: </h3>
-    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-						<option value="">Select one</option>
-
-    					</select>
-    					
-    		
-  				</div>
-  				<button type="submit" class="btn" id="updateWords" value="updateWords" ng-disabled = "!selectedBook"   ng-click = "updateWords()" >Update Words</button>
-
-			</form>
- 			</div>
+      			
  
  
  
@@ -742,7 +728,18 @@ function activaTab(tab){
   				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
 				</form>
       				
-      				
+      				<div class="form-group">
+    					<label for="repeatSelect"> Pick Book: </label>
+    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
+						<option value="">Select one</option>
+
+    					</select>
+    					
+    		
+  				</div>
+  				<button type="submit" class="btn" id="updateWords" value="updateWords" ng-disabled = "!selectedBook"   ng-click = "updateWords()" >Update Words</button>
+				
+				</form>
       				
       				
       			
@@ -752,19 +749,7 @@ function activaTab(tab){
     		<p></p>
     		<p></p>
       				
-      			<div class="container">
-  				<div class="form-group">
-    					<label for="repeatSelect"> Pick Book: </label>
-    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-						<option value="">Select one</option>
-
-    					</select>
-    					
-    		
-  				</div>
-  				<button type="submit" class="btn" id="updateImages" value="updateImages" ng-disabled = "!selectedBook" ng-click = "updateImages()" >Update Images</button>
-
- 			</div>
+      		
 
       				
 
