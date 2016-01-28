@@ -628,7 +628,7 @@ function activaTab(tab){
     		<div id="menu1" class="tab-pane fade">
       			<h3>Add Words to a Book </h3>
       			
-      			<div class="col-sm-4 container">
+      			<div class="col-sm-4 ">
       				
       				
       				<form>
@@ -645,6 +645,19 @@ function activaTab(tab){
   				</div>
   				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
   				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
+				
+				
+				<div class="form-group">
+    					<h3>Pick Book: </h3>
+    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
+						<option value="">Select one</option>
+
+    					</select>
+    					
+    		
+  				</div>
+  				<button type="submit" class="btn" id="updateWords" value="updateWords" ng-disabled = "!selectedBook"   ng-click = "updateWords()" >Update Words</button>
+				
 				</form>
       				
       				
