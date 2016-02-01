@@ -343,6 +343,7 @@
 	 success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed image");
+		  $scope.updateImages();
   	},
   	error: function(myObject, error) {
     		// The delete failed.
