@@ -134,6 +134,8 @@
 				$scope.imageList.push({name:results[i].get("name"),
 							id:results[i].id,
 							url:results[i].get("image").url()});
+				$scope.$apply();
+
 			}
 			
 			$scope.$apply();
