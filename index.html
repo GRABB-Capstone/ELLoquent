@@ -207,11 +207,12 @@
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
 	}
-	$scope.updateImages();
-  	$scope.$apply();	
+		
 		
        	
       });
+      $scope.updateImages();
+  	$scope.$apply();
       }
       $scope.addWord = function(){
       		if ($scope.wordList.includes($scope.word)){
