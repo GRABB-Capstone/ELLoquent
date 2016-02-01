@@ -192,12 +192,15 @@
   		image.set("name",imageName);
   		image.set("book",$scope.selectedBook.title);
   		image.save();
+  		alert("id :" + image.id);
   		
   		results[0].addUnique("images",imageName);
   		results[0].save();
   		$scope.image = "";
-  		//$scope.$apply();
+  		$scope.$apply();
   		$scope.updateImages();
+  		$scope.$apply();
+
 
   	
 
