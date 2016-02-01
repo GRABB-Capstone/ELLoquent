@@ -198,8 +198,7 @@
   		results[0].save();
   		$scope.image = "";
   		$scope.$apply();
-  		$scope.updateImages();
-  		$scope.$apply();
+  		
 
 
   	
@@ -208,7 +207,8 @@
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
 	}
-		
+	$scope.updateImages();
+  	$scope.$apply();	
 		
        	
       });
