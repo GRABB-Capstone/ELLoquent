@@ -195,6 +195,7 @@
   		results[0].save();
   		$scope.image = "";
   		$scope.$apply();
+  		$scope.updateImages();
 
   	
 
@@ -213,6 +214,7 @@
       		}
       		else
       	  		$scope.wordList.push($scope.word);
+      	  		
 							var Book= Parse.Object.extend("Book");
 							var query = new Parse.Query(Book);
 							query.equalTo("title", $scope.selectedBook.title);
