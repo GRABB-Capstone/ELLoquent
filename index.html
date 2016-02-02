@@ -797,8 +797,8 @@ function activaTab(tab){
 					<h3>Add Image:</h3>
 		     	 		<input  type="file" id="image" ng-model="image"/>
 		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage();updateImages();" ng-disabled="!image"/>
-		     	 		<input class="btn btn-primary btn-block form-control" type="submit" id="hideImage" value="Hide Images"  ng-click="showmeImages=false;updateImages(); " ng-show = "showmeImages"/>
-					<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images"   ng-click="showmeImages=true;updateImages();" ng-hide = "showmeImages"/ ng-disabled="!selectedBook.title">
+		     	 		<input class="btn btn-primary btn-block form-control" type="submit" id="hideImage" value="Hide Images"  ng-click="showmeImages=false;updateImages(); " ng-show = "showmeImages" ng-mouseover = "updateImages()"/>
+					<input class="btn btn-primary btn-block form-control" type="submit" id="showImage" value="Show Images"   ng-click="showmeImages=true;updateImages();" ng-hide = "showmeImages" ng-mouseover = "updateImages()" ng-disabled="!selectedBook.title"/ >
 
 
 				</div>
