@@ -61,6 +61,7 @@
       $scope.loggedIn = false;
       $scope.selectedBook = "";
       $scope.fixedBooks = [];
+      $scope.userBooks = [];
       $scope.leader=false;
       $scope.name;
       $scope.word;
@@ -258,7 +259,11 @@
   		}
 		});	
   	}
-  	
+  	$scope.addToUser = function(){
+  		
+  		
+  		alert("add to User");
+  	}
   
 
 
@@ -900,7 +905,7 @@ function activaTab(tab){
       					
       					<td>
       						
-           <button type="submit" class="btn" id="addToUser">Add to User</button>
+           <button type="submit" class="btn" id="addToUser" ng-click="addToUser(book.title)" >Add to User</button>
 						
       						
       					</td>
