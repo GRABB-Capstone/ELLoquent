@@ -538,6 +538,7 @@ function activaTab(tab){
       					<th>Subject</th>
       				
       					<th>Jump to Edit</th>
+      					<th>Add to User</th>
       					<th>Remove Book</th>
 					 </tr>
     				<tr ng-repeat="book in fixedBooks">
@@ -556,6 +557,13 @@ function activaTab(tab){
       	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)" >Add/Remove  Words</button>
       	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig2(book)" >Add/Remove Images</button>
 
+      					</td>
+      					
+      					<td>
+      						
+           <button type="submit" class="btn" id="addToUser">Add to User</button>
+						
+      						
       					</td>
       					<td>
       						
