@@ -820,7 +820,111 @@ function activaTab(tab){
     		
     		<div id="menu3" class="tab-pane fade">
       		<h3>Your Books!</h3>
+      		
+      		
+      		
+      		
+      		
+      		
+      		
+      		
+      			<div class="col-sm-4">
+      				
+      				
+      				<form>
+  				<div class="form-group">
+    					<label for="repeatSelect"> Filter by Grade: </label>
+    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
+
+    					</select>
+    					
+    					<label for="repeatSelect"> Filter by Subject: </label>
+    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+
+    					</select>
+  				</div>
+  				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
+  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
+				<p></p>
+    				<p></p>
+    		
+				</form>
+      				
+      				
+      				
+      				
+      			
+    			</div>
+
+    	
+    		
+    		
+    		
+    		
+    		
+    		
+      			<div class="container"  >
+      				<p></p>
+    				<p></p>
+  				<table class="table table-hover">
+  				
+    				<tr>
+    					
+      					<th>Title</th>
+      					<th>Author</th>
+      					<th>Cover</th>
+      					<th>Grade</th>
+      					<th>Subject</th>
+      				
+      					<th>Jump to Edit</th>
+      					<th>Add to User</th>
+      					<th>Remove Book</th>
+					 </tr>
+    				<tr ng-repeat="book in fixedBooks">
+      					<td>{{book.title}}</td>
+      					<td>{{book.author}}</td>
+ 
+      					
+      					<td><img ng-src="{{book.url}}" style="height:128px;" />	</td>
+      					<td>{{book.grade}}</td>
+      					<td>{{book.subject}}</td>	
+      						
+      				
+      				
+      				
+      					<td>
+      	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)" >Add/Remove  Words</button>
+      	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig2(book)" >Add/Remove Images</button>
+
+      					</td>
+      					
+      					<td>
+      						
+           <button type="submit" class="btn" id="addToUser">Add to User</button>
+						
+      						
+      					</td>
+      					<td>
+      						
+      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book.title)" >Remove Book</button>
+	
+      						
+      					</td>
+      					
+      					
+
+      					
+			 		</tr>
+  				</table>
+			</div>
+      		
       	
+      	
+      	
+      	
+      	
+      	
+      	//
       				
 		</div>
     		
