@@ -274,7 +274,7 @@
   		success: function(user) {
 			$scope.loggedIn = true;
 			$scope.currentUser = user;
-			alert(user.get("username") + "logged in");
+			alert(user.get("username") + " logged in");
 			$scope.$apply();
    
 		},
@@ -284,9 +284,10 @@
   		}
 		});	
   	}
-  	$scope.addToUser = function(){
+  	$scope.addToUser = function(title){
   		
-  		
+  		$scope.currentUser.addUnique("book",title);
+  		$scope.currentUser.save();
   		alert("add to User");
   	}
   
