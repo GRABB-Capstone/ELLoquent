@@ -328,7 +328,7 @@
 	$scope.removeFromUser = function(title){
       	
       	$scope.currentUser.remove("books",title);
-      	$scope.currentBook.save();
+      	$scope.currentUser.save();
       	$scope.updateUserBooks();
       	alert("removed book from user: " + title);
       }
