@@ -324,7 +324,14 @@
     		$('.nav-tabs a[href="#' + tab + '"]').tab('show');
 		
 		
-	}	
+	}
+	$scope.removeFromUser = function(title){
+      	
+      	$scope.currentUser.remove("books",title);
+      	$scope.currentBook.save();
+      	$scope.updateUserBooks();
+      	alert("removed book from user: " + title);
+      }
 	
       $scope.removeWord = function(word){
       	
@@ -934,7 +941,7 @@ function activaTab(tab){
       					
       					<td>
       						
-           <button type="submit" class="btn" id="addToUser" ng-click="addToUser(book.title)" >Add to User</button>
+           <button type="submit" class="btn" id="addToUser" ng-click="removeFromUser(book.title)" >Remove from User</button>
 						
       						
       					</td>
