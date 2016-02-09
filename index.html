@@ -170,6 +170,29 @@
 	}
 	});
       }
+      $scope.updateUserBooks = function(){
+	var Book = Parse.Object.extend("Book");
+	var query = new Parse.Query(Book);
+	query.find({
+  	success: function(results) {
+		$scope.books = results;
+		$scope.fixedBooks = [];
+		for (var i = 0; i < results.length; i++) {
+			$scope.fixedBooks.push({title:results[i].get("title"),
+						author:results[i].get("author"),
+						grade:results[i].get("grade"),
+						subject:results[i].get("subject"),
+						url:results[i].get("bookPhoto").url()});
+			
+		}
+		$scope.$apply();
+
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+	});
+      }
       $scope.addImage = function(){
       	
       	var Book= Parse.Object.extend("Book");
@@ -250,6 +273,8 @@
   	var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
 			$scope.loggedIn = true;
+			$scope.currentUser = user;
+			alert(user.get("username") + "logged in");
 			$scope.$apply();
    
 		},
@@ -358,7 +383,7 @@
   	error: function(myObject, error) {
     		// The delete failed.
     		// error is a Parse.Error with an error code and message.
-    				  alert("error removing image");
+    		alert("error removing image");
 
   		}
 	});
