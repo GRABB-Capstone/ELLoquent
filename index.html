@@ -170,29 +170,7 @@
 	}
 	});
       }
-      $scope.updateUserBooks = function(){
-	var Book = Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	query.find({
-  	success: function(results) {
-		$scope.books = results;
-		$scope.fixedBooks = [];
-		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title"),
-						author:results[i].get("author"),
-						grade:results[i].get("grade"),
-						subject:results[i].get("subject"),
-						url:results[i].get("bookPhoto").url()});
-			
-		}
-		$scope.$apply();
-
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
-	});
-      }
+      
       $scope.addImage = function(){
       	
       	var Book= Parse.Object.extend("Book");
@@ -291,7 +269,32 @@
   		alert("add to User");
   	}
   
+	$scope.updateUserBooks = function(){
+		$scope.userBooks = [];
+		var tempBooks = $scope.currentUser.get("books");
+		
+	
+		
+		
+		for (var i = 0; i < tempBooks.length; i++) {
+			
+			
+			for (var j = 0; j<$scope.fixedBooks.length;j++)
+			
+			if($scope.fixedBooks[j].title ==tempBooks[i]){
+				$scope.userBooks.push($scope.fixedBooks[j])
+			}
+				
+		
+		}
+		alert("len: " + $scope.userBooks.length);
+		
 
+      
+		
+		
+		
+	}
 
   	
   	$scope.test = function (x){
@@ -506,7 +509,7 @@ function activaTab(tab){
     			<li><a data-toggle="tab" href="#home">Books</a></li>
 		 	<li><a data-toggle="tab" href="#menu1">Words</a></li>
     			<li><a data-toggle="tab" href="#menu2">Images</a></li>
-    			<li><a data-toggle="tab" href="#menu3">My Books</a></li>
+    			<li><a data-toggle="tab" href="#menu3" ng-click = "updateUserBooks()">My Books</a></li>
   		</ul>
 
 
