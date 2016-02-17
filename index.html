@@ -787,7 +787,7 @@ function activaTab(tab){
 	 		<div id="menu2" class="tab-pane fade">
       				<h3>Add Images to a Book</h3>
       		<div class ="container">
-      			<div class="col-sm-4">
+      			<div class="col-md-6">
       				
       				
       				<form>
@@ -816,13 +816,16 @@ function activaTab(tab){
     		
   				</div>
   				<button type="submit" class="btn" id="updateWords" value="updateWords" ng-disabled = "!selectedBook"   ng-click = "updateImages()" >Update Images</button>
-				
+					<h3>Add Image:</h3>
+		     	 		<input  type="file" id="image" ng-model="image"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage();updateImages();" ng-disabled="!image"/>
+		     	 	
 				</form>
       				
       				
       			
     			</div>
-    		</div>
+    		
     		
     		<p></p>
     		<p></p>
@@ -834,15 +837,10 @@ function activaTab(tab){
    	 
  
 			
-			<div class= "container">
-				<div class = "container">
-					<h3>Add Image:</h3>
-		     	 		<input  type="file" id="image" ng-model="image"/>
-		     	 		<input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage();updateImages();" ng-disabled="!image"/>
-		     	 	
-				</div>
+			<div class= "col-md-6">
 				
-				<div class = "container" ng-show="showmeImages">
+				
+				<div class = "mygrid-wrapper-div">
 					<h3>Images:</h3>
 					<div class="container">
   					<table class="table table-hover">
@@ -861,13 +859,13 @@ function activaTab(tab){
   					</table>
 
 
-				</div>
+					</div>
 				</div>
 			</div>
 
 			
       				
-      				
+      			</div>	
     		</div>
     		
     		<div id="menu3" class="tab-pane fade">
