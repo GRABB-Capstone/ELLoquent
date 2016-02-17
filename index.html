@@ -686,7 +686,7 @@ function activaTab(tab){
     		
     		<div id="menu1" class="tab-pane fade">
       			<h3>Add Words to a Book </h3>
-      		<div class ="container"> 
+      		<div class ="row-sm-4"> 
       			<div class="col-sm-4 ">
       				
       				
@@ -725,9 +725,8 @@ function activaTab(tab){
       			
     			</div>
     			
-    			</div>
-    		<p></p>
-    		<p></p>
+    		
+    	
       			
       			
  
@@ -736,18 +735,20 @@ function activaTab(tab){
  
 
    	 
- 				<div class = "container">
+ 				
 
 			
 
 				<div class = "container">
 					<h3>Add Word:</h3>
 		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
 					<input class="btn btn-primary btn-block form-control" type="submit" id="hide"  value="Hide Words" ng-click="showmeWords=false;updateWords(); " ng-show = "showmeWords"/>
 					<input class="btn btn-primary btn-block form-control" type="submit" id="key" value="Show Words" ng-click="showmeWords=true;updateWords();" ng-hide = "showmeWords"/ ng-disabled="!selectedBook">
 				</div>
-
+				
+			</div>
+			<div class = "row-sm-4">
 				<div class="container">
   					<table class="table table-hover">
     					<tr>
@@ -765,7 +766,7 @@ function activaTab(tab){
     				
     				
 
-	 		</div>
+	 			</div>
 	 		</div>
 	 	</div>
 	 	
