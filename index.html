@@ -685,7 +685,7 @@ function activaTab(tab){
     		
     		
     		<div id="menu1" class="tab-pane fade">
-      			<h3>Add Words to a Book </h3>
+      		<h3>Add Words to a Book </h3>
       		<div class ="col-md-6"> 
       			<div class="container">
       				
@@ -716,7 +716,9 @@ function activaTab(tab){
     		
   				</div>
   				<button type="submit" class="btn" id="updateWords" value="updateWords" ng-disabled = "!selectedBook"   ng-click = "updateWords()" >Update Words</button>
-				
+					<h3>Add Word:</h3>
+		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
+		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
 				</form>
       				
       				
@@ -739,13 +741,6 @@ function activaTab(tab){
 
 			
 
-				<div class = "container">
-					<h3>Add Word:</h3>
-		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
-					
-				</div>
-				
 			</div>
 			<div class = "col-md-6">
 				<div class="container">
