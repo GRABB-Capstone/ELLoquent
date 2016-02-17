@@ -50,6 +50,28 @@
 });
 		</script>
 		
+		
+<script>
+	
+	
+	
+$(function() {  
+    var window_height = $(window).height(),
+       content_height = window_height - 200;
+
+    $('.mygrid-wrapper-div').height(content_height);
+});
+
+$( window ).resize(function() {
+    var window_height = $(window).height(),
+       content_height = window_height - 200;
+    $('.mygrid-wrapper-div').height(content_height);
+});
+
+	
+	
+</script>
+		
 <script>
   
   angular.module('submitExample', [])
@@ -730,6 +752,7 @@ function activaTab(tab){
 
 		</div>
 			<div class = "col-md-6">
+				<div class="mygrid-wrapper-div">
   					<table class="table table-hover">
     					<tr>
       						<th>Words</th>
@@ -743,7 +766,7 @@ function activaTab(tab){
 						</td>
     					</tr>
     					</table>
-    				
+    				</div>
 
 	 		</div>
 	 	</div>
