@@ -486,7 +486,7 @@ $( window ).resize(function() {
 	//window.alert(user.getUsername());
 	//book.setACL(acl);
 	book.save();
-	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+	//$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 	$scope.name = "";
 	$scope.author = "";
 	$scope.grade = "";
@@ -494,6 +494,7 @@ $( window ).resize(function() {
 	$scope.pickedSubject = "";
 	$scope.cover = "";
 	$scope.user = "";
+	$scope.updateBooks();
 
 	
       	}
