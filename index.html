@@ -226,7 +226,7 @@ $( window ).resize(function() {
   		image.set("name",imageName);
   		image.set("book",$scope.selectedBook.title);
   		image.save();
-  		alert("id :" + image.id);
+  		alert("added image");
   		
   		results[0].addUnique("images",imageName);
   		results[0].save();
@@ -299,7 +299,7 @@ $( window ).resize(function() {
   		
   		$scope.currentUser.addUnique("books",title);
   		$scope.currentUser.save();
-  		alert("add to User");
+  		alert("Added book to user");
   	}
   
 	$scope.updateUserBooks = function(){
@@ -320,7 +320,7 @@ $( window ).resize(function() {
 				
 		
 		}
-		alert("len: " + $scope.userBooks.length);
+	//	alert("len: " + $scope.userBooks.length);
 		
 
       
