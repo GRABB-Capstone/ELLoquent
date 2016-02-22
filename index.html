@@ -663,32 +663,29 @@ function activaTab(tab){
 		 	<div class= "container">
 	
 		 		<div class = "row">
-		 		 <div class = "col-md-4">
-		 		 <h3>Add a Book</h3>
-      				<h3>Book Title:</h3>
+		 		 <div class = "col-md-12">
+		 		<h3>Add a Book</h3>
+      				<h2>Book Title:</h3>
       				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name2" />
-      				<h3>Author:</h3>
+      				<h2>Author:</h3>
       				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
-    				<h3>Grade Level:</h3>
+    				<h2>Select Grade Level:</h3>
     				
-    				
-    				<label for="repeatSelect"> Pick Grade: </label>
-    					<select class="form-control" ng-model="pickedGrade" ng-options="grade for grade in gradesPick">
+    		
+    				<select class="form-control" ng-model="pickedGrade" ng-options="grade for grade in gradesPick">
     					<option value="">Select one</option>
 
     				</select>
     				
     				
-      				<h3>Subject:</h3>
-      				
-      				<label for="repeatSelect"> Pick Subject: </label>
-    				<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjectsPick">
+      				<h2>Select Subject:</h3>
+          			<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjectsPick">
     					<option value="">Select one</option>
       				</select>
       				
-      				<h3>Username:</h3>
+      				<h2>Username:</h3>
     			 	<input class="form-control"  type="text"  placeholder="Example: bronan" ng-model="user"/>
-      				<h3>Book Cover:</h3>
+      				<h2>Book Cover:</h3>
       				<input type="file" id="pic" ng-model="cover"/>
 
       				<p></p>
