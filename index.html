@@ -342,6 +342,15 @@ $( window ).resize(function() {
 					
   		activaTab('menu1');
   	}
+  	$scope.backToBrowse = function (){
+  		
+
+  		$scope.selectedBook = selBook;
+  		$scope.updateWords();
+  		$scope.updateImages();
+					
+  		activaTab('content');
+  	}
   
   	
 		
@@ -714,7 +723,8 @@ function activaTab(tab){
 		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage();updateImages();" ng-disabled="!image"/>
 		     	 	
       			
-      			
+      			 <input class="btn btn-primary btn-block" type="submit" id="backToBrowse" value="Back to Browse" ng-click="jumpToBrowse();"/>
+
       		</div>
       		<div class = "col-md-4">
       			<h3>Current Words </h3>
