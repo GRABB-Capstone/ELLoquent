@@ -343,7 +343,7 @@ $( window ).resize(function() {
   	}
   	$scope.trig2 = function (selBook){
   		
-
+		$scope.edit = false;
   		$scope.selectedBook = selBook;
   		$scope.updateImages();
 					
@@ -559,7 +559,7 @@ function activaTab(tab){
       		
       	
       		<div class = "container">
-      		<div class "row">
+      		<div class = "row">
       			<div class="col-sm-4">
       				
       				
@@ -594,8 +594,8 @@ function activaTab(tab){
     		
     		
     		
-    		<div class "row">
-      			<div class="container"  >
+    		<div class = "row" ng-show="!edit">
+      			<div class="container">
       				<p></p>
     				<p></p>
     			<div class="mygrid-wrapper-div">
@@ -654,6 +654,10 @@ function activaTab(tab){
 			</div>
 		</div>	
 			
+		</div>
+		
+		<div class = "row" ng-show="edit">
+			EDIT
 		</div>
 		
     		<div id="home" class="tab-pane fade">
