@@ -712,7 +712,7 @@ function activaTab(tab){
       		<div class = col-md-4>
       			<h3>Add Content to Book </h3>
       			
-      			{{selectedBook.title}}
+      			<h3>{{selectedBook.title}}</h3>
       			<h5>Add Word:</h5>
 		   	<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
 		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
@@ -736,7 +736,7 @@ function activaTab(tab){
     					<tr ng-repeat="word in wordList track by $index">
       						<td>{{word}}</td>
       						<td>      	
-      						<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >x</button>
+      						<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >X</button>
 						</td>
     					</tr>
     					</table>
@@ -756,7 +756,7 @@ function activaTab(tab){
     					<tr ng-repeat="image in imageList track by $index" >
     						<td><img ng-src="{{image.url}}" style="height:128px;" />	</td>
     						<td>
-    							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image.id)" >x</button>
+    							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image.id)" >X</button>
 						</td>
     					</tr>
   					</table>
@@ -774,68 +774,7 @@ function activaTab(tab){
       	<p></p>
       	<p></p>
       			
-      	<div class = "row">	
-      		<div class ="col-md-4"> 
-
-      				
-      				<form>
-  				<div class="form-group">
-    					<label for="repeatSelect"> Filter by Grade: </label>
-    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
-
-    					</select>
-    					
-    					<label for="repeatSelect"> Filter by Subject: </label>
-    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
-
-    					</select>
-  				</div>
-  				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
-  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
-				
-				
-				<div class="form-group">
-    					<label for="repeatSelect"> Pick Book: </label>
-    					<select class="form-control" ng-model="selectedBook" ng-options="book.title for book in fixedBooks">
-						<option value="">Select one</option>
-
-    					</select>
-    					
-    		
-  				</div>
-  				<button type="submit" class="btn" id="updateWords" value="updateWords" ng-disabled = "!selectedBook"   ng-click = "updateWords()" >Select Book</button>
-					<h3>Add Word:</h3>
-		   			<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	 		<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
-				</form>
-      				
-      				
-      				
-      			
-    			
-
-			
-
-		</div>
-		<div class = "col-md-8">
-				<div class="mygrid-wrapper-div">
-  					<table class="table table-hover">
-    					<tr>
-      						<th>Words</th>
-      						<th>Remove Word</th>
-		 			</tr>
-		 			
-    					<tr ng-repeat="word in wordList track by $index">
-      						<td>{{word}}</td>
-      						<td>      	
-      						<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >Remove Word</button>
-						</td>
-    					</tr>
-    					</table>
-    				</div>
-
-	 		</div>
-	 </div>
+      	
 	 </div>
 	 </div>
 	 		
