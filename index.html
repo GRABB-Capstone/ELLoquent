@@ -711,15 +711,65 @@ function activaTab(tab){
       	<div class = "row">
       		<div class = col-md-4>
       			<h3>Add Content to Book </h3>
+      			
+      			{{selectedBook.title}}
+      			<h3>Add Word:</h3>
+		   	<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
+		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
+      			
+      			
       		</div>
       		<div class = "col-md-4">
       			<h3>Current Words </h3>
+      			<div class="mygrid-wrapper-div">
+  					<table class="table table-hover">
+    					<tr>
+      						<th>Words</th>
+      						<th>Remove Word</th>
+		 			</tr>
+		 			
+    					<tr ng-repeat="word in wordList track by $index">
+      						<td>{{word}}</td>
+      						<td>      	
+      						<button type="submit" class="btn" id="removeWord"  ng-click="removeWord(word)" >x</button>
+						</td>
+    					</tr>
+    					</table>
+    				</div>
+    				
+    				
       		</div>
       		<div class = "col-md-4">
       			<h3>Current Images</h3>
+      			<div class = "mygrid-wrapper-div">
+					<div class="col-md-12">
+  					<table class="table table-hover">
+    					<tr>
+    						<th>Name</th>
+      						<th>Image</th>
+      						<th>Remove Image</th>
+		 					</tr>
+    					<tr ng-repeat="image in imageList track by $index" >
+    						<td>{{image.name}} </td>
+    						<td><img ng-src="{{image.url}}" style="height:128px;" />	</td>
+    						<td>
+    							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image.id)" >x</button>
+						</td>
+    					</tr>
+  					</table>
+
+
+					</div>
+				</div>
       		</div>
       		
       	</div>
+      	<p></p>
+      	<p></p>
+      	<p></p>
+      	<p></p>
+      	<p></p>
+      	<p></p>
       			
       	<div class = "row">	
       		<div class ="col-md-4"> 
