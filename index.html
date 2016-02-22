@@ -338,6 +338,7 @@ $( window ).resize(function() {
 
   		$scope.selectedBook = selBook;
   		$scope.updateWords();
+  		$scope.updateImages();
 					
   		activaTab('menu1');
   	}
@@ -627,7 +628,7 @@ function activaTab(tab){
       				
       					<td>
       	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)" >Add/Remove  Words</button>
-      	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig2(book)" >Add/Remove Images</button>
+      	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig(book)" >Add/Remove Images</button>
 
       					</td>
       					
@@ -850,7 +851,7 @@ function activaTab(tab){
       				
       					<td>
       	  <button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)" >Add/Remove  Words</button>
-      	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig2(book)" >Add/Remove Images</button>
+      	  <button type="submit" class="btn" id="addImage" value="jumpImage" ng-click="trig(book)" >Add/Remove Images</button>
 
       					</td>
       					
