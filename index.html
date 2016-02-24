@@ -212,6 +212,9 @@ $( window ).resize(function() {
       
       $scope.addImage = function(){
       	
+      	
+      	
+      	
       	var Book= Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	query.equalTo("title", $scope.selectedBook.get("title"));
@@ -247,11 +250,15 @@ $( window ).resize(function() {
   	error: function(error) {
 		alert("Error: " + error.code + " " + error.message);
 	}
+	
 		
 		
        	
       });
        
+       
+       alert("TEST IMAGE: " + image.id);
+      
 
       }
       $scope.addWord = function(){
