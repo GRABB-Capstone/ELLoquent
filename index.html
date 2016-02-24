@@ -408,23 +408,15 @@ $( window ).resize(function() {
       	$scope.updateWords();
       	alert("removed word: " + word);
       }
-      $scope.removeBook = function(bookTitle){
+      $scope.removeBook = function(removedBook){
       	
-     	var Book = Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	query.equalTo("title", bookTitle);
-	query.find({
-  	success: function(results) {
-		results[0].destroy({
+      	removedBook.destroy({
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
-		  alert("removed book: " + bookTitle);
-		  if (bookTitle == $scope.selectedBook.get("title")){
-		  	$scope.wordList = [];
-			$scope.showmeWords=false;
-			$scope.selectedBook = "";
-		  }
+		  alert("removed book: " + removedBook.get("title"));
+		  
 		  $scope.updateBooks();
+		  $scope.$apply();
 
   		},
   		error: function(myObject, error) {
@@ -433,14 +425,6 @@ $( window ).resize(function() {
     				  alert("error removing book");
 
   		}
-	});
-		
-		
-
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
 	});
 
      	
@@ -689,7 +673,7 @@ function activaTab(tab){
       					</td>
       					<td>
       						
-      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book.title)" >X</button>
+      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book)" >X</button>
 	
       						
       					</td>
@@ -921,7 +905,7 @@ function activaTab(tab){
       					</td>
       					<td>
       						
-      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book.title)" >Remove Book</button>
+      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book)" >Remove Book</button>
 	
       						
       					</td>
