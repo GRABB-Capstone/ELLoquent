@@ -231,6 +231,7 @@ $( window ).resize(function() {
   	alert("added image: " + image.id);
       	
       	$scope.selectedBook.addUnique("images",image);
+      	$scope.selectedBook.save();
       	
 /*
       	var Book= Parse.Object.extend("Book");
