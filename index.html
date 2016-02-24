@@ -666,12 +666,12 @@ function activaTab(tab){
 					 </tr>
     				<tr ng-repeat="book in allBooks">
       					<td>{{book.get("title")}}</td>
-      					<td>{{book.author}}</td>
+      					<td>{{book.get("author")}}</td>
  
       					
-      					<td><img ng-src="{{book.url}}" style="height:128px;" />	</td>
-      					<td>{{book.grade}}</td>
-      					<td>{{book.subject}}</td>	
+      					<td><img ng-src="{{book.get('bookPhoto').url()}}" style="height:128px;" />	</td>
+      					<td>{{book.get("grade")}}</td>
+      					<td>{{book.get("subject")}}</td>	
       						
       				
       				
