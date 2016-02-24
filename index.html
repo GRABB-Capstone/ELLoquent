@@ -92,6 +92,7 @@ $( window ).resize(function() {
       $scope.data;
       $scope.currentBook;
       $scope.loggedIn = false;
+      $scope.selectedBookTitle = "No Book Selected";
       $scope.selectedBook = {title:"No Book Selected",
 						author:"N/A",
 						grade:"N/A",
@@ -340,7 +341,7 @@ $( window ).resize(function() {
   	}
   	$scope.trig = function (selBook){
   		
-
+		$scope.selectedBookTitle = selBook.get("title");
   		$scope.selectedBook = selBook;
   		$scope.updateWords();
   		$scope.updateImages();
@@ -765,7 +766,7 @@ function activaTab(tab){
       			
       			
       			
-      			<h3>{{selectedBook.get("title")}}</h3>
+      			<h3>{{selectedBookTitle}}</h3>
       			
       			
       			
