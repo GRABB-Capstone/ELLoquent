@@ -151,6 +151,7 @@ $( window ).resize(function() {
 		query.equalTo("title", $scope.selectedBook.title);
 		query.find({
   		success: function(results) {
+  			$scope.allBooks = results;
   			$scope.wordList = results[0].get("words");
   			$scope.currentBook = results[0];
   			$scope.$apply();
@@ -663,8 +664,8 @@ function activaTab(tab){
       					<th>Add to User</th>
       					<th>Remove</th>
 					 </tr>
-    				<tr ng-repeat="book in fixedBooks">
-      					<td>{{book.title}}</td>
+    				<tr ng-repeat="book in allBooks">
+      					<td>{{book.get("title")}}</td>
       					<td>{{book.author}}</td>
  
       					
