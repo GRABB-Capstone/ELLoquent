@@ -213,8 +213,26 @@ $( window ).resize(function() {
       $scope.addImage = function(){
       	
       	
+      	var imageUploadControl = $("#image")[0];
+      	var parseImage;
+      	$scope.imageName = $scope.image.slice(12);
+      	if (imageUploadControl.files.length > 0) {
+		var image = imageUploadControl.files[0];
+   		var imageName = $scope.imageName;
+   		parseImage = new Parse.File(imageName, image);
+   		alert("Uploaded Image: " + parseImage);
+      	}	
+  	var Image= Parse.Object.extend("Image");
+	var image= new Image();
+  	image.set("image", parseImage);
+  	image.set("name",imageName);
+  	image.set("book",$scope.selectedBook.get("title"));
+  	image.save();
+  	alert("added image: " + image.id);
       	
+      	$scope.selectedBook.addUnique("images",image);
       	
+/*
       	var Book= Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
 	query.equalTo("title", $scope.selectedBook.get("title"));
@@ -256,9 +274,8 @@ $( window ).resize(function() {
        	
       });
        
-       
-       alert("TEST IMAGE: " + image.id);
-      
+       */
+
 
       }
       $scope.addWord = function(){
