@@ -506,8 +506,8 @@ $( window ).resize(function() {
 	book.save();
 	
 	
-	//$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
-
+	$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+	$scope.selectedBook = {title:$scope.name,author:$scope.author,grade:$scope.grade};
 	
 	$scope.name = "";
 	$scope.author = "";
@@ -519,10 +519,7 @@ $( window ).resize(function() {
 	$scope.selectedBook = 
 	$scope.updateBooks();
 	
-	for (var j = 0; j < $scope.fixedBooks.length; j++) {
-		if ($scope.fixedBooks[j].title == bookName)
-			$scope.selectedBook = fixedBook[j];
-	}
+	\
 	
 	$scope.$apply();
 	
