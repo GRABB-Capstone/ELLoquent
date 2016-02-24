@@ -356,7 +356,10 @@ $( window ).resize(function() {
 		//$scope.selectedBook = 
   		//$scope.updateWords();
   		//$scope.updateImages();
-					
+		
+		
+	}
+			
   		activaTab('menu1');
   	}
   
@@ -489,6 +492,10 @@ $( window ).resize(function() {
 	book.set("bookPhoto", parseFile);
 	book.set("words",[]);
 	book.set("user",$scope.user);
+	
+
+	var name = $scope.name;
+	
 	//user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
 	//acl.setPublicWriteAccess(false);
@@ -497,7 +504,11 @@ $( window ).resize(function() {
 	//window.alert(user.getUsername());
 	//book.setACL(acl);
 	book.save();
+	
+	
 	//$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
+
+	
 	$scope.name = "";
 	$scope.author = "";
 	$scope.grade = "";
@@ -507,7 +518,13 @@ $( window ).resize(function() {
 	$scope.user = "";
 	$scope.selectedBook = 
 	$scope.updateBooks();
+	
+	for (var j = 0; j < $scope.fixedBooks.length; j++) {
+		if ($scope.fixedBooks[j].title == name)
+			$scope.selectedBook = fixedBook[j];
+	
 	$scope.$apply();
+	
 	$scope.jumpToEdit();
 
 	
@@ -723,7 +740,18 @@ function activaTab(tab){
       		<div class = col-md-4>
       			<h3>Add Content to Book </h3>
       			
+      			
+      			
+      			
+      			
+      			
       			<h3>{{selectedBook.title}}</h3>
+      			
+      			
+      			
+      			
+      			
+      			
       			<h5>Add Word:</h5>
 		   	<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
 		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
