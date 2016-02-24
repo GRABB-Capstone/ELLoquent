@@ -349,12 +349,28 @@ $( window ).resize(function() {
 					
   		activaTab('content');
   	}
-  	$scope.jumpToEdit = function (){
+  	$scope.jumpToEdit = function (bookName){
   		
 		
-		//$scope.selectedBook = 
-  		//$scope.updateWords();
-  		//$scope.updateImages();
+		//$scope.selectedBook =
+		
+		var Book = Parse.Object.extend("Book");
+		var query = new Parse.Query(Book);
+		query.equalTo("title", bookName);
+		query.find({
+	 	success: function(results) {
+			$scope.selectedBook = results[0];
+			$scope.$apply();
+
+  		},
+  		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		}
+		});
+		
+		
+  		$scope.updateWords();
+  		$scope.updateImages();
 		
 		
 	
@@ -521,7 +537,7 @@ $( window ).resize(function() {
 	
 	$scope.$apply();
 	
-	$scope.jumpToEdit();
+	$scope.jumpToEdit(bookName);
 
 	
       	}
