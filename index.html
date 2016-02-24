@@ -97,7 +97,6 @@ $( window ).resize(function() {
 						grade:"N/A",
 						subject:"N/A",
 						url:"N/A"};
-      $scope.selectedBook.title = "No Book Selected";
       $scope.fixedBooks = [];
       $scope.userBooks = [];
       $scope.leader=false;
@@ -148,7 +147,7 @@ $( window ).resize(function() {
       $scope.updateWords = function(){
 		var Book= Parse.Object.extend("Book");
 		var query = new Parse.Query(Book);
-		query.equalTo("title", $scope.selectedBook.title);
+		query.equalTo("title", $scope.selectedBook.get("title"));
 		query.find({
   		success: function(results) {
   			$scope.allBooks = results;
@@ -166,7 +165,7 @@ $( window ).resize(function() {
 	$scope.updateImages = function(){
 		var Image= Parse.Object.extend("Image");
 		var query = new Parse.Query(Image);
-		query.equalTo("book", $scope.selectedBook.title);
+		query.equalTo("book", $scope.selectedBook.get("title"));
 		query.find({
   		success: function(results) {
   			$scope.imageList =[];
@@ -214,7 +213,7 @@ $( window ).resize(function() {
       	
       	var Book= Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
-	query.equalTo("title", $scope.selectedBook.title);
+	query.equalTo("title", $scope.selectedBook.get("title"));
 	query.find({
   	success: function(results) {
   		var imageUploadControl = $("#image")[0];
@@ -230,7 +229,7 @@ $( window ).resize(function() {
 		var image= new Image();
   		image.set("image", parseImage);
   		image.set("name",imageName);
-  		image.set("book",$scope.selectedBook.title);
+  		image.set("book",$scope.selectedBook.get("title"));
   		image.save();
   		alert("added image");
   		
@@ -263,7 +262,7 @@ $( window ).resize(function() {
       	  		
 							var Book= Parse.Object.extend("Book");
 							var query = new Parse.Query(Book);
-							query.equalTo("title", $scope.selectedBook.title);
+							query.equalTo("title", $scope.selectedBook.get("title"));
 							query.find({
   						success: function(results) {
   							results[0].addUnique("words",$scope.word);
@@ -419,7 +418,7 @@ $( window ).resize(function() {
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed book: " + bookTitle);
-		  if (bookTitle == $scope.selectedBook.title){
+		  if (bookTitle == $scope.selectedBook.get("title")){
 		  	$scope.wordList = [];
 			$scope.showmeWords=false;
 			$scope.selectedBook = "";
@@ -766,7 +765,7 @@ function activaTab(tab){
       			
       			
       			
-      			<h3>{{selectedBook.title}}</h3>
+      			<h3>{{selectedBook.get("title")}}</h3>
       			
       			
       			
