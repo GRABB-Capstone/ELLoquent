@@ -533,10 +533,14 @@ $( window ).resize(function() {
 	$scope.updateBooks();
 	
 	
+				var selBook = 	{title:book.get("title"),
+						author:book.get("author"),
+						grade:book.get("grade"),
+						subject:book.get("subject"),
+						url:book.get("bookPhoto").url()}
+	//$scope.$apply();
 	
-	$scope.$apply();
-	
-	$scope.jumpToEdit(bookName);
+	$scope.trig(selBook);
 
 	
       	}
