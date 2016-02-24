@@ -774,7 +774,7 @@ function activaTab(tab){
       			
       			<h5>Add Word:</h5>
 		   	<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook.title"/>
+		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || selectedBook.title == 'No Book Selected'"/>
       			
       			<h5>Add Image:</h5>
 		     	 <input  type="file" id="image" ng-model="image"/>
