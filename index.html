@@ -494,7 +494,7 @@ $( window ).resize(function() {
 	book.set("user",$scope.user);
 	
 
-	var name = $scope.name;
+	var bookName = $scope.name;
 	
 	//user.setUsername("username", $scope.user);
 	//acl.setPublicReadAccess(false);
@@ -520,7 +520,7 @@ $( window ).resize(function() {
 	$scope.updateBooks();
 	
 	for (var j = 0; j < $scope.fixedBooks.length; j++) {
-		if ($scope.fixedBooks[j].title == name)
+		if ($scope.fixedBooks[j].title == bookName)
 			$scope.selectedBook = fixedBook[j];
 	
 	$scope.$apply();
