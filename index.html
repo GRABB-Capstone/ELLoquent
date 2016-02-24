@@ -220,7 +220,6 @@ $( window ).resize(function() {
 		var image = imageUploadControl.files[0];
    		var imageName = $scope.imageName;
    		parseImage = new Parse.File(imageName, image);
-   		alert("Uploaded Image: " + parseImage);
       	}	
   	var Image= Parse.Object.extend("Image");
 	var image= new Image();
@@ -228,9 +227,8 @@ $( window ).resize(function() {
   	image.set("name",imageName);
   	image.set("book",$scope.selectedBook.get("title"));
   	image.save();
-  	alert("added image: " + image.id);
-      	
-      	$scope.selectedBook.addUnique("images",image);
+
+      	$scope.selectedBook.addUnique("images",imageName);
       	$scope.selectedBook.save();
       	
 /*
