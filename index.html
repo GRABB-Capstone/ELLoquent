@@ -664,7 +664,7 @@ $( window ).resize(function() {
 	
 			//$scope.$apply();
 	
-			$scope.trig(savedBook);
+			
       			alert("added book: " + savedBook.get("title"));
       				
   		},
@@ -674,6 +674,7 @@ $( window ).resize(function() {
 				 alert('Failed to create new object, with error code: ' + error.message);
 		}
   	});
+  	$scope.trig(book);
 	
 	
 	
