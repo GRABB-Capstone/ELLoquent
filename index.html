@@ -557,6 +557,8 @@ $( window ).resize(function() {
 
   		}
 	});
+	
+	
 
      	
       }
@@ -578,6 +580,35 @@ $( window ).resize(function() {
   			
 
       }
+      
+      var Image = Parse.Object.extend("Image");
+      var query = new Parse.Query(Image);
+      query.get(removedImage.id, {
+	 success: function(destroyedImage) {
+    // The object was retrieved successfully.
+    	destroyedImage.destroy({
+	 	success: function(myObject) {
+		  // The object was deleted from the Parse Cloud.
+		
+		  
+
+  		},
+  		error: function(myObject, error) {
+    		// The delete failed.
+    		// error is a Parse.Error with an error code and message.
+    				  alert("error removing book");
+
+  		}
+	});
+    		
+    
+    
+  	},
+	 error: function(object, error) {
+    // The object was not retrieved successfully.
+    // error is a Parse.Error with an error code and message.
+  	}
+	});
       	
       	
       
