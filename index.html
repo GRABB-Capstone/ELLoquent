@@ -232,6 +232,7 @@ $( window ).resize(function() {
     		$scope.selectedBook.addUnique("images",savedImage);
       
       		$scope.selectedBook.save();
+      		$scope.$apply();
 		 alert('New object created with objectId: ' + savedImage.id);
   		},
   		error: function(savedImage, error) {
