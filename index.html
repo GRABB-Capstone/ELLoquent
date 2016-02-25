@@ -226,10 +226,20 @@ $( window ).resize(function() {
   	image.set("image", parseImage);
   	image.set("name",imageName);
   	image.set("book",$scope.selectedBook.get("title"));
-  	image.save();
-
-      	$scope.selectedBook.addUnique("images",imageName);
-      	$scope.selectedBook.save();
+  	image.save(null, {
+  		success: function(savedImage) {
+    		// Execute any logic that should take place after the object is saved.
+    		$scope.selectedBook.addUnique("images",savedImage);
+      
+      		$scope.selectedBook.save();
+		 alert('New object created with objectId: ' + savedImage.id);
+  		},
+  		error: function(savedImage, error) {
+		 // Execute any logic that should take place if the save fails.
+		 // error is a Parse.Error with an error code and message.
+		 alert('Failed to create new object, with error code: ' + error.message);
+		 }
+      		
       	
 /*
       	var Book= Parse.Object.extend("Book");
