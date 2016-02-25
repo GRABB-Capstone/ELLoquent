@@ -381,7 +381,8 @@ $( window ).resize(function() {
 			$scope.loggedIn = true;
 			$scope.currentUser = user;
 			alert(user.get("username") + " logged in");
-			$scope.updateBooks();
+			$scope.filterBooks();
+			$scope.myFilterBooks();
 		//	$scope.updateUserBooks();
 			$scope.$apply();
    
