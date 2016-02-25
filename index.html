@@ -645,36 +645,35 @@ $( window ).resize(function() {
 	book.set("user",$scope.user);
 	
 
-	var bookName = $scope.name;
-	
 
+	$scope.name = "";
+	$scope.author = "";
+	$scope.grade = "";
+	$scope.pickedGrade ="";
+	$scope.pickedSubject = "";
+	$scope.cover = "";
+			
 	book.save(null, {
-  				success: function(savedBook) {
+  		success: function(savedBook) {
     				// Execute any logic that should take place after the object is saved.
     			//	$scope.updateWords();
     			
-    			$scope.allBooks.push(savedBook);
-    			$scope.name = "";
-			$scope.author = "";
-			$scope.grade = "";
-			$scope.pickedGrade ="";
-			$scope.pickedSubject = "";
-			$scope.cover = "";
-			//$scope.updateBooks();
+    			
+			$scope.filterBooks();
 	
 	
 			//$scope.$apply();
 	
 			$scope.trig(savedBook);
-      				alert("added book: " + savedBook.get("title"));
+      			alert("added book: " + savedBook.get("title"));
       				
-  				},
-  				error: function(savedBook, error) {
+  		},
+  		error: function(savedBook, error) {
 				 // Execute any logic that should take place if the save fails.
 				 // error is a Parse.Error with an error code and message.
 				 alert('Failed to create new object, with error code: ' + error.message);
-				}
-  			});
+		}
+  	});
 	
 	
 	
