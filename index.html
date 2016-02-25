@@ -396,7 +396,17 @@ $( window ).resize(function() {
   	$scope.addToUser = function(book){
   		
   		book.addUnique("users",$scope.currentUser.get("username"));
-  		book.save();
+  		book.save(null, {
+  			success: function(savedBook) {
+	 		// Execute any logic that should take place after the object is saved.
+			$scope.myFilterBooks();
+  			},
+  			error: function(savedBook, error) {
+			 // Execute any logic that should take place if the save fails.
+			 // error is a Parse.Error with an error code and message.
+			 alert('Failed to create new object, with error code: ' + error.message);
+			 }
+  		});
   		$scope.myFilterBooks();
   		//$scope.currentUser.addUnique("books",title);
   		//$scope.currentUser.save();
