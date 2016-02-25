@@ -391,10 +391,12 @@ $( window ).resize(function() {
   		}
 		});	
   	}
-  	$scope.addToUser = function(title){
+  	$scope.addToUser = function(book){
   		
-  		$scope.currentUser.addUnique("books",title);
-  		$scope.currentUser.save();
+  		book.addUnique("users",$scope.currentUser.get("username"));
+  		book.save();
+  		//$scope.currentUser.addUnique("books",title);
+  		//$scope.currentUser.save();
   		alert("Added book to user");
   	}
   
@@ -773,7 +775,7 @@ function activaTab(tab){
       					
       					<td>
       						
-           <button type="submit" class="btn" id="addToUser" ng-click="addToUser(book.title)">Add to User</button>
+           <button type="submit" class="btn" id="addToUser" ng-click="addToUser(book)">Add to User</button>
 						
       						
       					</td>
