@@ -397,6 +397,7 @@ $( window ).resize(function() {
   		
   		book.addUnique("users",$scope.currentUser.get("username"));
   		book.save();
+  		$scope.myFilterBooks();
   		//$scope.currentUser.addUnique("books",title);
   		//$scope.currentUser.save();
   		alert("Added book to user");
