@@ -431,8 +431,8 @@ $( window ).resize(function() {
   		
 		$scope.selectedBookTitle = selBook.get("title");
   		$scope.selectedBook = selBook;
-  		$scope.updateWords();
-  		$scope.updateImages();
+  		//$scope.updateWords();
+  		//$scope.updateImages();
 					
   		activaTab('menu1');
   	}
@@ -463,8 +463,8 @@ $( window ).resize(function() {
 		});
 		
 		
-  		$scope.updateWords();
-  		$scope.updateImages();
+  		//$scope.updateWords();
+  		//$scope.updateImages();
 		
 		
 	
@@ -536,7 +536,7 @@ $( window ).resize(function() {
       	$scope.selectedBook.save(null, {
   				success: function(savedBook) {
     				// Execute any logic that should take place after the object is saved.
-    				$scope.updateImages();
+    			//	$scope.updateImages();
       				alert("Removed Image");
   				},
   				error: function(savedBook, error) {
