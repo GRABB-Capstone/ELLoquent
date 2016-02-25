@@ -998,8 +998,7 @@ function activaTab(tab){
       					<th>Subject</th>
       				
       					<th>Edit</th>
-      					<th>Add to User</th>
-      					<th>Remove Book</th>
+      					<th>Remove from User</th>
 					 </tr>
     				<tr ng-repeat="book in userBooks">
       					<td>{{book.get("title")}}</td>
@@ -1024,12 +1023,7 @@ function activaTab(tab){
 						
       						
       					</td>
-      					<td>
-      						
-      					<button type="submit" class="btn" id="removeBook"  ng-click="removeBook(book)" >Remove Book</button>
-	
-      						
-      					</td>
+      					
       					
       					
 
