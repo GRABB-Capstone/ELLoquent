@@ -878,10 +878,12 @@ function activaTab(tab){
       			<div class = "mygrid-wrapper-div">
   					<table class="table table-hover">
     					<tr>
+    						<th>Name</th>
       						<th>Image</th>
       						<th>Remove</th>
 		 					</tr>
     					<tr ng-repeat="im in selectedBook.get('images') track by $index" >
+    						<td>{{im.get('book')}}</td>
     						<td><img ng-src="{{im.get('image').url()}}" style="width:192px;" />	</td>
     						<td>
     							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image)" >X</button>
