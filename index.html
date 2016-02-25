@@ -130,7 +130,8 @@ $( window ).resize(function() {
 		query.equalTo("subject",$scope.myFilterSubjects);
 	if($scope.myFilterGrades != "Any")	
 		query.equalTo("grade",$scope.myFilterGrades);
-	query.containedIn("users",$scope.currentUser.get("username") );
+	query.equalTo("users",$scope.currentUser.get("username"));
+
 	query.find({
   	success: function(results) {
 		$scope.userBooks = results;
