@@ -274,7 +274,6 @@ $( window ).resize(function() {
 	 		// Execute any logic that should take place after the object is saved.
 			$scope.image = "";
       			$scope.$apply();
-			 alert('applied');
   			},
   			error: function(savedBook, error) {
 			 // Execute any logic that should take place if the save fails.
@@ -411,7 +410,6 @@ $( window ).resize(function() {
   		$scope.myFilterBooks();
   		//$scope.currentUser.addUnique("books",title);
   		//$scope.currentUser.save();
-  		alert("Added book to user");
   	}
   
 	$scope.updateUserBooks = function(){
@@ -523,7 +521,6 @@ $( window ).resize(function() {
   				success: function(savedImage) {
     				// Execute any logic that should take place after the object is saved.
     			//	$scope.updateWords();
-      				alert("Removed Word: " + word);
   				},
   				error: function(savedImage, error) {
 				 // Execute any logic that should take place if the save fails.
@@ -539,8 +536,7 @@ $( window ).resize(function() {
       	removedBook.destroy({
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
-		  alert("removed book: " + removedBook.get("title"));
-		  
+
 		  $scope.filterBooks();
 		  $scope.myFilterBooks();
 		  $scope.$apply();
@@ -564,7 +560,6 @@ $( window ).resize(function() {
   				success: function(savedBook) {
     				// Execute any logic that should take place after the object is saved.
     			//	$scope.updateImages();
-      				alert("Removed Image");
   				},
   				error: function(savedBook, error) {
 				 // Execute any logic that should take place if the save fails.
