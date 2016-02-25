@@ -882,7 +882,7 @@ function activaTab(tab){
       						<th>Image</th>
       						<th>Remove</th>
 		 					</tr>
-    					<tr ng-repeat="im in selectedBook.get('images') track by $index" >
+    					<tr ng-repeat="im in selectedBook.get('images')" >
     						<td>{{im.get('book')}}</td>
     						<td><img ng-src="{{im.get('image').url()}}" style="width:192px;" />	</td>
     						<td>
