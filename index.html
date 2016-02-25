@@ -221,7 +221,7 @@ $( window ).resize(function() {
    		var imageName = $scope.imageName;
    		parseImage = new Parse.File(imageName, image);
       	}	
-      	
+      	/*
       	parseImage.save().then(function() {
 		// The file has been saved to Parse.
 			$scope.selectedBook.addUnique("images",parseImage);
@@ -245,27 +245,27 @@ $( window ).resize(function() {
 		}, function(error) {
 		// The file either could not be read, or could not be saved to Parse.
 	});
-      	
+      	*/
       
       	
-  //	var Image= Parse.Object.extend("Image");
-//	var image= new Image();
-//  	image.set("image", parseImage);
- // 	image.set("name",imageName);
- // 	image.set("book",$scope.selectedBook.get("title"));
-  /*	image.save(null, {
+  	var Image= Parse.Object.extend("Image");
+	var image= new Image();
+  	image.set("image", parseImage);
+  	image.set("name",imageName);
+  	image.set("book",$scope.selectedBook.get("title"));
+  	image.save(null, {
   		success: function(savedImage) {
     		// Execute any logic that should take place after the object is saved.
-    		$scope.selectedBook.addUnique("images",parseImage);
+    		$scope.selectedBook.addUnique("images",savedImage.get("image").url());
       
       		$scope.selectedBook.save(null, {
-  			success: function(savedImage) {
+  			success: function(savedBook) {
 	 		// Execute any logic that should take place after the object is saved.
-		//	$scope.image = "";
+			$scope.image = "";
       			$scope.$apply();
 			 alert('applied');
   			},
-  			error: function(savedImage, error) {
+  			error: function(savedBook, error) {
 			 // Execute any logic that should take place if the save fails.
 			 // error is a Parse.Error with an error code and message.
 			 alert('Failed to create new object, with error code: ' + error.message);
@@ -283,7 +283,7 @@ $( window ).resize(function() {
 		 }
   	});
       		
-      	*/
+      	
 /*
       	var Book= Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
