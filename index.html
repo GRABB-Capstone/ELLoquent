@@ -118,6 +118,30 @@ $( window ).resize(function() {
       	 $scope.filterBooks();
       }
       
+      $scope.myResetFilter = function(){
+	 $scope.myFilterSubjects = "Any";
+      	 $scope.myFilterGrades = "Any";
+      	 $scope.myFilterBooks();
+      }
+      $scope.myFilterBooks = function(){
+      	var Book = Parse.Object.extend("Book");
+	var query = new Parse.Query(Book);
+	if($scope.myFilterSubjects != "Any")
+		query.equalTo("subject",$scope.myFilterSubjects);
+	if($scope.myFilterGrades != "Any")	
+		query.equalTo("grade",$scope.myFilterGrades);
+	query.find({
+  	success: function(results) {
+		$scope.userBooks = results;
+
+		$scope.$apply();
+
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+	});
+      }
       $scope.filterBooks = function(){
       	var Book = Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
@@ -922,17 +946,17 @@ function activaTab(tab){
       				<form>
   				<div class="form-group">
     					<label for="repeatSelect"> Filter by Grade: </label>
-    					<select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
+    					<select class="form-control" ng-model="myFilterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]">
 
     					</select>
     					
     					<label for="repeatSelect"> Filter by Subject: </label>
-    					<select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
+    					<select class="form-control" ng-model="myFilterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]">
 
     					</select>
   				</div>
-  				<button type="submit" class="btn" id="filter" value="filter" ng-click = "filterBooks()" >Filter!</button>
-  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "resetFilter()" >Reset Filter</button>
+  				<button type="submit" class="btn" id="filter" value="filter" ng-click = "myFilterBooks()" >Filter!</button>
+  				<button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click = "myResetFilter()" >Reset Filter</button>
 				<p></p>
     				<p></p>
     		
