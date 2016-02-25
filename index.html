@@ -609,7 +609,7 @@ $( window ).resize(function() {
       query.equalTo("url",removedImage);
       query.find({
   	success: function(results) {
-		results.destroy({
+		results[0].destroy({
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
 		
