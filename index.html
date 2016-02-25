@@ -483,10 +483,11 @@ $( window ).resize(function() {
 		
 		
 	}
-	$scope.removeFromUser = function(title){
+	$scope.removeFromUser = function(book){
       	
-      	$scope.currentUser.remove("books",title);
-      	$scope.currentUser.save();
+      	book.remove("users",$scope.currentUser.get("username"));
+      	book.save();
+      
       	//$scope.updateUserBooks();
       	alert("removed book from user: " + title);
       }
@@ -1008,7 +1009,7 @@ function activaTab(tab){
       					
       					<td>
       						
-           <button type="submit" class="btn" id="addToUser" ng-click="removeFromUser(book.title)" >Remove from User</button>
+           <button type="submit" class="btn" id="addToUser" ng-click="removeFromUser(book)" >Remove from User</button>
 						
       						
       					</td>
