@@ -881,7 +881,7 @@ function activaTab(tab){
       						<th>Remove</th>
 		 					</tr>
     					<tr ng-repeat="image in selectedBook.get('images') track by $index" >
-    						<td><img ng-src="{{image.get('image').url()}}" style="width:192px;" />	</td>
+    						<td><img ng-src="{{image.url()}}" style="width:192px;" />	</td>
     						<td>
     							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image)" >X</button>
 						</td>
