@@ -222,7 +222,7 @@ $( window ).resize(function() {
    		parseImage = new Parse.File(imageName, image);
       	}	
       	
-      	parseFile.save().then(function() {
+      	parseImage.save().then(function() {
 		// The file has been saved to Parse.
 			$scope.selectedBook.addUnique("images",parseImage);
       
