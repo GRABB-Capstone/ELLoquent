@@ -289,26 +289,29 @@ $( window ).resize(function() {
 
       }
       $scope.addWord = function(){
-      		if ($scope.wordList.includes($scope.word)){
+      		if ($scope.selectedBook.get("words").includes($scope.word)){
       			alert("Word Already Exists");
       		}
-      		else
-      	  		$scope.wordList.push($scope.word);
+      		else{
+      			
+      			$scope.selectedBook.addUnique("words",$scope.word);
+      			$scope.selectedBook.save(null, {
+  				success: function(savedImage) {
+    				// Execute any logic that should take place after the object is saved.
+    				
+      				alert("Saved");
+  				},
+  				error: function(savedImage, error) {
+				 // Execute any logic that should take place if the save fails.
+				 // error is a Parse.Error with an error code and message.
+				 alert('Failed to create new object, with error code: ' + error.message);
+				}
+  			});
+      		}
+      			
+      		
+      		
       	  		
-							var Book= Parse.Object.extend("Book");
-							var query = new Parse.Query(Book);
-							query.equalTo("title", $scope.selectedBook.get("title"));
-							query.find({
-  						success: function(results) {
-  							results[0].addUnique("words",$scope.word);
-  							results[0].save();
-  							$scope.word = "";
-  							$scope.$apply();
-  						},
-  						error: function(error) {
-								alert("Error: " + error.code + " " + error.message);
-							}
-					});
 	}
 	$scope.tryLogin = function(){
 		if ($scope.username == "bronan")
