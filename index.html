@@ -536,7 +536,11 @@ $( window ).resize(function() {
       	removedBook.destroy({
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
-
+		
+		  if($scope.selectedBook.get("title)") == removedBook.get("title")){
+		  	$scope.selectedBook = "";
+		  	$scope.selectedBookTitle = "No Book Selected";
+		  }
 		  $scope.filterBooks();
 		  $scope.myFilterBooks();
 		  $scope.$apply();
