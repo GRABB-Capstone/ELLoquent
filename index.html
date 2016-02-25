@@ -98,7 +98,6 @@ $( window ).resize(function() {
 						grade:"N/A",
 						subject:"N/A",
 						url:"N/A"};
-      $scope.fixedBooks = [];
       $scope.userBooks = [];
       $scope.leader=false;
       $scope.name;
@@ -112,6 +111,7 @@ $( window ).resize(function() {
       $scope.grade;
       $scope.user;
       $scope.friends = [];
+      
       $scope.resetFilter = function(){
 	 $scope.filterSubjects = "Any";
       	 $scope.filterGrades = "Any";
@@ -128,15 +128,7 @@ $( window ).resize(function() {
 	query.find({
   	success: function(results) {
 		$scope.allBooks = results;
-		$scope.fixedBooks = [];
-		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title"),
-						author:results[i].get("author"),
-						grade:results[i].get("grade"),
-						subject:results[i].get("subject"),
-						url:results[i].get("bookPhoto").url()});
-			
-		}
+
 		$scope.$apply();
 
   	},
@@ -192,15 +184,7 @@ $( window ).resize(function() {
 	query.find({
   	success: function(results) {
 		$scope.allBooks = results;
-		/*$scope.fixedBooks = [];
-		for (var i = 0; i < results.length; i++) {
-			$scope.fixedBooks.push({title:results[i].get("title"),
-						author:results[i].get("author"),
-						grade:results[i].get("grade"),
-						subject:results[i].get("subject"),
-						url:results[i].get("bookPhoto").url()});
-			
-		}*/
+
 		$scope.$apply();
 
   	},
@@ -398,10 +382,10 @@ $( window ).resize(function() {
 		for (var i = 0; i < tempBooks.length; i++) {
 			
 			
-			for (var j = 0; j<$scope.fixedBooks.length;j++)
+			for (var j = 0; j<$scope.allBooks.length;j++)
 			
-			if($scope.fixedBooks[j].title ==tempBooks[i]){
-				$scope.userBooks.push($scope.fixedBooks[j])
+			if($scope.allBooks[j].get("title") == tempBooks[i]){
+				$scope.userBooks.push($scope.allBooks[j])
 			}
 				
 		
@@ -614,17 +598,10 @@ $( window ).resize(function() {
 
 	var bookName = $scope.name;
 	
-	//user.setUsername("username", $scope.user);
-	//acl.setPublicReadAccess(false);
-	//acl.setPublicWriteAccess(false);
-	//acl.setReadAccess(user, true);
-	//acl.setWriteAccess(user, true);
-	//window.alert(user.getUsername());
-	//book.setACL(acl);
+
 	book.save();
 	
 	
-	//$scope.fixedBooks.push({title:$scope.name,author:$scope.author,grade:$scope.grade});
 
 	$scope.name = "";
 	$scope.author = "";
