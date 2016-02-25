@@ -439,7 +439,7 @@ $( window ).resize(function() {
   	$scope.jumpToBrowse = function (){
   		
 
-  		$scope.updateBooks();
+  	//	$scope.updateBooks();
 					
   		activaTab('content');
   	}
@@ -515,7 +515,7 @@ $( window ).resize(function() {
 		  // The object was deleted from the Parse Cloud.
 		  alert("removed book: " + removedBook.get("title"));
 		  
-		  $scope.updateBooks();
+		//  $scope.updateBooks();
 		  $scope.$apply();
 
   		},
@@ -633,14 +633,9 @@ $( window ).resize(function() {
 	$scope.pickedGrade ="";
 	$scope.pickedSubject = "";
 	$scope.cover = "";
-	$scope.updateBooks();
+	//$scope.updateBooks();
 	
 	
-				var selBook = 	{title:book.get("title"),
-						author:book.get("author"),
-						grade:book.get("grade"),
-						subject:book.get("subject"),
-						url:book.get("bookPhoto").url()}
 	//$scope.$apply();
 	
 	$scope.trig(book);
@@ -687,7 +682,7 @@ function activaTab(tab){
 	<input class="btn btn-primary btn-block" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled = "!username || !password" />
 	</div>
 
-	<div ng-show="loggedIn == true" data-ng-init="updateBooks()">
+	<div ng-show="loggedIn == true">
 
 		<div class="container">
   		<h2>Navigation Bar</h2>
