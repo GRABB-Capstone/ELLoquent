@@ -485,7 +485,7 @@ $( window ).resize(function() {
       	
       	$scope.currentUser.remove("books",title);
       	$scope.currentUser.save();
-      	$scope.updateUserBooks();
+      	//$scope.updateUserBooks();
       	alert("removed book from user: " + title);
       }
 	
@@ -692,10 +692,10 @@ function activaTab(tab){
 		<div class="container">
   		<h2>Navigation Bar</h2>
 		<ul class="nav nav-tabs">
-    			<li class="active"><a data-toggle="tab" href="#content" ng-click="updateBooks()">Browse Content</a></li>
-    			<li><a data-toggle="tab" href="#home" ng-click="updateBooks()">Add Books</a></li>
+    			<li class="active"><a data-toggle="tab" href="#content">Browse Content</a></li>
+    			<li><a data-toggle="tab" href="#home" >Add Books</a></li>
 		 	<li><a data-toggle="tab" href="#menu1">Edit Book</a></li>
-    			<li><a data-toggle="tab" href="#menu2" ng-click = "updateUserBooks()">My Books</a></li>
+    			<li><a data-toggle="tab" href="#menu2" >My Books</a></li>
   		</ul>
 
 
