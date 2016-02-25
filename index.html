@@ -606,34 +606,21 @@ $( window ).resize(function() {
       
       var Image = Parse.Object.extend("Image");
       var query = new Parse.Query(Image);
-      query.get(removedImage.id, {
-	 success: function(destroyedImage) {
-    // The object was retrieved successfully.
-    	destroyedImage.destroy({
-	 	success: function(myObject) {
-		  // The object was deleted from the Parse Cloud.
-		
-		  
+      query.equalTo("url",removedImage);
+      query.find({
+  	success: function(results) {
+		results.destroy();
 
-  		},
-  		error: function(myObject, error) {
-    		// The delete failed.
-    		// error is a Parse.Error with an error code and message.
-    				  alert("error removing book");
-
-  		}
-	});
-    		
-    
-    
   	},
-	 error: function(object, error) {
-    // The object was not retrieved successfully.
-    // error is a Parse.Error with an error code and message.
-  	}
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
 	});
-      	
       }
+      
+      
+    
+   
       
       	/*
       	var Image = Parse.Object.extend("Image");
@@ -1006,7 +993,7 @@ function activaTab(tab){
       						<th>Remove</th>
 		 					</tr>
     					<tr ng-repeat="im in selectedBook.get('images')" >
-    						<td><img ng-src="{{im.url}}" style="width:192px;" />	</td>
+    						<td><img ng-src="{{im}}" style="width:192px;" />	</td>
     						<td>
     							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(im)" >X</button>
 						</td>
