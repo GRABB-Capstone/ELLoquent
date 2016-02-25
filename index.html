@@ -234,7 +234,7 @@ $( window ).resize(function() {
       		$scope.selectedBook.save(null, {
   			success: function(savedImage) {
 	 		// Execute any logic that should take place after the object is saved.
-
+			$scope.image = "";
       			$scope.$apply();
 			 alert('applied');
   			},
