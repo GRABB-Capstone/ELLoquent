@@ -222,12 +222,11 @@ $( window ).resize(function() {
    		parseImage = new Parse.File(imageName, image);
       	}	
       	
-      	parseImage.save(null, {
-  			success: function(savedImage) {
-	 		// Execute any logic that should take place after the object is saved.
-				$scope.selectedBook.addUnique("images",parseImage);
+      	parseFile.save().then(function() {
+		// The file has been saved to Parse.
+			$scope.selectedBook.addUnique("images",parseImage);
       
-      				$scope.selectedBook.save(null, {
+      			$scope.selectedBook.save(null, {
   					success: function(savedImage) {
 	 			// Execute any logic that should take place after the object is saved.
 	 			$scope.image = "";
@@ -240,19 +239,14 @@ $( window ).resize(function() {
 				 alert('Failed to create new object, with error code: ' + error.message);
 				 }
   			});
-  			},
-  			error: function(savedImage, error) {
-			 // Execute any logic that should take place if the save fails.
-			 // error is a Parse.Error with an error code and message.
-			 alert('Failed to create new object, with error code: ' + error.message);
-			 }
-  		});
-      	
-      	
-      	
+		
+		
+		
+		}, function(error) {
+		// The file either could not be read, or could not be saved to Parse.
+	});
       	
       
-      	
       	
   //	var Image= Parse.Object.extend("Image");
 //	var image= new Image();
