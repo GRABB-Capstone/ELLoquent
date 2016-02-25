@@ -221,12 +221,45 @@ $( window ).resize(function() {
    		var imageName = $scope.imageName;
    		parseImage = new Parse.File(imageName, image);
       	}	
-  	var Image= Parse.Object.extend("Image");
-	var image= new Image();
-  	image.set("image", parseImage);
-  	image.set("name",imageName);
-  	image.set("book",$scope.selectedBook.get("title"));
-  	image.save(null, {
+      	
+      	parseImage.save(null, {
+  			success: function(savedImage) {
+	 		// Execute any logic that should take place after the object is saved.
+				$scope.selectedBook.addUnique("images",parseImage);
+      
+      				$scope.selectedBook.save(null, {
+  					success: function(savedImage) {
+	 			// Execute any logic that should take place after the object is saved.
+	 			$scope.image = "";
+      				$scope.$apply();
+				 alert('applied');
+  				},
+  				error: function(savedImage, error) {
+				 // Execute any logic that should take place if the save fails.
+				 // error is a Parse.Error with an error code and message.
+				 alert('Failed to create new object, with error code: ' + error.message);
+				 }
+  			});
+  			},
+  			error: function(savedImage, error) {
+			 // Execute any logic that should take place if the save fails.
+			 // error is a Parse.Error with an error code and message.
+			 alert('Failed to create new object, with error code: ' + error.message);
+			 }
+  		});
+      	
+      	
+      	
+      	
+      
+      	
+      	
+  //	var Image= Parse.Object.extend("Image");
+//	var image= new Image();
+//  	image.set("image", parseImage);
+ // 	image.set("name",imageName);
+ // 	image.set("book",$scope.selectedBook.get("title"));
+  /*	image.save(null, {
   		success: function(savedImage) {
     		// Execute any logic that should take place after the object is saved.
     		$scope.selectedBook.addUnique("images",parseImage);
@@ -256,7 +289,7 @@ $( window ).resize(function() {
 		 }
   	});
       		
-      	
+      	*/
 /*
       	var Book= Parse.Object.extend("Book");
 	var query = new Parse.Query(Book);
