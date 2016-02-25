@@ -192,7 +192,7 @@ $( window ).resize(function() {
 	query.find({
   	success: function(results) {
 		$scope.allBooks = results;
-		$scope.fixedBooks = [];
+		/*$scope.fixedBooks = [];
 		for (var i = 0; i < results.length; i++) {
 			$scope.fixedBooks.push({title:results[i].get("title"),
 						author:results[i].get("author"),
@@ -200,7 +200,7 @@ $( window ).resize(function() {
 						subject:results[i].get("subject"),
 						url:results[i].get("bookPhoto").url()});
 			
-		}
+		}*/
 		$scope.$apply();
 
   	},
@@ -344,6 +344,7 @@ $( window ).resize(function() {
 			$scope.loggedIn = true;
 			$scope.currentUser = user;
 			alert(user.get("username") + " logged in");
+			$scope.updateBooks();
 			$scope.$apply();
    
 		},
@@ -549,8 +550,8 @@ $( window ).resize(function() {
       $scope.addBook = function() {
       	
       	
-      	for (var i = 0; i < $scope.fixedBooks.length; i++) {
-		if ($scope.fixedBooks[i].title == $scope.name)
+      	for (var i = 0; i < $scope.allBooks.length; i++) {
+		if ($scope.allBooks[i].get("title") == $scope.name)
 			found = 1;
 	}
       	
