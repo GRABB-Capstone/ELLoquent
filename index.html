@@ -229,7 +229,7 @@ $( window ).resize(function() {
   	image.save(null, {
   		success: function(savedImage) {
     		// Execute any logic that should take place after the object is saved.
-    		$scope.selectedBook.addUnique("images",savedImage);
+    		$scope.selectedBook.addUnique("images",parseImage);
       
       		$scope.selectedBook.save(null, {
   			success: function(savedImage) {
@@ -884,7 +884,7 @@ function activaTab(tab){
 		 					</tr>
     					<tr ng-repeat="im in selectedBook.get('images')" >
     						<td>{{im.get('book')}}</td>
-    						<td><img ng-src="{{im.get('image').url()}}" style="width:192px;" />	</td>
+    						<td><img ng-src="{{im.url()}}" style="width:192px;" />	</td>
     						<td>
     							<button type="submit" class="btn" id="removeImage"  ng-click="removeImage(image)" >X</button>
 						</td>
