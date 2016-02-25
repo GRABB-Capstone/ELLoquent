@@ -350,7 +350,7 @@ $( window ).resize(function() {
       			$scope.selectedBook.save(null, {
   				success: function(savedImage) {
     				// Execute any logic that should take place after the object is saved.
-    				
+    				$scope.word = "";
       				alert("Saved");
   				},
   				error: function(savedImage, error) {
