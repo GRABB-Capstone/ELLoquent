@@ -609,7 +609,20 @@ $( window ).resize(function() {
       query.equalTo("url",removedImage);
       query.find({
   	success: function(results) {
-		results.destroy();
+		results.destroy({
+	 	success: function(myObject) {
+		  // The object was deleted from the Parse Cloud.
+		
+		  
+
+  		},
+  		error: function(myObject, error) {
+    		// The delete failed.
+    		// error is a Parse.Error with an error code and message.
+    				  alert("error removing book");
+
+  		}
+	});
 
   	},
   	error: function(error) {
