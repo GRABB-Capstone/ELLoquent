@@ -496,7 +496,7 @@ $( window ).resize(function() {
       	$scope.selectedBook.save(null, {
   				success: function(savedImage) {
     				// Execute any logic that should take place after the object is saved.
-    				$scope.updateWords();
+    			//	$scope.updateWords();
       				alert("Removed Word: " + word);
   				},
   				error: function(savedImage, error) {
@@ -870,7 +870,7 @@ function activaTab(tab){
       			
       			<h5>Add Image:</h5>
 		     	 <input  type="file" id="image" ng-model="image"/>
-		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage();updateImages();" ng-disabled="!image||  selectedBook.title == 'No Book Selected'"/>
+		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  selectedBook.title == 'No Book Selected'"/>
 		     	 	
       			
       			 <input class="btn btn-primary btn-block" type="submit" id="backToBrowse" value="Back to Browse" ng-click="jumpToBrowse();"/>
