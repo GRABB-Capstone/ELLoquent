@@ -94,6 +94,7 @@ $( window ).resize(function() {
       $scope.currentBook;
       $scope.loggedIn = false;
       $scope.selectedBookTitle = "No Book Selected";
+      $scope.selectedBookURL = "images/noimage.png"
       $scope.selectedBook = null;
       $scope.userBooks = [];
       $scope.leader=false;
@@ -461,6 +462,7 @@ $( window ).resize(function() {
   	$scope.trig = function (selBook){
   		
 		$scope.selectedBookTitle = selBook.get("title");
+		$scope.selectedBookURL = selectedBook.get('bookPhoto').url();
   		$scope.selectedBook = selBook;
   		//$scope.updateWords();
   		//$scope.updateImages();
@@ -558,6 +560,7 @@ $( window ).resize(function() {
 		
 		  
  		$scope.selectedBookTitle = "No Book Selected";
+ 		$scope.selectedBookURL = "images/noimage.png";
 		 $scope.selectedBook = null;
  			
 		  
@@ -944,7 +947,7 @@ function activaTab(tab){
       			
       			<h3>{{selectedBookTitle}}</h3>
       			
-      			<img ng-src="{{selectedBook.get('bookPhoto').url()}}" style="width:192px;" />
+      			<img ng-src="{{selectedBookURL}}" style="width:192px;" />
       			
       			
       			
