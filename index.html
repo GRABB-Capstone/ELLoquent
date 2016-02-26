@@ -462,8 +462,9 @@ $( window ).resize(function() {
   	$scope.trig = function (selBook){
   		
 		$scope.selectedBookTitle = selBook.get("title");
-		$scope.selectedBookURL = selectedBook.get('bookPhoto').url();
   		$scope.selectedBook = selBook;
+  		$scope.selectedBookURL = selectedBook.get('bookPhoto').url();
+
   		//$scope.updateWords();
   		//$scope.updateImages();
 					
