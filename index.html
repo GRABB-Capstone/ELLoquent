@@ -94,11 +94,7 @@ $( window ).resize(function() {
       $scope.currentBook;
       $scope.loggedIn = false;
       $scope.selectedBookTitle = "No Book Selected";
-      $scope.selectedBook = {title:"No Book Selected",
-						author:"N/A",
-						grade:"N/A",
-						subject:"N/A",
-						url:"N/A"};
+      $scope.selectedBook = null;
       $scope.userBooks = [];
       $scope.leader=false;
       $scope.name;
@@ -562,11 +558,7 @@ $( window ).resize(function() {
 		
 		  
  		$scope.selectedBookTitle = "No Book Selected";
-		 $scope.selectedBook = {title:"No Book Selected",
-			author:"N/A",
-			grade:"N/A",
-			subject:"N/A",
-			url:"N/A"};
+		 $scope.selectedBook = null;
  			
 		  
 		  $scope.filterBooks();
@@ -961,13 +953,13 @@ function activaTab(tab){
       			
       			<h5>Add Word:</h5>
 		   	<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
-		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || selectedBook.title == 'No Book Selected'"/>
+		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook"/>
       			
       			<h5>Add Image:</h5>
 		     	 <input  type="file" id="image" ng-model="image"/>
-		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  selectedBook.title == 'No Book Selected'"/>
+		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  !selectedBook"/>
 		     	 	
-      			 <button type="submit" class="btn btn-danger btn-block" id="removeBook"  ng-click="removeBook(selectedBook)" ng-disabled="selectedBook.title == 'No Book Selected'">Delete Book</button>
+      			 <button type="submit" class="btn btn-danger btn-block" id="removeBook"  ng-click="removeBook(selectedBook)" ng-disabled="!selectedBook">Delete Book</button>
       			 <input class="btn btn-primary btn-block" type="submit" id="backToBrowse" value="Back to Browse" ng-click="jumpToBrowse();"/>
 
       		</div>
