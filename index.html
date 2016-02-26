@@ -967,8 +967,7 @@ function activaTab(tab){
 		     	 <input  type="file" id="image" ng-model="image"/>
 		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  selectedBook.title == 'No Book Selected'"/>
 		     	 	
-      			 <button type="submit" class="btn" id="removeBook"  ng-click="removeBook(selectedBook)" ng-disabled="selectedBook.title == 'No Book Selected'">Delete Book</button>
-
+      			 <button type="submit" class="btn btn-danger btn-block" id="removeBook"  ng-click="removeBook(selectedBook)" ng-disabled="selectedBook.title == 'No Book Selected'">Delete Book</button>
       			 <input class="btn btn-primary btn-block" type="submit" id="backToBrowse" value="Back to Browse" ng-click="jumpToBrowse();"/>
 
       		</div>
