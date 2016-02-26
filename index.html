@@ -459,7 +459,7 @@ $( window ).resize(function() {
   		
 		$scope.selectedBookTitle = selBook.get("title");
   		$scope.selectedBook = selBook;
-  		$scope.selectedBookURL = $scope.selectedBook.get('bookPhoto').url();
+  		$scope.selectedBookURL = selBook.get('bookPhoto').url();
 
   		//$scope.updateWords();
   		//$scope.updateImages();
