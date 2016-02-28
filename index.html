@@ -980,6 +980,7 @@ function activaTab(tab){
       				
       			
       				<h5>Book Cover:</h5>
+      				<img ng-src="{{selectedBookURL}}" style="width:192px;" />
       				<input type="file" id="pic" ng-model="editCover"/>
 
       				<p></p>
@@ -990,9 +991,8 @@ function activaTab(tab){
       			
       			
       			
-      			<h3>{{selectedBookTitle}}</h3>
-      			
-      			<img ng-src="{{selectedBookURL}}" style="width:192px;" />
+
+      		 	
       			
       			
       			
@@ -1002,16 +1002,16 @@ function activaTab(tab){
       			 <button type="submit" class="btn btn-danger btn-block" id="removeBook"  ng-click="removeBook(selectedBook)" ng-disabled="!selectedBook">Delete Book</button>
       			 <input class="btn btn-primary btn-block" type="submit" id="backToBrowse" value="Back to Browse" ng-click="jumpToBrowse();"/>
 
-			<h5>Edit Book Details</h5>
-			
+
 		
 
 
       		</div>
       		<div class = "col-md-4">
-      			<h3>Current Words </h3>
-      			
+
       			<div class = "row">
+      			<h3>Current Words </h3>
+
       			<h5>Add Word:</h5>
 		   	<input class="form-control"  type="text"  placeholder="Example: Technology" ng-model="word"/>
 		     	<input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook"/>
@@ -1042,7 +1042,6 @@ function activaTab(tab){
       			<h3>Current Images</h3>
       			<div class = "row">
       				<h5>Add Image:</h5>
-      				<p></p><p></p><p></p><p></p><p></p><p></p>
 		     	 <input class="btn btn-block" type="file" id="image" ng-model="image"/>
 		     	 <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  !selectedBook"/>
       			
