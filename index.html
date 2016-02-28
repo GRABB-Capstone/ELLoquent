@@ -964,7 +964,7 @@ function activaTab(tab){
       			
       				<h5>Book Cover:</h5>
       				<input type="file" id="imageFile" ng-model="cover"/>
-      				<img src="images/noimage.png" alt="hi" style="height:128px" class="inline"/>
+      				<img id="imageCover" src="images/noimage.png" alt="hi" style="height:128px" class="inline"/>
 
 
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="addBook()" ng-disabled="!name || !author || !pickedGrade|| !cover || !pickedSubject"/>
