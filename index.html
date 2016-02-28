@@ -966,21 +966,19 @@ function activaTab(tab){
 			
 			<div class = "col-md-12">
       				<h5>Book Title:</h5>
-      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="editName" value="selectedBook.get('title')" />
+      				<input class="form-control"  type="text" ng-model="editName" value="selectedBook.get('title')" />
       				<h5>Author:</h5>
-      				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="editAuthor" value="selectedBook.get('author')" />
+      				<input class="form-control"  type="text"  ng-model="editAuthor" value="selectedBook.get('author')" />
     				<h5>Select Grade Level:</h5>
     				
     		
     				<select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick" value="selectedBook.get('grade')">
-    					<option value="">Select one</option>
 
     				</select>
     				
     				
       				<h5>Select Subject:</h5>
           			<select class="form-control" ng-model="editPickedSubject" ng-options="subject for subject in subjectsPick" value="selectedBook.get('subject')">
-    					<option value="">Select one</option>
       				</select>
       				
       			
