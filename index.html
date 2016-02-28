@@ -458,12 +458,12 @@ $( window ).resize(function() {
   		$scope.selectedBook = selBook;
   		$scope.selectedBookURL = selBook.get('bookPhoto').url();
   		
-  		$scope.editTitle = selectedBook.get('title');
-      		$scope.editAuthor = selectedBook.get('author');
+  		$scope.editTitle = $scope.selectedBook.get('title');
+      		$scope.editAuthor = $scope.selectedBook.get('author');
 
-      		$scope.editGrade = selectedBook.get('grade');
+      		$scope.editGrade = $scope.selectedBook.get('grade');
 
-      		$scope.editSubject = selectedBook.get('subject');
+      		$scope.editSubject = $scop.eselectedBook.get('subject');
 
   		//$scope.updateWords();
   		//$scope.updateImages();
