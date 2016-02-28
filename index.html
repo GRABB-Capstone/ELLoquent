@@ -702,17 +702,46 @@ function readURL(input) {
       }*/
       $scope.editBook = function(){
       	
-  
+  	var fileUploadControl = $("#editImageFile")[0];
+      	var parseFile;
+      	$scope.fileName = $scope.cover.slice(12);
+      	if (fileUploadControl.files.length > 0) {
+	   var file = fileUploadControl.files[0];
+   	   var name = $scope.fileName;
+   	   parseFile = new Parse.File(name, file);
+   	   alert("Uploaded: " + name);
+   	   
+   
+      	}
       	
       	$scope.selectedBook.set("title",$scope.editName);
 	$scope.selectedBook.set("author",$scope.editAuthor);
 	$scope.selectedBook.set("grade", $scope.editPickedGrade);
 	$scope.selectedBook.set("subject",$scope.editPickedSubject);
-//	book.set("bookPhoto", parseFile);
-//	book.set("words",[]);
-	$scope.selectedBook.save();
+	$scope.selectedBook.set("bookPhoto", parseFile);
 
 
+	$scope.selectedBook.save(null, {
+  		success: function(savedBook) {
+    				// Execute any logic that should take place after the object is saved.
+    			//	$scope.updateWords();
+    			
+    			
+			$scope.filterBooks();
+	
+		
+	
+
+			
+      			alert("saved book: " + savedBook.get("title"));
+      				
+  		},
+  		error: function(savedBook, error) {
+				 // Execute any logic that should take place if the save fails.
+				 // error is a Parse.Error with an error code and message.
+				 alert('Failed to create new object, with error code: ' + error.message);
+		}
+  	});
       	
       	
       }
