@@ -962,6 +962,31 @@ function activaTab(tab){
       			
       			
       			
+      			h5>Book Title:</h5>
+      				<input class="form-control"  type="text" ng-model="editName"  />
+      				<h5>Author:</h5>
+      				<input class="form-control"  type="text"  ng-model="editAuthor"  />
+    				<h5>Select Grade Level:</h5>
+    				
+    		
+    				<select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick" >
+
+    				</select>
+    				
+    				
+      				<h5>Select Subject:</h5>
+          			<select class="form-control" ng-model="editPickedSubject" ng-options="subject for subject in subjectsPick">
+      				</select>
+      				
+      			
+      				<h5>Book Cover:</h5>
+      				<input type="file" id="pic" ng-model="editCover"/>
+
+      				<p></p>
+      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Save Book Details" ng-click="editBook()"/>
+      
+      			
+      			
       			
       			
       			
