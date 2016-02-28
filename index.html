@@ -700,7 +700,21 @@ $( window ).resize(function() {
    	   var name = $scope.fileName;
    	   parseFile = new Parse.File(name, file);
    	   alert("Uploaded: " + name);
+   	   
+   	   var reader = new FileReader();
+   	   
+   	   reader.onload = function (e) {
+                $('#imageCover').attr('src', e.target.result);
+           }
+           
+           reader.readAsDataURL(input.files[0]);
       	}
+      	
+      	  
+    
+    $("#imageFile").change(function(){
+        readURL(this);
+    });
       	
       	var found = 0;
       	
@@ -936,8 +950,8 @@ function activaTab(tab){
       				
       			
       				<h5>Book Cover:</h5>
-      				<input type="file" id="pic" ng-model="cover"/>
-      				<img src="cover" alt="hi" style="height:128px" class="inline"/>
+      				<input type="file" id="imageFile" ng-model="cover"/>
+      				<img src="imageCover" alt="hi" style="height:128px" class="inline"/>
 
 
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="addBook()" ng-disabled="!name || !author || !pickedGrade|| !cover || !pickedSubject"/>
