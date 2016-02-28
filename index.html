@@ -962,7 +962,9 @@ function activaTab(tab){
       			<div class = "row">
       			<h3>Edit Book Details </h3>
       			
-      			
+      			<h5>Book Cover:</h5>
+      				<img ng-src="{{selectedBookURL}}" style="width:192px;" />
+      				<input type="file" id="pic" ng-model="editCover"/>
       			
       			<h5>Book Title:</h5>
       				<input class="form-control"  type="text" ng-model="editName"  />
@@ -981,9 +983,7 @@ function activaTab(tab){
       				</select>
       				
       			
-      				<h5>Book Cover:</h5>
-      				<img ng-src="{{selectedBookURL}}" style="width:192px;" />
-      				<input type="file" id="pic" ng-model="editCover"/>
+      			
 
       				<p></p>
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Save Book Details" ng-click="editBook()" ng-disabled ="!editName || !editAuthor || !editPickedGrade || !editPickedSubject"/>
