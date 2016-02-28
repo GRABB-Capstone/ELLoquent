@@ -100,7 +100,7 @@ function readURL(input) {
             var reader = new FileReader();
             
             reader.onload = function (e) {
-                $('#editImageCover').attr('src', e.target.result);
+                $('#editImageCover').attr('ng-src', e.target.result);
             }
             
             reader.readAsDataURL(input.files[0]);
@@ -1012,7 +1012,8 @@ function activaTab(tab){
       			<h3>Edit Book Details </h3>
       			
       			<h5>Book Cover:</h5>
-      				<img id="editImageCover" src="selectedBookURL" alt="hi" style="width:192px" class="inline"/>
+      				<img id="editImageCover" ng-src="{{selectedBook.get('bookPhoto').url()}}" style="width:192px;" />
+
       				<input id = "editImageFile" type="file" id="pic" ng-model="editCover"/>
       			
       			<h5>Book Title:</h5>
