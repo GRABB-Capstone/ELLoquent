@@ -953,7 +953,7 @@ function activaTab(tab){
 	
 		 		<div class = "row">
 		 			
-		 		<div class = "col-md-12">
+		 		<div class = "col-md-6">
 		 		<h3>Add a Book</h3>
 		 		
       				<h5>Book Title:</h5>
@@ -975,9 +975,7 @@ function activaTab(tab){
       				</select>
       				
       			
-      				<h5>Book Cover:</h5>
-      				<input type="file" id="imageFile" ng-model="cover"/>
-      				<img id="imageCover" src="images/noimage.png" alt="hi" style="height:128px" class="inline"/>
+      				
 
 
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="addBook()" ng-disabled="!name || !author || !pickedGrade|| !cover || !pickedSubject"/>
@@ -985,6 +983,16 @@ function activaTab(tab){
 
 				
 				</div >
+				
+				<div class= "col-md-6">
+					
+				<h5>Book Cover:</h5>
+      				
+      				<img id="imageCover" src="images/noimage.png" alt="hi" style="width:256px" class="inline"/>
+				<input type="file" id="imageFile" ng-model="cover"/>
+				
+				</div>
+				
 
 
    	 
