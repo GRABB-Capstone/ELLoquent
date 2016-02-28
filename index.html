@@ -489,6 +489,7 @@ function readURL(input) {
   	}
   	$scope.trig = function (selBook){
   		
+  		$scope.editCover  = "";
 		$scope.selectedBookTitle = selBook.get("title");
   		$scope.selectedBook = selBook;
   		$scope.selectedBookURL = selBook.get('bookPhoto').url();
@@ -509,6 +510,7 @@ function readURL(input) {
   		
 
   	//	$scope.updateBooks();
+  		
 					
   		activaTab('content');
   	}
