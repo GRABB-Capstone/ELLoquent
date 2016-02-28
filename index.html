@@ -966,20 +966,20 @@ function activaTab(tab){
 			
 			<div class = "col-md-12">
       				<h5>Book Title:</h5>
-      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="editName"/>
+      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="editName" value="selectedBook.get('title')" />
       				<h5>Author:</h5>
-      				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="editAuthor" />
+      				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="editAuthor" value="selectedBook.get('author')" />
     				<h5>Select Grade Level:</h5>
     				
     		
-    				<select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick">
+    				<select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick" value="selectedBook.get('grade')">
     					<option value="">Select one</option>
 
     				</select>
     				
     				
       				<h5>Select Subject:</h5>
-          			<select class="form-control" ng-model="editPickedSubject" ng-options="subject for subject in subjectsPick">
+          			<select class="form-control" ng-model="editPickedSubject" ng-options="subject for subject in subjectsPick" value="selectedBook.get('subject')">
     					<option value="">Select one</option>
       				</select>
       				
@@ -988,7 +988,7 @@ function activaTab(tab){
       				<input type="file" id="pic" ng-model="editCover"/>
 
       				<p></p>
-      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="editBook()"/>
+      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Save Book Details" ng-click="editBook()"/>
       
 
 				
