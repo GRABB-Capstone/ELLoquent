@@ -502,7 +502,7 @@ function readURL(input) {
   		$scope.editCover  = "";
 		$scope.selectedBookTitle = selBook.get("title");
   		$scope.selectedBook = selBook;
-  	//	$scope.selectedBookURL = selBook.get('bookPhoto').url();
+  		$scope.selectedBookURL = selBook.get('bookPhoto').url();
   		
   		$scope.editName = $scope.selectedBook.get('title');
       		$scope.editAuthor = $scope.selectedBook.get('author');
@@ -729,7 +729,8 @@ function readURL(input) {
 	$scope.selectedBook.set("author",$scope.editAuthor);
 	$scope.selectedBook.set("grade", $scope.editPickedGrade);
 	$scope.selectedBook.set("subject",$scope.editPickedSubject);
-	$scope.selectedBook.set("bookPhoto", parseFile);
+	if($scope.editCover)
+		$scope.selectedBook.set("bookPhoto", parseFile);
 
 
 	$scope.selectedBook.save(null, {
