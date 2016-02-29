@@ -739,14 +739,14 @@ function readURL(input) {
     			//	$scope.updateWords();
     			
     			
-			$scope.filterBooks();
-			$scope.selectedBook = savedBook;
-		
+			//$scope.filterBooks();
+			//$scope.selectedBook = savedBook;
+			trig($scope.selectedBook);
 	
 
 			
       		//	alert("saved book: " + savedBook.get("title"));
-      			$scope.jumpToBrowse();
+      		//	$scope.jumpToBrowse();
       				
   		},
   		error: function(savedBook, error) {
