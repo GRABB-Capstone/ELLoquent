@@ -333,7 +333,7 @@ function readURL(input) {
       		
       		
       		
-		 alert('New object created with objectId: ' + savedImage.id);
+		// alert('New object created with objectId: ' + savedImage.id);
   		},
   		error: function(savedImage, error) {
 		 // Execute any logic that should take place if the save fails.
@@ -429,7 +429,7 @@ function readURL(input) {
   		success: function(user) {
 			$scope.loggedIn = true;
 			$scope.currentUser = user;
-			alert(user.get("username") + " logged in");
+		//	alert(user.get("username") + " logged in");
 			$scope.filterBooks();
 			$scope.myFilterBooks();
 		//	$scope.updateUserBooks();
@@ -495,7 +495,7 @@ function readURL(input) {
 	}
   	
   	$scope.test = function (x){
-  		alert("test" + x);
+  	//	alert("test" + x);
   	}
   	$scope.trig = function (selBook){
   		
@@ -579,7 +579,7 @@ function readURL(input) {
   			});
       
       	//$scope.updateUserBooks();
-      	alert("removed book from user: " + title);
+      //	alert("removed book from user: " + title);
       }
 	
       $scope.removeWord = function(word){
@@ -720,7 +720,7 @@ function readURL(input) {
 	   var file = fileUploadControl.files[0];
    	   var name = $scope.fileName;
    	   parseFile = new Parse.File(name, file);
-   	   alert("Uploaded: " + name);
+   //	   alert("Uploaded: " + name);
    	   
    
       	}
@@ -745,7 +745,7 @@ function readURL(input) {
 	
 
 			
-      			alert("saved book: " + savedBook.get("title"));
+      		//	alert("saved book: " + savedBook.get("title"));
       			$scope.jumpToBrowse();
       				
   		},
@@ -778,7 +778,7 @@ function readURL(input) {
 	   var file = fileUploadControl.files[0];
    	   var name = $scope.fileName;
    	   parseFile = new Parse.File(name, file);
-   	   alert("Uploaded: " + name);
+   	//   alert("Uploaded: " + name);
    	   
    
       	}
@@ -823,7 +823,7 @@ function readURL(input) {
 			$scope.trig(savedBook);
 			
 			
-      			alert("added book: " + savedBook.get("title"));
+      		//	alert("added book: " + savedBook.get("title"));
       				
   		},
   		error: function(savedBook, error) {
