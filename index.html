@@ -508,10 +508,11 @@ function readURL(input) {
 	}
 	$scope.validateBook = function(){
 		    if ($scope.bookAddForm.$valid) {
-			 alert('VALID');
+			 $scope.addBook();
     		    } 
     		    else {
 			 $scope.attempted = true;
+			 alert('Not Valid Entry, please fill out all fields');
 	    	     }
 		return;
 	}
@@ -780,6 +781,17 @@ function readURL(input) {
       	
       
       }*/
+      $scope.validateEdit = function(){
+      	 if ($scope.editForm.$valid) {
+			 $scope.addBook();
+    	} 
+    	else
+    		alert('Not Valid Entry, please fill out all fields);
+    
+	return;
+      	
+      	
+      }
       $scope.editBook = function(){
       	
   	var fileUploadControl = $("#editImageFile")[0];
