@@ -1180,9 +1180,10 @@ function activaTab(tab){
       				<input id = "editImageFile" type="file"  ng-model="editCover"/>
       			
       			<h5>Book Title:</h5>
-      				<input class="form-control" name = "editName" ng-class="{ 'error': editForm.editName.$invalid && editForm.editName.$dirty }" type="text" ng-model="editName"  />
+
+      				<input class="form-control" name = "editName" ng-class="{ 'error': editForm.editName.$invalid && editForm.editName.$dirty }" type="text" ng-model="editName" required />
       				<h5>Author:</h5>
-      				<input class="form-control" name = "editAuthor" ng-class="{ 'error': editForm.editName.$invalid && editForm.editAuthor.$dirty }"  type="text"  ng-model="editAuthor"  />
+      				<input class="form-control" name = "editAuthor" ng-class="{ 'error': editForm.editName.$invalid && editForm.editAuthor.$dirty }"  type="text"  ng-model="editAuthor"  required />
     				<h5>Select Grade Level:</h5>
     				
     		
