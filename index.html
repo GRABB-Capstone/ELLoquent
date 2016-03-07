@@ -507,7 +507,12 @@ function readURL(input) {
 		
 	}
 	$scope.validateBook = function(){
-		$scope.attempted = true;
+		    if ($scope.bookAddForm.$valid) {
+			 alert('VALID');
+    		    } 
+    		    else {
+			 $scope.attempted = true;
+	    	     }
 		return;
 	}
 	$scope.refreshAddBooks = function(){
