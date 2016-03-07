@@ -449,7 +449,10 @@ function readURL(input) {
 			$scope.myFilterBooks();
 		//	$scope.updateUserBooks();
 			$scope.$apply();
-   
+   			$scope.jumptoBrowse();
+   			$scope.password = "";
+   			$scope.username = "";
+   			
 		},
 		error: function(user, error) {
     			// The login failed. Check error to see why.
@@ -905,7 +908,7 @@ function activaTab(tab){
 		<span class="right">  			
 		<input class="btn btn-primary" type="submit" id="logout" value="Log Out" ng-click="logout()"  />
 		</span>
-		<span class="left"><h2>Welcome {{username}}</h2>
+		<span class="left"><h2>Welcome {{$scope.currentUser.get('username')}}</h2>
 		</span>
 		</div>
 		
