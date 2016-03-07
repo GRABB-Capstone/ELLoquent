@@ -900,7 +900,10 @@ function activaTab(tab){
 	<div ng-show="loggedIn == true">
 
 		<div class="container">
-		<span class="right">Right aligned</span><span class="left">Left aligned</span>​
+		<span class="right">  			
+		<input class="btn btn-primary" type="submit" id="logout" value="Log Out" ng-click="logout()"  />
+		</span>
+		<span class="left"><h2>Welcome {{username}}</h2></span>​
 
 		<ul class="nav nav-tabs">
     			<li class="active"><a data-toggle="tab" href="#content" id="myTab" ng-click = "filterBooks()">Browse Content</a></li>
