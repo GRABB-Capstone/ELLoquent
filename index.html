@@ -1103,19 +1103,19 @@ function activaTab(tab){
 		 		
 		 		
 		 		
-				<div class="form-group" ng-class="{ 'has-error': bookAddForm.name.$invalid && bookAddForm.name.$dirty }" >
+				<div class="form-group" ng-class="{ 'error': bookAddForm.name.$invalid && bookAddForm.name.$dirty }" >
 				    <label class="control-label">Book Title</label>
 				    <input type="text" class="form-control" name="name" ng-model="name" required placeholder="Example: Harry Potter" />
 				</div>
 				
-				<div class="form-group" ng-class="{ 'has-error': bookAddForm.author.$invalid && bookAddForm.author.$dirty }" >
+				<div class="form-group" ng-class="{ 'error': bookAddForm.author.$invalid && bookAddForm.author.$dirty }" >
 				    <label class="control-label">Author</label>
 				    <input type="text" class="form-control" name="author" ng-model="author" required placeholder="Example: J. K. Rowling" />
 				</div>
 				
 				<h5>Select Grade:</h5>
 				
-				<select name="grade" class = "form-control" ng-class="{'has-error':bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
+				<select name="grade" class = "form-control" ng-class="{'error':bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
         				ng-model="pickedGrade" 
         				ng-options="grade for grade in gradesPick"
             				required> 
@@ -1123,7 +1123,7 @@ function activaTab(tab){
     				</select>
     				
       				<h5>Select Subject:</h5>
-      				<select name="subject" class = "form-control" ng-class="{'has-error':bookAddForm.subject.$dirty && bookAddForm.subject.$invalid}" style="width: 220px;" 
+      				<select name="subject" class = "form-control" ng-class="{'error':bookAddForm.subject.$dirty && bookAddForm.subject.$invalid}" style="width: 220px;" 
         				ng-model="pickedSubject" 
         				ng-options="subject for subject in subjectsPick">
             				required> 
