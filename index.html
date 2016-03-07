@@ -1115,7 +1115,7 @@ function activaTab(tab){
 				
 				<h5>Select Grade:</h5>
 				
-				<select name="grade" class = "form-control" ng-class="{'error':bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
+				<select name="grade" class = "form-control" ng-class="{'has-error':bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
         				ng-model="pickedGrade" 
         				ng-options="grade for grade in gradesPick"
             				required> 
@@ -1123,7 +1123,7 @@ function activaTab(tab){
     				</select>
     				
       				<h5>Select Subject:</h5>
-      				<select name="subject" class = "form-control" ng-class="{'error':bookAddForm.subject.$dirty && bookAddForm.subject.$invalid}" style="width: 220px;" 
+      				<select name="subject" class = "form-control" ng-class="{'has-error':bookAddForm.subject.$dirty && bookAddForm.subject.$invalid}" style="width: 220px;" 
         				ng-model="pickedSubject" 
         				ng-options="subject for subject in subjectsPick">
             				required> 
