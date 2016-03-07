@@ -75,7 +75,6 @@
 
 .error {
   color: red;  
-  border:1px solid #f00;
 }
 	
 </style>		
@@ -1123,7 +1122,7 @@ function activaTab(tab){
     				</select>
     				
       				<h5>Select Subject:</h5>
-      				<select name="subject" class = "form-control" ng-class="{'error':bookAddForm.subject.$dirty && bookAddForm.subject.$invalid}" style="width: 220px;" 
+      				<select name="subject1" class = "form-control" ng-class="{'error':bookAddForm.subject1.$dirty && bookAddForm.subject1.$invalid}" style="width: 220px;" 
         				ng-model="pickedSubject" 
         				ng-options="subject for subject in subjectsPick">
             				required> 
