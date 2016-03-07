@@ -425,6 +425,9 @@ function readURL(input) {
 		$scope.loggedIn = true;
 	
   	}
+  	$scope.logout = function(){
+  		
+  	}
   	$scope.login = function(){
   	var user = Parse.User.logIn($scope.username, $scope.password, {
   		success: function(user) {
@@ -886,7 +889,12 @@ function activaTab(tab){
 	<div ng-show="loggedIn == true">
 
 		<div class="container">
-  		<h2>Navigation Bar</h2>
+			
+		<div align="right">
+  			Welcome {{username}}
+  			<input class="btn btn-primary btn-block" type="submit" id="logout" value="Log Out" ng-click="logout()"  />
+		</div>
+		
 		<ul class="nav nav-tabs">
     			<li class="active"><a data-toggle="tab" href="#content" id="myTab" ng-click = "filterBooks()">Browse Content</a></li>
     			<li><a data-toggle="tab" href="#home" ng-click = "refreshAddBooks()">Add Books</a></li>
