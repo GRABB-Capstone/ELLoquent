@@ -1098,7 +1098,10 @@ function activaTab(tab){
 		 		
 		 		
 		 		
-		 		
+	<div class="form-group" ng-class="{ 'has-error': bookAddForm.name2.$invalid && bookAddForm.name2.$dirty }" >
+        <label class="control-label">Book Title</label>
+        <input type="text" class="form-control" name="name2" ng-model="bName" required placeholder="Example: Harry Potter" />
+      </div>
 		 		
       				<div class="form-group" ng-class="{ 'has-error': bookAddForm.bName.$invalid && bookAddForm.bName.$dirty }">
       				<label class="control-label">Book Title</label>
