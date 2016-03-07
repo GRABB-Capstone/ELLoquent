@@ -1103,31 +1103,36 @@ function activaTab(tab){
 		 		
 		 		
 		 		
-	<div class="form-group" ng-class="{ 'has-error': bookAddForm.name2.$invalid && bookAddForm.name2.$dirty }" >
-        <label class="control-label">Book Title</label>
-        <input type="text" class="form-control" name="name2" ng-model="bName" required placeholder="Example: Harry Potter" />
-      </div>
-		 		
-      				<div class="form-group" ng-class="{ 'error': bookAddForm.bName.$invalid && bookAddForm.bName.$dirty }">
-      				<label class="control-label">Book Title</label>
-      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="bName"/>
-      				</div>
-      				
-      				<h5>Author:</h5>
-      				<input class="form-control"  name ="author" ng-class="{ 'error': bookAddForm.author.$invalid && bookAddForm.author.$dirty }" type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
-    				<h5>Select Grade Level:</h5>
-    				
-    		
-    				<select class="form-control" name ="grade" ng-class="{ 'error': bookAddForm.grade.$invalid && bookAddForm.grade.$dirty }" ng-model="pickedGrade" ng-options="grade for grade in gradesPick">
-    					<option value="">Select one</option>
-
+				<div class="form-group" ng-class="{ 'has-error': bookAddForm.name.$invalid && bookAddForm.name.$dirty }" >
+				    <label class="control-label">Book Title</label>
+				    <input type="text" class="form-control" name="name" ng-model="name" required placeholder="Example: Harry Potter" />
+				</div>
+				
+				<div class="form-group" ng-class="{ 'has-error': bookAddForm.author.$invalid && bookAddForm.author.$dirty }" >
+				    <label class="control-label">Author</label>
+				    <input type="text" class="form-control" name="author" ng-model="author" required placeholder="Example: J. K. Rowling" />
+				</div>
+				
+				<h5>Select Grade:</h5>
+				
+				<select name="grade" class = "form-control" ng-class="{'error':bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
+        				ng-model="pickedGrade" 
+        				ng-options="grade for grade in gradesPick"
+            				required> 
+      					<option value="">Select Service</option> 
     				</select>
     				
-    				
       				<h5>Select Subject:</h5>
-          			<select class="form-control" ng-model="pickedSubject" ng-options="subject for subject in subjectsPick">
-    					<option value="">Select one</option>
-      				</select>
+      				<select name="subject" class = "form-control" ng-class="{'error':bookAddForm.subject.$dirty && bookAddForm.subject.$invalid}" style="width: 220px;" 
+        				ng-model="pickedSubject" 
+        				ng-options="subject for subject in subjectsPick">
+            				required> 
+      					<option value="">Select Service</option> 
+    				</select>
+      
+		 		
+      			
+      			
       				
       				<p></p>
       				<p></p>
