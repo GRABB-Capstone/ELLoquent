@@ -63,6 +63,15 @@
 .mygrid-wrapper-div {
     overflow: scroll;
 }
+
+
+.right{
+    float:right;
+}
+
+.left{
+    float:left;
+}
 	
 </style>		
 		
@@ -889,12 +898,8 @@ function activaTab(tab){
 	<div ng-show="loggedIn == true">
 
 		<div class="container">
-			
-		<div align="right">
-  			<h2>Welcome {{username}}</h2>
-  			<input class="btn btn-primary" type="submit" id="logout" value="Log Out" ng-click="logout()"  />
-		</div>
-		
+		<span class="right">Right aligned</span><span class="left">Left aligned</span>​
+
 		<ul class="nav nav-tabs">
     			<li class="active"><a data-toggle="tab" href="#content" id="myTab" ng-click = "filterBooks()">Browse Content</a></li>
     			<li><a data-toggle="tab" href="#home" ng-click = "refreshAddBooks()">Add Books</a></li>
