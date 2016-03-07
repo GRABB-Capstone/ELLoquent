@@ -900,19 +900,25 @@ function activaTab(tab){
 	<div ng-show="loggedIn == true">
 
 		<div class="container">
+			
+		<div class ="row">
 		<span class="right">  			
 		<input class="btn btn-primary" type="submit" id="logout" value="Log Out" ng-click="logout()"  />
 		</span>
-		<span class="left"><h2>Welcome {{username}}</h2></span>​
-
+		<span class="left"><h2>Welcome {{username}}</h2>
+		</span>
+		</div>
+		
+		<div class ="row">
 		<ul class="nav nav-tabs">
     			<li class="active"><a data-toggle="tab" href="#content" id="myTab" ng-click = "filterBooks()">Browse Content</a></li>
     			<li><a data-toggle="tab" href="#home" ng-click = "refreshAddBooks()">Add Books</a></li>
 		 	<li id="editBook"><a data-toggle="tab" href="#menu1">Edit Book</a></li>
     			<li><a data-toggle="tab" href="#menu2" >My Books</a></li>
   		</ul>
-
-
+		</div>
+		
+		<div class ="row">
   		<div class="tab-content">
   		<div id="content" class="tab-pane fade in active">
       		<h3>Browse Content </h3>
@@ -1299,7 +1305,8 @@ function activaTab(tab){
 
     
    		</div>
-
+		</div>
+		
 		</div>
 	</div>
 </div>
