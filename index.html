@@ -1089,8 +1089,20 @@ function activaTab(tab){
 		 		<div class = "col-md-6">
 		 		
 		 		
-      				<h5>Book Title:</h5>
-      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name" name="name2" />
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+      				<div class="form-group" ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
+      				<label class="control-label">Book Title</label>
+      				<input class="form-control"  type="text"  placeholder="Example: Harry Potter" ng-model="name"/>
+      				</div>
+      				
       				<h5>Author:</h5>
       				<input class="form-control"  type="text"  placeholder="Example: J.K. Rowling" ng-model="author" />
     				<h5>Select Grade Level:</h5>
