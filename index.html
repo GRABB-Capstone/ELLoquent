@@ -507,10 +507,11 @@ function readURL(input) {
 		
 	}
 	$scope.validateBook = function(){
-		
+		$scope.attempted = true;
 		return;
 	}
 	$scope.refreshAddBooks = function(){
+		$scope.attempted = false;
 		$scope.name = "";
 		$scope.author = "";
 		$scope.grade = "";
@@ -1107,22 +1108,22 @@ function activaTab(tab){
 		 		
 		 		
 		 		<h5>Title:</h5>
-				    <input type="text" class="form-control" name="name"  ng-class="{ 'error': bookAddForm.name.$invalid && bookAddForm.name.$dirty }" ng-model="name" required placeholder="Example: Harry Potter" />
+				    <input type="text" class="form-control" name="name"  ng-class="{ 'error': attempted && bookAddForm.name.$invalid && bookAddForm.name.$dirty }" ng-model="name" required placeholder="Example: Harry Potter" />
 
 				<h5>Author:</h5>
-				    <input type="text"  class="form-control" name="author" ng-class="{ 'error': bookAddForm.author.$invalid && bookAddForm.author.$dirty }" ng-model="author" required placeholder="Example: J. K. Rowling" />
+				    <input type="text"  class="form-control" name="author" ng-class="{ 'error': attempted && bookAddForm.author.$invalid && bookAddForm.author.$dirty }" ng-model="author" required placeholder="Example: J. K. Rowling" />
 
 				
 				
 				<h5>Select Subject:</h5>
-				<select name="subj" class = "form-control" ng-class="{'error':bookAddForm.subj.$dirty && bookAddForm.subj.$invalid}" style="width: 220px;" 
+				<select name="subj" class = "form-control" ng-class="{'error':attempted && bookAddForm.subj.$dirty && bookAddForm.subj.$invalid}" style="width: 220px;" 
         				ng-model="pickedSubject" 
         				ng-options="subject for subject in subjectsPick"
             				required> 
       					<option value="">Select Subject</option> 
     				</select>
 				<h5>Select Grade:</h5>
-				<select name="grade" class = "form-control" ng-class="{'error':bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
+				<select name="grade" class = "form-control" ng-class="{'error':attempted && bookAddForm.grade.$dirty && bookAddForm.grade.$invalid}" style="width: 220px;" 
         				ng-model="pickedGrade" 
         				ng-options="grade for grade in gradesPick"
             				required> 
@@ -1150,9 +1151,9 @@ function activaTab(tab){
 					
 				<h5>Book Cover:</h5>
       				<center>
-      				<img id="imageCover" ng-src="{{defaultImage}}"style="height:192px"/>
+      				<img id="imageCover" ng-src="{{defaultImage}}" style="height:192px"/>
       				</center>
-				<input type="file" id="imageFile" ng-model="cover" required/>
+				<input type="file" id="imageFile" name="cover"  ng-class="{'error':attempted && bookAddForm.cover.$dirty && bookAddForm.cover.$invalid}" ng-model="cover" required/>
 				
 				</div>
 				
