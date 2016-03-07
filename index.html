@@ -638,7 +638,7 @@ function readURL(input) {
 		  $scope.jumpToBrowse();
 		  if(tempImages != null){
       			for (var i = 0; i < tempImages.length; i++) {
-			$scope.removeImage(tempImages[i]);
+				$scope.removeImageFromParse(tempImages[i]);
 		  	}
 		 }
 
@@ -655,6 +655,35 @@ function readURL(input) {
 
      	
       }
+      $scope.removeImageFromParse = function(removedImage){
+      	
+      	  var Image = Parse.Object.extend("Image");
+      var query = new Parse.Query(Image);
+      query.equalTo("url",removedImage);
+      query.find({
+  	success: function(results) {
+		results[0].destroy({
+	 	success: function(myObject) {
+		  // The object was deleted from the Parse Cloud.
+		
+		  
+
+  		},
+  		error: function(myObject, error) {
+    		// The delete failed.
+    		// error is a Parse.Error with an error code and message.
+    				  alert("error removing book");
+
+  		}
+	});
+
+  	},
+  	error: function(error) {
+		alert("Error: " + error.code + " " + error.message);
+	}
+	});
+      }
+      
       $scope.removeImage = function(removedImage){
       	
       	$scope.selectedBook.remove("images",removedImage);
