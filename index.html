@@ -621,11 +621,7 @@ function readURL(input) {
       $scope.removeBook = function(removedBook){
       	
       	var tempImages = removedBook.get('images');
-	if(tempImages != null){
-      		for (var i = 0; i < tempImages.length; i++) {
-			$scope.removeImage(tempImages[i]);
-		}
-	}
+	
       	removedBook.destroy({
 	 	success: function(myObject) {
 		  // The object was deleted from the Parse Cloud.
@@ -638,9 +634,13 @@ function readURL(input) {
 		  
 		  $scope.filterBooks();
 		  $scope.myFilterBooks();
-		//  $scope.$apply();
+		  $scope.$apply();
 		  $scope.jumpToBrowse();
-		  $scope.selectedBook = null;
+		  if(tempImages != null){
+      			for (var i = 0; i < tempImages.length; i++) {
+			$scope.removeImage(tempImages[i]);
+		  	}
+		 }
 
   		},
   		error: function(myObject, error) {
