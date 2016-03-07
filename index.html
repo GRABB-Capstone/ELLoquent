@@ -638,8 +638,9 @@ function readURL(input) {
 		  
 		  $scope.filterBooks();
 		  $scope.myFilterBooks();
-		  $scope.$apply();
+		//  $scope.$apply();
 		  $scope.jumpToBrowse();
+		  $scope.selectedBook = null;
 
   		},
   		error: function(myObject, error) {
