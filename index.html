@@ -506,7 +506,10 @@ function readURL(input) {
 		
 		
 	}
-
+	$scope.validateBook = function(){
+		
+		return;
+	}
 	$scope.refreshAddBooks = function(){
 		$scope.name = "";
 		$scope.author = "";
@@ -1137,7 +1140,7 @@ function activaTab(tab){
       				
 
 
-      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="addBook()" ng-disabled="!name || !author || !pickedGrade || !pickedSubject"/>
+      				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="validateBook()"/>
       
 
 				
