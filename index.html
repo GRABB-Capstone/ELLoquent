@@ -1103,19 +1103,17 @@ function activaTab(tab){
 		 		
 		 		
 		 		<h5>Title:</h5>
-				<div class="form-group" ng-class="{ 'error': bookAddForm.name.$invalid && bookAddForm.name.$dirty }" >
-				    <input type="text" class="form-control" name="name" ng-model="name" required placeholder="Example: Harry Potter" />
-				</div>
-				
+				    <input type="text" class="form-control" name="name"  ng-class="{ 'error': bookAddForm.name.$invalid && bookAddForm.name.$dirty }" ng-model="name" required placeholder="Example: Harry Potter" />
+
 				<h5>Author:</h5>
 				    <input type="text"  class="form-control" name="author" ng-class="{ 'error': bookAddForm.author.$invalid && bookAddForm.author.$dirty }" ng-model="author" required placeholder="Example: J. K. Rowling" />
 
 				
 				
 				<h5>Select Subject:</h5>
-      				<select name="subject1" class = "form-control" ng-class="{'error':bookAddForm.subject1.$dirty && bookAddForm.subject1.$invalid}" style="width: 220px;" 
+				<select name="subj" class = "form-control" ng-class="{'error':bookAddForm.subj.$dirty && bookAddForm.subj.$invalid}" style="width: 220px;" 
         				ng-model="pickedSubject" 
-        				ng-options="subject for subject in subjectsPick">
+        				ng-options="subject for subject in subjectsPick"
             				required> 
       					<option value="">Select Subject</option> 
     				</select>
