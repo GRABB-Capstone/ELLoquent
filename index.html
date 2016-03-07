@@ -506,6 +506,9 @@ function readURL(input) {
 		
 		
 	}
+	$scope.validateForm() = function(){
+		
+	}
 	$scope.refreshAddBooks = function(){
 		$scope.name = "";
 		$scope.author = "";
@@ -541,7 +544,7 @@ function readURL(input) {
   	}
   	$scope.jumpToBrowse = function (){
   		
-
+		
   	//	$scope.updateBooks();
   		
 					
@@ -1171,15 +1174,17 @@ function activaTab(tab){
       			<div class = "row">
       			<h3>Edit Book Details </h3>
       			
+      			<form name = "editForm">
+      			
       			<h5>Book Cover:</h5>
       				<img id="editImageCover" ng-src="{{selectedBook.get('bookPhoto').url()}}" style="width:192px;" />
 
       				<input id = "editImageFile" type="file"  ng-model="editCover"/>
       			
       			<h5>Book Title:</h5>
-      				<input class="form-control"  type="text" ng-model="editName"  />
+      				<input class="form-control" name = "editName" ng-class="{ 'error': editForm.name.$invalid && editForm.name.$dirty }" type="text" ng-model="editName"  />
       				<h5>Author:</h5>
-      				<input class="form-control"  type="text"  ng-model="editAuthor"  />
+      				<input class="form-control" name = "editAuthor" ng-class="{ 'error': editForm.name.$invalid && editForm.name.$dirty }"  type="text"  ng-model="editAuthor"  />
     				<h5>Select Grade Level:</h5>
     				
     		
@@ -1215,7 +1220,7 @@ function activaTab(tab){
       			
       			
       			 <input class="btn btn-warning btn-block" type="submit" id="backToBrowse" value="Cancel Edit" ng-click="jumpToBrowse();"/>
-
+			</form>
 
 		</div>
 			</div>
