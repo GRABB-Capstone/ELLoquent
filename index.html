@@ -619,6 +619,10 @@ function readURL(input) {
 
       }
       $scope.removeBook = function(removedBook){
+      	var tempImages = removedBook.get('images');
+      	for (var i = 0; i < tempImages.length; i++) {
+		$scope.removeImage(tempImages[i]);
+	}
       	
       	removedBook.destroy({
 	 	success: function(myObject) {
