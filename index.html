@@ -884,12 +884,7 @@ function readURL(input) {
 	
 
 
-	$scope.name = "";
-	$scope.author = "";
-	$scope.grade = "";
-	$scope.pickedGrade ="";
-	$scope.pickedSubject = "";
-	$scope.cover = "";
+
 			
 	book.save(null, {
   		success: function(savedBook) {
@@ -900,10 +895,15 @@ function readURL(input) {
 			$scope.filterBooks();
 	
 			$scope.addToUser(savedBook);
-			//$scope.$apply();
-	
+
 			$scope.trig(savedBook);
-			
+			$scope.name = "";
+			$scope.author = "";
+			$scope.grade = "";
+			$scope.pickedGrade ="";
+			$scope.pickedSubject = "";
+			$scope.cover = "";
+			$scope.$apply();
 			
       		//	alert("added book: " + savedBook.get("title"));
       				
