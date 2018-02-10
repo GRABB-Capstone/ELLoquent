@@ -3,639 +3,498 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
+	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>		
+	<script src="//www.parsecdn.com/js/parse-1.2.19.min.js"></script>		
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
 
-
-		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
-		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>		
-		<script src="//www.parsecdn.com/js/parse-1.2.19.min.js"></script>		
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-		<!-- Latest version of Parse SDK for Back4App -->
-		<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script> 
+	<!-- Latest version of Parse SDK for Back4App -->
+	<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script> 
     		
-    	
-    		
-    		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-		<!-- Latest compiled JavaScript -->
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     		
-    		<script>
-			Parse.initialize('XlZQi8Z0dAIDNWjBmqWmNctcEjVA3NTNSVDF2fin', 'YlBsos14dteWEK9Ug2AsA8TpNiHCuPQQbDZMQcfh');
-				
-			Parse.serverURL = 'https://parseapi.back4app.com'
-			
-			
-		</script>
+    <script>
+		Parse.initialize('XlZQi8Z0dAIDNWjBmqWmNctcEjVA3NTNSVDF2fin', 'YlBsos14dteWEK9Ug2AsA8TpNiHCuPQQbDZMQcfh');
+		Parse.serverURL = 'https://parseapi.back4app.com'
+	</script>
 		
-		
-		
-		<script>
-		
-		window.onload = function() {
+	<script>
+    /* Functions that I assume need to be loaded when the page loads for who knows why */
+	    window.onload = function() {
  
-    			$('#editBook').hide();
-    			$("#imageFile").change(function(){
-        			readURL(this);
-    			});
-    			$("#editImageFile").change(function(){
-        			editReadURL(this);
-    			});
- 
-		};
-	
-		
-	
+    		$('#editBook').hide();
+    		$("#imageFile").change(function(){
+        		readURL(this);
+    		});
+    		$("#editImageFile").change(function(){
+        		editReadURL(this);
+    		});
+	    };		
+	</script>
 
-		
-		
-		</script>
-		
-		
-		
 <style>
 	
+    .mygrid-wrapper-div {
+        overflow: scroll;
+    }
 
+    .right{
+        float:right;
+    }
 
-.mygrid-wrapper-div {
-    overflow: scroll;
-}
+    .left{
+        float:left;
+    }
 
-
-.right{
-    float:right;
-}
-
-.left{
-    float:left;
-}
-
-.error {
-  color: red;  
-  border:1px solid #f00;
-}
+    .error {
+      color: red;  
+      border:1px solid #f00;
+    }
 	
 </style>		
 		
-<script>
-	
-	
-	
-$(function() {  
-    var window_height = $(window).height(),
-       content_height = window_height - 200;
+<script type="text/javascript">
 
-    $('.mygrid-wrapper-div').height(content_height);
-});
+    /* Change the height of the window and its content */
+	$(function() {  
+        var window_height = $(window).height(),
+           content_height = window_height - 200;
+        debugger;
+        $('.mygrid-wrapper-div').height(content_height);
+    });
 
-$( window ).resize(function() {
-    var window_height = $(window).height(),
-       content_height = window_height - 200;
-    $('.mygrid-wrapper-div').height(content_height);
-});
+    /* Why this is here twice, I have no idea */
+    $( window ).resize(function() {
+        var window_height = $(window).height(),
+           content_height = window_height - 200;
+        $('.mygrid-wrapper-div').height(content_height);
+    });
 
+    /* Read the image from a file explorer for a new book's cover */
+    function readURL(input) {
 
-function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            
             reader.onload = function (e) {
                 $('#imageCover').attr('src', e.target.result);
             }
             
             reader.readAsDataURL(input.files[0]);
         }
-   }
-   
-   function editReadURL(input) {
+    }
+
+    /* Read the image from a file explorer for an existing book's cover */
+    function editReadURL(input) {
+
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            
             reader.onload = function (e) {
                 $('#editImageCover').attr('src', e.target.result);
             }
             
             reader.readAsDataURL(input.files[0]);
         }
-   }
-    
-    
-
-	
-</script>
-		
-<script>
+    }
   
-  angular.module('submitExample', [])
-    .controller('ExampleController', ['$scope', function($scope) {
-      $scope.list = [];
-      $scope.books =["one","two"];
-      $scope.data;
-      $scope.currentBook;
-      $scope.loggedIn = false;
-      $scope.selectedBookTitle = "No Book Selected";
-      $scope.selectedBookURL = "images/noimage.png"
-      $scope.selectedBook = null;
-      $scope.defaultImage = "images/noimage.png";
-      $scope.userBooks = [];
-      $scope.leader=false;
-      $scope.name;
-      $scope.word;
-      $scope.grades = ["Any","K","1","2","3","4","5","6"];
-      $scope.gradesPick = ["K","1","2","3","4","5","6"];
-      $scope.subjects = ["Any","Language Arts","Social Studies","Math","Science"];
-      $scope.subjectsPick = ["Language Arts","Social Studies","Math","Science"];
-      $scope.fileName;
-      $scope.wordList  = [];
-      $scope.grade;
-      $scope.user;
-      $scope.friends = [];
+    angular.module('submitExample', []).controller('ExampleController', ['$scope', function($scope) {
+        $scope.list = [];
+        $scope.books =["one","two"];
+        $scope.data;
+        $scope.currentBook;
+        $scope.loggedIn = false;
+        $scope.selectedBookTitle = "No Book Selected";
+        $scope.selectedBookURL = "images/noimage.png"
+        $scope.selectedBook = null;
+        $scope.defaultImage = "images/noimage.png";
+        $scope.userBooks = [];
+        $scope.leader=false;
+        $scope.name;
+        $scope.word;
+        $scope.grades = ["Any","K","1","2","3","4","5","6"];
+        $scope.gradesPick = ["K","1","2","3","4","5","6"];
+        $scope.subjects = ["Any","Language Arts","Social Studies","Math","Science"];
+        $scope.subjectsPick = ["Language Arts","Social Studies","Math","Science"];
+        $scope.fileName;
+        $scope.wordList  = [];
+        $scope.grade;
+        $scope.user;
+        $scope.friends = [];
       
-      $scope.resetFilter = function(){
-	 $scope.filterSubjects = "Any";
-      	 $scope.filterGrades = "Any";
-      	 $scope.filterBooks();
-      }
+        $scope.resetFilter = function(){
+	        $scope.filterSubjects = "Any";
+      	    $scope.filterGrades = "Any";
+      	    $scope.filterBooks();
+        }
       
-      $scope.myResetFilter = function(){
-	 $scope.myFilterSubjects = "Any";
-      	 $scope.myFilterGrades = "Any";
-      	 $scope.myFilterBooks();
-      }
-      $scope.myFilterBooks = function(){
-      	var Book = Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	if($scope.myFilterSubjects != "Any")
-		query.equalTo("subject",$scope.myFilterSubjects);
-	if($scope.myFilterGrades != "Any")	
-		query.equalTo("grade",$scope.myFilterGrades);
-	query.equalTo("users",$scope.currentUser.get("username"));
+        $scope.myResetFilter = function(){
+	        $scope.myFilterSubjects = "Any";
+      	    $scope.myFilterGrades = "Any";
+      	    $scope.myFilterBooks();
+        }
 
-	query.find({
-  	success: function(results) {
-		$scope.userBooks = results;
+        $scope.myFilterBooks = function(){
+            var Book = Parse.Object.extend("Book");
+            var query = new Parse.Query(Book);
+            if ($scope.myFilterSubjects != "Any")
+            {
+                query.equalTo("subject", $scope.myFilterSubjects);
+            }
+            if ($scope.myFilterGrades != "Any")
+            {
+                query.equalTo("grade", $scope.myFilterGrades);
+            }
+            query.equalTo("users",$scope.currentUser.get("username"));
 
-		$scope.$apply();
+	        query.find({
+  	            success: function(results) {
+		            $scope.userBooks = results;
+		            $scope.$apply();
+  	            },
+  	            error: function(error) {
+		            alert("Error: " + error.code + " " + error.message);
+	            }
+	        });
+        }
 
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
-	});
-      }
-      $scope.filterBooks = function(){
-      	var Book = Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	if($scope.filterSubjects != "Any")
-		query.equalTo("subject",$scope.filterSubjects);
-	if($scope.filterGrades != "Any")	
-		query.equalTo("grade",$scope.filterGrades);
-	query.find({
-  	success: function(results) {
-		$scope.allBooks = results;
+        $scope.filterBooks = function(){
+      	    var Book = Parse.Object.extend("Book");
+	        var query = new Parse.Query(Book);
+            if ($scope.filterSubjects != "Any")
+            {
+                query.equalTo("subject", $scope.filterSubjects);
+            }
+            if ($scope.filterGrades != "Any")
+            {
+                query.equalTo("grade", $scope.filterGrades);
+            }
+	        query.find({
+  	            success: function(results) {
+		            $scope.allBooks = results;
+		            $scope.$apply();
+  	            },
+  	            error: function(error) {
+		            alert("Error: " + error.code + " " + error.message);
+	            }
+	        });
+        }
 
-		$scope.$apply();
-
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
-	});
-      }
-      $scope.updateWords = function(){
-		var Book= Parse.Object.extend("Book");
-		var query = new Parse.Query(Book);
-		query.equalTo("title", $scope.selectedBook.get("title"));
-		query.find({
-  		success: function(results) {
-  			$scope.allBooks = results;
-  			$scope.wordList = results[0].get("words");
-  			$scope.currentBook = results[0];
-  			$scope.$apply();
+        $scope.updateWords = function(){
+		    var Book= Parse.Object.extend("Book");
+		    var query = new Parse.Query(Book);
+		    query.equalTo("title", $scope.selectedBook.get("title"));
+		    query.find({
+  		        success: function(results) {
+  			        $scope.allBooks = results;
+  			        $scope.wordList = results[0].get("words");
+  			        $scope.currentBook = results[0];
+  			        $scope.$apply();
   		
-  		},
-  		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
-		});
-		
-	}
-	$scope.updateImages = function(){
-		var Image= Parse.Object.extend("Image");
-		var query = new Parse.Query(Image);
-		query.equalTo("book", $scope.selectedBook.get("title"));
-		query.find({
-  		success: function(results) {
-  			$scope.imageList =[];
-  			for (var i = 0; i < results.length; i++) {
-				$scope.imageList.push({name:results[i].get("name"),
-							id:results[i].id,
-							url:results[i].get("image").url()});
+  		        },
+  		        error: function(error) {
+			        alert("Error: " + error.code + " " + error.message);
+		        }
+		    });
+        }
 
-			}
+	    $scope.updateImages = function(){
+		    var Image= Parse.Object.extend("Image");
+		    var query = new Parse.Query(Image);
+		    query.equalTo("book", $scope.selectedBook.get("title"));
+		    query.find({
+  		        success: function(results) {
+  			        $scope.imageList =[];
+  			        for (var i = 0; i < results.length; i++) {
+                        $scope.imageList.push({
+                            name: results[i].get("name"),
+                            id: results[i].id,
+                            url: results[i].get("image").url()
+                        });
+			        }
 			
-			$scope.$apply();
+			        $scope.$apply();
+  		        },
+  		        error: function(error) {
+			        alert("Error: " + error.code + " " + error.message);
+		        }
+		    });
+        }
 
-  		},
-  		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
-		});
+        $scope.updateBooks = function(){
+	        var Book = Parse.Object.extend("Book");
+	        var query = new Parse.Query(Book);
+	        query.find({
+  	            success: function(results) {
+		            $scope.allBooks = results;
 
-	}
-      $scope.updateBooks = function(){
-	var Book = Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	query.find({
-  	success: function(results) {
-		$scope.allBooks = results;
+		            $scope.$apply();
 
-		$scope.$apply();
-
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
-	});
-      }
+  	            },
+  	            error: function(error) {
+		            alert("Error: " + error.code + " " + error.message);
+	            }
+	        });
+        }
       
-      $scope.addImage = function(){
-      	
-      	
-      	var imageUploadControl = $("#image")[0];
-      	var parseImage;
-      	$scope.imageName = $scope.image.slice(12);
-      	if (imageUploadControl.files.length > 0) {
-		var image = imageUploadControl.files[0];
-   		var imageName = $scope.imageName;
-   		parseImage = new Parse.File(imageName, image);
-      	}	
-      	/*
-      	parseImage.save().then(function() {
-		// The file has been saved to Parse.
-			$scope.selectedBook.addUnique("images",parseImage);
+        $scope.addImage = function () {
+
+            var imageUploadControl = $("#image")[0];
+            var parseImage;
+            $scope.imageName = $scope.image.slice(12);
+
+            if (imageUploadControl.files.length > 0) {
+	            var image = imageUploadControl.files[0];
+   	            var imageName = $scope.imageName;
+   	            parseImage = new Parse.File(imageName, image);
+            }	
       
-      			$scope.selectedBook.save(null, {
-  					success: function(savedImage) {
-	 			// Execute any logic that should take place after the object is saved.
-	 			$scope.image = "";
-      				$scope.$apply();
-				 alert('applied');
-  				},
-  				error: function(savedImage, error) {
-				 // Execute any logic that should take place if the save fails.
-				 // error is a Parse.Error with an error code and message.
-				 alert('Failed to create new object, with error code: ' + error.message);
-				 }
-  			});
-		
-		
-		
-		}, function(error) {
-		// The file either could not be read, or could not be saved to Parse.
-	});
-      	*/
-      
-      	
-  	var Image= Parse.Object.extend("Image");
-	var image= new Image();
-  	image.set("image", parseImage);
-  	image.set("name",imageName);
-  	image.set("book",$scope.selectedBook.get("title"));
-  	image.save(null, {
-  		success: function(savedImage) {
-    		// Execute any logic that should take place after the object is saved.
-    		$scope.selectedBook.addUnique("images",savedImage.get("image").url());
+  	        var Image= Parse.Object.extend("Image");
+	        var image= new Image();
+  	        image.set("image", parseImage);
+  	        image.set("name",imageName);
+  	        image.set("book",$scope.selectedBook.get("title"));
+  	        image.save(null, {
+  		        success: function(savedImage) {
+    		        // Execute any logic that should take place after the object is saved.
+    		        $scope.selectedBook.addUnique("images",savedImage.get("image").url());
     		
-    		
-    		image.set("url",savedImage.get("image").url());
-    		image.save(null, {
-  			success: function(savedBook) {
-	 		// Execute any logic that should take place after the object is saved.
-			
-			
-			
-				$scope.selectedBook.save(null, {
-  				success: function(savedBook) {
-	 			// Execute any logic that should take place after the object is saved.
-				$scope.image = "";
-      				$scope.$apply();
-      			
-      			
-  				},
-  				error: function(savedBook, error) {
-				 // Execute any logic that should take place if the save fails.
-				 // error is a Parse.Error with an error code and message.
-				 alert('Failed to create new object, with error code: ' + error.message);
-				 }
-  		});
-			
-      			
-      			
-  			},
-  			error: function(savedBook, error) {
-			 // Execute any logic that should take place if the save fails.
-			 // error is a Parse.Error with an error code and message.
-			 alert('Failed to create new object, with error code: ' + error.message);
-			 }
-  		});
-    		
-      
-      		
-      		
-      		
-      		
-		// alert('New object created with objectId: ' + savedImage.id);
-  		},
-  		error: function(savedImage, error) {
-		 // Execute any logic that should take place if the save fails.
-		 // error is a Parse.Error with an error code and message.
-		 alert('Failed to create new object, with error code: ' + error.message);
-		 }
-  	});
-      		
-      	
-/*
-      	var Book= Parse.Object.extend("Book");
-	var query = new Parse.Query(Book);
-	query.equalTo("title", $scope.selectedBook.get("title"));
-	query.find({
-  	success: function(results) {
-  		var imageUploadControl = $("#image")[0];
-      		var parseImage;
-      		$scope.imageName = $scope.image.slice(12);
-      		if (imageUploadControl.files.length > 0) {
-		  	var image = imageUploadControl.files[0];
-   		 	var imageName = $scope.imageName;
-   		 	parseImage = new Parse.File(imageName, image);
-   		 	alert("Uploaded Image: " + parseImage);
-      		}	
-  		var Image= Parse.Object.extend("Image");
-		var image= new Image();
-  		image.set("image", parseImage);
-  		image.set("name",imageName);
-  		image.set("book",$scope.selectedBook.get("title"));
-  		image.save();
-  		alert("added image");
-  		
-  		results[0].addUnique("images",imageName);
-  		results[0].save();
-  		$scope.image = "";
-  		$scope.$apply();
-  		
+    		        image.set("url",savedImage.get("image").url());
+    		        image.save(null, {
+  			            success: function(savedBook) {
+	 		                // Execute any logic that should take place after the object is saved.
+	        				$scope.selectedBook.save(null, {
+  				                success: function(savedBook) {
+	 			                    // Execute any logic that should take place after the object is saved.
+				                    $scope.image = "";
+      				                $scope.$apply();
+      			  				},
+  				                error: function(savedBook, error) {
+				                    // Execute any logic that should take place if the save fails.
+				                    // error is a Parse.Error with an error code and message.
+				                    alert('Failed to create new object, with error code: ' + error.message);
+				                }
+  		                    });
+			  			},
+  			            error: function(savedBook, error) {
+			                // Execute any logic that should take place if the save fails.
+			                // error is a Parse.Error with an error code and message.
+			                alert('Failed to create new object, with error code: ' + error.message);
+			            }
+  		            });
+		            // alert('New object created with objectId: ' + savedImage.id);
+  		        },
+  		        error: function(savedImage, error) {
+		            // Execute any logic that should take place if the save fails.
+		            // error is a Parse.Error with an error code and message.
+		            alert('Failed to create new object, with error code: ' + error.message);
+		        }
+  	        });
+        }
 
-
-  	
-
-  	},
-  	error: function(error) {
-		alert("Error: " + error.code + " " + error.message);
-	}
-	
-		
-		
-       	
-      });
-       
-       */
-
-
-      }
-      $scope.addWord = function(){
-      		if ($scope.selectedBook.get("words").includes($scope.word)){
+        $scope.addWord = function(){
+            if ($scope.selectedBook.get("words").includes($scope.word))
+            {
       			alert("Word Already Exists");
       		}
-      		else{
-      			
+            else
+            {
       			$scope.selectedBook.addUnique("words",$scope.word);
       			$scope.selectedBook.save(null, {
-  				success: function(savedImage) {
-    				// Execute any logic that should take place after the object is saved.
-    				$scope.word = "";
-    				$scope.$apply();
-  				},
-  				error: function(savedImage, error) {
-				 // Execute any logic that should take place if the save fails.
-				 // error is a Parse.Error with an error code and message.
-				 alert('Failed to create new object, with error code: ' + error.message);
-				}
-  			});
+  				    success: function(savedImage) {
+    				    // Execute any logic that should take place after the object is saved.
+    				    $scope.word = "";
+    				    $scope.$apply();
+  				    },
+  				    error: function(savedImage, error) {
+				     // Execute any logic that should take place if the save fails.
+				     // error is a Parse.Error with an error code and message.
+				     alert('Failed to create new object, with error code: ' + error.message);
+				    }
+  			    });
       		}
-      			
-      		
-      		
-      	  		
-	}
-	$scope.tryLogin = function(){
-		if ($scope.username == "bronan")
-			$scope.loggedIn = true;
-	
-  	}
-  	$scope.quickLogin = function(){
+        }
 
-		$scope.loggedIn = true;
-	
-  	}
-  	$scope.logout = function(){
-  		$scope.loggedIn = false;
-  		$scope.currentUser = null;
-  		
-  	}
-  	$scope.login = function(){
-  	var user = Parse.User.logIn($scope.username, $scope.password, {
-  		success: function(user) {
-			$scope.loggedIn = true;
-			$scope.currentUser = user;
-		//	alert(user.get("username") + " logged in");
-			$scope.filterBooks();
-			$scope.myFilterBooks();
-		//	$scope.updateUserBooks();
-			$scope.$apply();
-   			$scope.jumpToBrowse();
-   			$scope.password = "";
-   			$scope.username = "";
-   			
-		},
-		error: function(user, error) {
-    			// The login failed. Check error to see why.
-    			alert("Incorrect Username or Password");
-  		}
-		});	
-  	}
-  	$scope.addToUser = function(book){
-  		
-  		book.addUnique("users",$scope.currentUser.get("username"));
-  		book.save(null, {
-  			success: function(savedBook) {
-	 		// Execute any logic that should take place after the object is saved.
-			$scope.myFilterBooks();
-  			},
-  			error: function(savedBook, error) {
-			 // Execute any logic that should take place if the save fails.
-			 // error is a Parse.Error with an error code and message.
-			 alert('Failed to create new object, with error code: ' + error.message);
-			 }
-  		});
-  		$scope.myFilterBooks();
-  		//$scope.currentUser.addUnique("books",title);
-  		//$scope.currentUser.save();
-  	}
+	    $scope.tryLogin = function(){
+            if ($scope.username == "bronan")
+            {
+                $scope.loggedIn = true;
+            }
+        }
+
+  	    $scope.quickLogin = function(){
+		    $scope.loggedIn = true;
+        }
+
+  	    $scope.logout = function(){
+  		    $scope.loggedIn = false;
+  		    $scope.currentUser = null;
+            }
+
+  	    $scope.login = function(){
+  	        var user = Parse.User.logIn($scope.username, $scope.password, {
+  		        success: function(user) {
+			        $scope.loggedIn = true;
+			        $scope.currentUser = user;
+		            // alert(user.get("username") + " logged in");
+			        $scope.filterBooks();
+			        $scope.myFilterBooks();
+		            // $scope.updateUserBooks();
+			        $scope.$apply();
+   			        $scope.jumpToBrowse();
+   			        $scope.password = "";
+   			        $scope.username = "";
+		        },
+		        error: function(user, error) {
+    			    // The login failed. Check error to see why.
+    			    alert("Incorrect Username or Password");
+  		        }
+		    });	
+  	    }
+
+  	    $scope.addToUser = function(book){
+  		    book.addUnique("users",$scope.currentUser.get("username"));
+  		    book.save(null, {
+  			    success: function(savedBook) {
+	 		        // Execute any logic that should take place after the object is saved.
+			        $scope.myFilterBooks();
+  			    },
+  			    error: function(savedBook, error) {
+			        // Execute any logic that should take place if the save fails.
+			        // error is a Parse.Error with an error code and message.
+			        alert('Failed to create new object, with error code: ' + error.message);
+			    }
+  		    });
+  		    $scope.myFilterBooks();
+  		    //$scope.currentUser.addUnique("books",title);
+  		    //$scope.currentUser.save();
+  	    }
   
-	$scope.updateUserBooks = function(){
-		$scope.userBooks = [];
-		var tempBooks = $scope.currentUser.get("books");
+	    $scope.updateUserBooks = function(){
+		    $scope.userBooks = [];
+		    var tempBooks = $scope.currentUser.get("books");
 		
-	
-		for (var i = 0; i < tempBooks.length; i++) {
-			
-			for (var j = 0; j<$scope.allBooks.length;j++)
-			
-			if($scope.allBooks[j].get("title") == tempBooks[i]){
-				$scope.userBooks.push($scope.allBooks[j])
-			}
-				
-		
-		}
+            for (var i = 0; i < tempBooks.length; i++)
+            {
+                for (var j = 0; j < $scope.allBooks.length; j++)
+                {
+                    if ($scope.allBooks[j].get("title") == tempBooks[i]) {
+                        $scope.userBooks.push($scope.allBooks[j])
+                    }
+                }
+    		}
+        }
 
+	    $scope.validateBook = function(){
+            if ($scope.bookAddForm.$valid)
+            {
+			    $scope.addBook();
+    		} 
+            else
+            {
+			    $scope.attempted = true;
+			    alert('Not Valid Entry, please fill out all fields');
+	    	}
+        }
 
-      
-		
-		
-		
-	}
-	$scope.validateBook = function(){
-		    if ($scope.bookAddForm.$valid) {
-			 $scope.addBook();
-    		    } 
-    		    else {
-			 $scope.attempted = true;
-			 alert('Not Valid Entry, please fill out all fields');
-	    	     }
-		return;
-	}
-	$scope.refreshAddBooks = function(){
-		$scope.attempted = false;
-		$scope.name = "";
-		$scope.author = "";
-		$scope.grade = "";
-		$scope.pickedGrade ="";
-		$scope.pickedSubject = "";
-		$scope.cover = "";
-		$scope.defaultImage = "images/noimage.png";
-		$('#imageCover').attr('src', "images/noimage.png");
-	}
-  	
-  	$scope.test = function (x){
-  	//	alert("test" + x);
-  	}
-  	$scope.trig = function (selBook){
-  		
-  		$scope.editCover  = "";
-		$scope.selectedBookTitle = selBook.get("title");
-  		$scope.selectedBook = selBook;
-  		$scope.selectedBookURL = selBook.get('bookPhoto').url();
-  		
-  		$scope.editName = $scope.selectedBook.get('title');
+	    $scope.refreshAddBooks = function(){
+		    $scope.attempted = false;
+		    $scope.name = "";
+		    $scope.author = "";
+		    $scope.grade = "";
+		    $scope.pickedGrade ="";
+		    $scope.pickedSubject = "";
+		    $scope.cover = "";
+		    $scope.defaultImage = "images/noimage.png";
+		    $('#imageCover').attr('src', "images/noimage.png");
+	    }
+
+        $scope.trig = function (selBook)
+        {
+  		    $scope.editCover  = "";
+		    $scope.selectedBookTitle = selBook.get("title");
+  		    $scope.selectedBook = selBook;
+  		    $scope.selectedBookURL = selBook.get('bookPhoto').url();
+  		    $scope.editName = $scope.selectedBook.get('title');
       		$scope.editAuthor = $scope.selectedBook.get('author');
-
       		$scope.editPickedGrade = $scope.selectedBook.get('grade');
+            $scope.editPickedSubject = $scope.selectedBook.get('subject');
 
-      		$scope.editPickedSubject = $scope.selectedBook.get('subject');
-		$('#editImageCover').attr('src',  selBook.get('bookPhoto').url());
-  		//$scope.updateWords();
-  		//$scope.updateImages();
+		    $('#editImageCover').attr('src',  selBook.get('bookPhoto').url());
 					
-  		activaTab('menu1');
-  	}
-  	$scope.jumpToBrowse = function (){
-  		
-		$scope.filterBooks();
-  	//	$scope.updateBooks();
-  		
-					
-  		activaTab('content');
-  	}
-  	$scope.jumpToEdit = function (bookName){
-  		
-		
-		//$scope.selectedBook =
-		
-		var Book = Parse.Object.extend("Book");
-		var query = new Parse.Query(Book);
-		query.equalTo("title", bookName);
-		query.find({
-	 	success: function(results) {
-			$scope.selectedBook = results[0];
-			$scope.$apply();
+  		    activaTab('menu1');
+        }
 
-  		},
-  		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
-		});
-		
-		
-  		//$scope.updateWords();
-  		//$scope.updateImages();
-		
-		
-	
-			
-  		activaTab('menu1');
-  	}
-  
-  	
-		
-		
-		
-	$scope.activaTab = function activaTab(tab){
+  	    $scope.jumpToBrowse = function (){
+		    $scope.filterBooks();
+  		    activaTab('content');
+        }
+
+        $scope.jumpToEdit = function (bookName)
+        {		
+		    var Book = Parse.Object.extend("Book");
+		    var query = new Parse.Query(Book);
+            query.equalTo("title", bookName);
+
+            query.find({
+                success: function (results) {
+                    $scope.selectedBook = results[0];
+                    $scope.$apply();
+
+                },
+                error: function (error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
+
+  		    activaTab('menu1');
+  	    }
+
+	    $scope.activaTab = function activaTab(tab) {
     		$('.nav-tabs a[href="#' + tab + '"]').tab('show');
-		
-		
-	}
-	$scope.removeFromUser = function(book){
-      	
-      	book.remove("users",$scope.currentUser.get("username"));
-      	book.save(null, {
-  				success: function(savedImage) {
-    				// Execute any logic that should take place after the object is saved.
-    			//	$scope.updateWords();
-      				$scope.myFilterBooks();
-  				},
-  				error: function(savedImage, error) {
-				 // Execute any logic that should take place if the save fails.
-				 // error is a Parse.Error with an error code and message.
-				 alert('Failed to create new object, with error code: ' + error.message);
-				}
-  			});
-      
-      	//$scope.updateUserBooks();
-      //	alert("removed book from user: " + title);
-      }
-	
-      $scope.removeWord = function(word){
-      	
-      	$scope.selectedBook.remove("words",word);
-      	
-      	$scope.selectedBook.save(null, {
-  				success: function(savedImage) {
-    				// Execute any logic that should take place after the object is saved.
-    			//	$scope.updateWords();
-  				},
-  				error: function(savedImage, error) {
-				 // Execute any logic that should take place if the save fails.
-				 // error is a Parse.Error with an error code and message.
-				 alert('Failed to create new object, with error code: ' + error.message);
-				}
-  			});
-  			
+        }
 
-      }
+	    $scope.removeFromUser = function(book){
+      	
+      	    book.remove("users",$scope.currentUser.get("username"));
+      	    book.save(null, {
+  			    success: function(savedImage) {
+    			    // Execute any logic that should take place after the object is saved.
+    		        // $scope.updateWords();
+      			    $scope.myFilterBooks();
+  			    },
+  			    error: function(savedImage, error) {
+				    // Execute any logic that should take place if the save fails.
+				    // error is a Parse.Error with an error code and message.
+				    alert('Failed to create new object, with error code: ' + error.message);
+			    }
+  		    });
+        }
+	
+    $scope.removeWord = function(word){
+      	
+    $scope.selectedBook.remove("words",word);
+      	
+    $scope.selectedBook.save(null, {
+  			success: function(savedImage) {
+    			// Execute any logic that should take place after the object is saved.
+    		//	$scope.updateWords();
+  			},
+  			error: function(savedImage, error) {
+				// Execute any logic that should take place if the save fails.
+				// error is a Parse.Error with an error code and message.
+				alert('Failed to create new object, with error code: ' + error.message);
+			}
+  		});
+    }
+
       $scope.removeBook = function(removedBook){
       	
       	var tempImages = removedBook.get('images');
