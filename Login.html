@@ -7,9 +7,9 @@
     <meta charset="utf-8" />
     <title></title>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>-->
     <script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
@@ -27,15 +27,15 @@
             background-color: aqua;
             border-bottom: solid;
             border-bottom-color: gray;
+            border-bottom-width: 2px;
             border-radius: 5px;
         }
 
         .login-container {
+            border: solid;
             border-color: gray;
             border-width: 2px;
             border-radius: 8px;
-            border: solid;
-            padding: 10px;
         }
 
     </style>
@@ -73,12 +73,13 @@
     <div ng-controller="LoginController">
         <div class="container" style="padding-top: 15px;" ng-hide="loggedIn == true">
             <div class="login-container" style="width: 40%; margin: 0 auto;">
-                <div style="font-size: 40px; text-align: center;">Log In</div>
-                <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Username" id="test" ng-model="username" />
-                <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Password" ng-model="password" />
-                <input class="btn btn-primary btn-block" style="margin-top: 15px;" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="!username || !password" />
+                <div class="login-header-container" style="font-size: 40px; text-align: center;">Log In</div>
+                <div style="margin: 10px;">
+                    <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Username" id="test" ng-model="username" />
+                    <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Password" ng-model="password" />
+                    <input class="btn btn-primary btn-block" style="margin-top: 15px;" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="!username || !password" />
+                </div>
             </div>
-            <IMG SRC="images/elloquent_banner.png" ALT="some text" WIDTH=32 HEIGHT=32>
         </div>
     </div>
 </body>
