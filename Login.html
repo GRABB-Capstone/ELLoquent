@@ -47,7 +47,7 @@
             $("#Header").load("Header.html");
         });
 
-        angular.module('Login', []).controller('LoginController', ['$scope', function ($scope) {
+        angular.module('Login', []).controller('LoginController', ['$scope', '$location', function ($scope, $location) {
 
             $scope.username = "";
             $scope.password = "";
@@ -57,6 +57,7 @@
                 var user = Parse.User.logIn($scope.username, $scope.password, {
                     success: function (user) {
                         debugger;
+                        $location.url("/Header/");
                     },
                     error: function (user, error) {
                         // The login failed. Check error to see why.
