@@ -24,18 +24,20 @@
     <style>
 
         .login-header-container {
-            background-color: aqua;
-            border-bottom: solid;
-            border-bottom-color: gray;
-            border-bottom-width: 2px;
-            border-radius: 5px;
+            background-color: rgb(92, 184, 228);
+            /*border-bottom: solid;*/
+            /*border-bottom-color: gray;
+            border-bottom-width: 2px;*/
+            border-radius: 8px;
         }
 
         .login-container {
-            border: solid;
-            border-color: gray;
-            border-width: 2px;
+            /*border: solid;*/
+            /*border-color: gray;
+            border-width: 2px;*/
             border-radius: 8px;
+            background-color: rgb(170, 225, 255);
+            padding: 0px;
         }
 
     </style>
@@ -45,7 +47,7 @@
             $("#Header").load("Header.html");
         });
 
-        angular.module('Login', []).controller('LoginController', ['$scope', function ($scope) {
+        angular.module('Login', []).controller('LoginController', ['$scope', '$location', function ($scope, $location) {
 
             $scope.username = "";
             $scope.password = "";
@@ -55,6 +57,7 @@
                 var user = Parse.User.logIn($scope.username, $scope.password, {
                     success: function (user) {
                         debugger;
+                        //$location.url("../Header/");
                     },
                     error: function (user, error) {
                         // The login failed. Check error to see why.
@@ -74,10 +77,10 @@
         <div class="container" style="padding-top: 15px;" ng-hide="loggedIn == true">
             <div class="login-container" style="width: 40%; margin: 0 auto;">
                 <div class="login-header-container" style="font-size: 40px; text-align: center;">Log In</div>
-                <div style="margin: 10px;">
-                    <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Username" id="test" ng-model="username" />
+                <div style="padding: 10px;">
+                    <input class="form-control" type="text" placeholder="Username" id="test" ng-model="username" />
                     <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Password" ng-model="password" />
-                    <input class="btn btn-primary btn-block" style="margin-top: 15px;" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="!username || !password" />
+                    <input href="#Header" class="btn btn-primary btn-block" style="margin-top: 15px;" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="!username || !password" />
                 </div>
             </div>
         </div>
