@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html ng-app="Elloquent">
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -8,7 +8,8 @@
 
     <script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -20,25 +21,195 @@
     <style>
         .login-header-container {
             background-color: rgb(92, 184, 228);
-            /*border-bottom: solid;*/
-            /*border-bottom-color: gray;
-            border-bottom-width: 2px;*/
             border-radius: 8px;
         }
 
         .login-container {
-            /*border: solid;*/
-            /*border-color: gray;
-            border-width: 2px;*/
             border-radius: 8px;
             background-color: rgb(170, 225, 255);
             padding: 0px;
         }
+
+        .mygrid-wrapper-div {
+            overflow: scroll;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .error {
+            color: red;
+            border: 1px solid #f00;
+        }
+
+        .myBlock {
+            border-style: solid;
+            border-bottom-style: none;
+            border-width: 1px;
+            border-color: lightgray;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
     </style>
 
     <script>
 
-        angular.module('submitExample', []).controller('ExampleController', ['$scope', function ($scope) {
+        /* Functions that I assume need to be loaded when the page loads for who knows why */
+        window.onload = function () {
+
+            $('#editBook').hide();
+            $("#imageFile").change(function () {
+                readURL(this);
+            });
+            $("#editImageFile").change(function () {
+                editReadURL(this);
+            });
+        };
+
+        /* Change the height of the window and its content */
+        $(function () {
+            var window_height = $(window).height(),
+                content_height = window_height - 200;
+            $('.mygrid-wrapper-div').height(content_height);
+        });
+
+        /* Why this is here twice, I have no idea */
+        $(window).resize(function () {
+            var window_height = $(window).height(),
+                content_height = window_height - 200;
+            $('.mygrid-wrapper-div').height(content_height);
+        });
+
+        /* Read the image from a file explorer for a new book's cover */
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imageCover').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        /* Read the image from a file explorer for an existing book's cover */
+        function editReadURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#editImageCover').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        angular.module('Elloquent', ['ngCookies']).controller('ElloquentController', ['$scope', '$cookies', function ($scope, $cookies) {
+
+            /* Login variables */
+            $scope.loggedIn = false;
+            $scope.username = "";
+            $scope.password = "";
+            $scope.currentUser = null;
+
+            /* Unorganized variables */
+            $scope.list = [];
+            $scope.books = ["one", "two"];
+            $scope.data;
+            $scope.currentBook;
+            $scope.loggedIn = false;
+            $scope.selectedBookTitle = "No Book Selected";
+            $scope.selectedBookURL = "images/noimage.png"
+            $scope.selectedBook = null;
+            $scope.defaultImage = "images/noimage.png";
+            $scope.userBooks = [];
+            $scope.leader = false;
+            $scope.name;
+            $scope.word;
+            $scope.grades = ["Any", "K-1st", "2nd-3rd", "4th-5th", "6th-7th"];
+            $scope.gradesPick = ["K-1st", "2nd-3rd", "4th-5th", "6th-7th"];
+            $scope.subjects = ["Any", "Language Arts", "Social Studies", "Math", "Science"];
+            $scope.subjectsPick = ["Language Arts", "Social Studies", "Math", "Science"];
+            $scope.difficulty = ["Any", "Easy", "Intermediate", "Advanced"];
+            $scope.difficultyPick = ["Easy", "Intermediate", "Advanced"]
+            $scope.fileName;
+            $scope.wordList = [];
+            $scope.grade;
+            $scope.user;
+            $scope.friends = [];
+
+            $scope.login = function () {
+                var user = Parse.User.logIn($scope.username, $scope.password, {
+                    success: function (user) {
+                        $scope.loggedIn = true;
+                        $scope.password = "";
+                        $scope.currentUser = user;
+                        $cookies.put('user', 'hello', {
+                            path: '/'
+                        });
+                        $scope.$apply();
+                    },
+                    error: function (user, error) {
+                        /* Login Failed :[ */
+                        alert("Incorrect Username or Password");
+                    }
+                });
+            }
+
+            $scope.filterBooks = function () {
+                var Book = Parse.Object.extend("Book");
+                var query = new Parse.Query(Book);
+
+                if ($scope.filterSubjects != "Any")
+                {
+                    query.equalTo("subject", $scope.filterSubjects);
+                }
+                if ($scope.filterGrades != "Any")
+                {
+                    query.equalTo("gradeLevel", $scope.filterGrades);
+                }
+                if ($scope.filterDifficulty != "Any")
+                {
+                    query.equalTo("difficulty", $scope.filterDifficulty);
+                }
+
+                query.find({
+                    success: function (results) {
+                        $scope.allBooks = results;
+                        $scope.$apply();
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+            }
+
+            $scope.resetFilter = function () {
+                $scope.filterSubjects = "Any";
+                $scope.filterGrades = "Any";
+                $scope.filterDifficulty = "Any";
+                $scope.filterBooks();
+            }
+
+            var init = function () {
+                var user = $cookies.get('user');
+                $scope.username = "nick";
+                $scope.password = "nick";
+                $scope.login();
+            };
+            init();
 
         }]);
 
@@ -46,10 +217,10 @@
 </head>
 
 <body>
-    <div ng-controller="ExampleController">
+    <div ng-controller="ElloquentController">
 
         <div class="container">
-            <!-- Modal -->
+
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -75,7 +246,7 @@
                 <div class="login-header-container" style="font-size: 40px; text-align: center;">Log In</div>
                 <div style="padding: 10px;">
                     <input class="form-control" type="text" placeholder="Username" id="test" ng-model="username" />
-                    <input class="form-control" style="margin-top: 15px;" type="text" placeholder="Password" ng-model="password" />
+                    <input class="form-control" style="margin-top: 15px;" type="password" placeholder="Password" ng-model="password" />
                     <input href="#Header" class="btn btn-primary btn-block" style="margin-top: 15px;" type="submit" id="passCode" value="Log In" ng-click="login()" ng-disabled="!username || !password" />
                 </div>
             </div>
@@ -106,22 +277,30 @@
                 <div class="row">
                     <div class="tab-content">
                         <div id="content" class="tab-pane fade in active">
-                            <h3>Browse Content </h3>
+                            <h1 style="text-align: center;">Browse Content </h1>
 
                             <div class="container">
 
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="repeatSelect"> Filter by Grade: </label>
-                                                <select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]"></select>
-                                                <label for="repeatSelect"> Filter by Subject: </label>
-                                                <select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]"></select>
-                                            </div>
-                                            <button type="submit" class="btn" id="filter" value="filter" ng-click="filterBooks()">Filter!</button>
-                                            <button type="submit" class="btn" id="resetFilter" value="restFilter" ng-click="resetFilter()">Reset Filter</button>
-                                        </form>
+                                <div class="row myBlock">
+                                    <div style="flex: 2;">
+                                        <div style="display: flex;">
+                                            <button type="submit" style="flex: 1; margin: 5px;" class="btn" id="filter" value="filter" ng-click="filterBooks()">Filter!</button>
+                                            <button type="submit" style="flex: 1; margin: 5px;" class="btn" id="resetFilter" value="restFilter" ng-click="resetFilter()">Reset Filter</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div style="flex: 3; margin: 5px;">
+                                        <label for="repeatSelect"> Filter by Grade: </label>
+                                        <select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]"></select>
+                                    </div>
+                                    <div style="flex: 3; margin: 5px;">
+                                        <label for="repeatSelect"> Filter by Subject: </label>
+                                        <select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]"></select>
+                                    </div>
+                                    <div style="flex: 3; margin: 5px;">
+                                        <label for="repeatSelect"> Filter by Difficulty: </label>
+                                        <select class="form-control" ng-model="filterDifficulty" ng-options="subject for subject in difficulty" ng-init="filterDifficulty = difficulty[0]"></select>
                                     </div>
                                 </div>
 
@@ -130,20 +309,22 @@
 
                                         <table class="table table-hover">
                                             <tr>
+                                                <th>Cover</th>
                                                 <th>Title</th>
                                                 <th>Author</th>
-                                                <th>Cover</th>
                                                 <th>Grade</th>
                                                 <th>Subject</th>
+                                                <th>Difficulty</th>
                                                 <th>Edit</th>
                                                 <th>Add to User</th>
                                             </tr>
                                             <tr ng-repeat="book in allBooks">
-                                                <td>{{book.get("title")}}</td>
+                                                <td><img ng-src="{{book.get('coverPicture').url()}}" style="height:192px;" />	</td>
+                                                <td>{{book.get("name")}}</td>
                                                 <td>{{book.get("author")}}</td>
-                                                <td><img ng-src="{{book.get('bookPhoto').url()}}" style="width:192px;" />	</td>
-                                                <td>{{book.get("grade")}}</td>
+                                                <td>{{book.get("gradeLevel")}}</td>
                                                 <td>{{book.get("subject")}}</td>
+                                                <td>{{book.get("difficulty")}}</td>
                                                 <td><button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)">Edit</button></td>
                                                 <td><button type="submit" class="btn" id="addToUser" ng-click="addToUser(book)">Add to User</button></td>
                                             </tr>
@@ -222,7 +403,7 @@
                                                     <input class="form-control" name="editName" ng-class="{ 'error': editForm.editName.$invalid }" type="text" ng-model="editName" required />
                                                     <h5>Author:</h5>
                                                     <input class="form-control" name="editAuthor" ng-class="{ 'error': editForm.editAuthor.$invalid }" type="text" ng-model="editAuthor" required />
-                                                    
+
                                                     <h5>Select Grade Level:</h5>
                                                     <select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick"></select>
 
@@ -231,7 +412,6 @@
 
                                                     <input class="btn btn-primary btn-block" type="submit" id="submit" value="Save Book Details" ng-click="editBook()" ng-disabled="!editName || !editAuthor || !editPickedGrade || !editPickedSubject" />
 
-                                                    <!-- Button trigger modal -->
                                                     <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal" ng-disabled="!selectedBook">
                                                         Delete Book
                                                     </button>
