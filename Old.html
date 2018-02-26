@@ -5,23 +5,29 @@
 
 	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>-->
-	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!--<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>		
 	<script src="//www.parsecdn.com/js/parse-1.2.19.min.js"></script>		
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>-->
 
 	<!-- Latest version of Parse SDK for Back4App -->
-	<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script> 
+	<!--<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>--> 
     		
     <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 
 	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 
 	<!-- Latest compiled JavaScript -->
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     		
+    <script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <script>
 		Parse.initialize('XlZQi8Z0dAIDNWjBmqWmNctcEjVA3NTNSVDF2fin', 'YlBsos14dteWEK9Ug2AsA8TpNiHCuPQQbDZMQcfh');
 		Parse.serverURL = 'https://parseapi.back4app.com'
@@ -87,7 +93,7 @@
             reader.onload = function (e) {
                 $('#imageCover').attr('src', e.target.result);
             }
-            
+            debugger;
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -100,7 +106,7 @@
             reader.onload = function (e) {
                 $('#editImageCover').attr('src', e.target.result);
             }
-            
+            debugger;
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -338,7 +344,8 @@
   		    $scope.currentUser = null;
             }
 
-  	    $scope.login = function(){
+            $scope.login = function () {
+                debugger;
   	        var user = Parse.User.logIn($scope.username, $scope.password, {
   		        success: function(user) {
 			        $scope.loggedIn = true;
