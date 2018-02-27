@@ -135,19 +135,22 @@
         $scope.user;
         $scope.friends = [];
       
-        $scope.resetFilter = function(){
+        $scope.resetFilter = function () {
+            debugger;
 	        $scope.filterSubjects = "Any";
       	    $scope.filterGrades = "Any";
       	    $scope.filterBooks();
         }
       
-        $scope.myResetFilter = function(){
+        $scope.myResetFilter = function () {
+            debugger;
 	        $scope.myFilterSubjects = "Any";
       	    $scope.myFilterGrades = "Any";
       	    $scope.myFilterBooks();
         }
 
-        $scope.myFilterBooks = function(){
+        $scope.myFilterBooks = function () {
+            debugger;
             var Book = Parse.Object.extend("Book");
             var query = new Parse.Query(Book);
             if ($scope.myFilterSubjects != "Any")
@@ -171,7 +174,8 @@
 	        });
         }
 
-        $scope.filterBooks = function(){
+        $scope.filterBooks = function () {
+            debugger;
       	    var Book = Parse.Object.extend("Book");
 	        var query = new Parse.Query(Book);
             if ($scope.filterSubjects != "Any")
@@ -193,7 +197,8 @@
 	        });
         }
 
-        $scope.updateWords = function(){
+        $scope.updateWords = function () {
+            debugger;
 		    var Book= Parse.Object.extend("Book");
 		    var query = new Parse.Query(Book);
 		    query.equalTo("title", $scope.selectedBook.get("title"));
@@ -211,7 +216,8 @@
 		    });
         }
 
-	    $scope.updateImages = function(){
+        $scope.updateImages = function () {
+            debugger;
 		    var Image= Parse.Object.extend("Image");
 		    var query = new Parse.Query(Image);
 		    query.equalTo("book", $scope.selectedBook.get("title"));
@@ -234,7 +240,8 @@
 		    });
         }
 
-        $scope.updateBooks = function(){
+        $scope.updateBooks = function () {
+            debugger;
 	        var Book = Parse.Object.extend("Book");
 	        var query = new Parse.Query(Book);
 	        query.find({
@@ -251,7 +258,7 @@
         }
       
         $scope.addImage = function () {
-
+            debugger;
             var imageUploadControl = $("#image")[0];
             var parseImage;
             $scope.imageName = $scope.image.slice(12);
@@ -305,7 +312,8 @@
   	        });
         }
 
-        $scope.addWord = function(){
+        $scope.addWord = function () {
+            debugger;
             if ($scope.selectedBook.get("words").includes($scope.word))
             {
       			alert("Word Already Exists");
@@ -366,7 +374,8 @@
 		    });	
   	    }
 
-  	    $scope.addToUser = function(book){
+            $scope.addToUser = function (book) {
+                debugger;
   		    book.addUnique("users",$scope.currentUser.get("username"));
   		    book.save(null, {
   			    success: function(savedBook) {
@@ -384,7 +393,8 @@
   		    //$scope.currentUser.save();
   	    }
   
-	    $scope.updateUserBooks = function(){
+            $scope.updateUserBooks = function () {
+                debugger;
 		    $scope.userBooks = [];
 		    var tempBooks = $scope.currentUser.get("books");
 		
@@ -399,7 +409,8 @@
     		}
         }
 
-	    $scope.validateBook = function(){
+            $scope.validateBook = function () {
+                debugger;
             if ($scope.bookAddForm.$valid)
             {
 			    $scope.addBook();
@@ -411,7 +422,8 @@
 	    	}
         }
 
-	    $scope.refreshAddBooks = function(){
+            $scope.refreshAddBooks = function () {
+                debugger;
 		    $scope.attempted = false;
 		    $scope.name = "";
 		    $scope.author = "";
@@ -425,6 +437,7 @@
 
         $scope.trig = function (selBook)
         {
+            debugger;
   		    $scope.editCover  = "";
 		    $scope.selectedBookTitle = selBook.get("title");
   		    $scope.selectedBook = selBook;
@@ -439,13 +452,16 @@
   		    activaTab('menu1');
         }
 
-  	    $scope.jumpToBrowse = function (){
+        $scope.jumpToBrowse = function () {
+            debugger;
 		    $scope.filterBooks();
   		    activaTab('content');
         }
 
         $scope.jumpToEdit = function (bookName)
         {		
+            debugger;
+
 		    var Book = Parse.Object.extend("Book");
 		    var query = new Parse.Query(Book);
             query.equalTo("title", bookName);
@@ -464,11 +480,15 @@
   		    activaTab('menu1');
   	    }
 
-	    $scope.activaTab = function activaTab(tab) {
+        $scope.activaTab = function activaTab(tab) {
+            debugger;
+
     		$('.nav-tabs a[href="#' + tab + '"]').tab('show');
         }
 
-	    $scope.removeFromUser = function(book){
+        $scope.removeFromUser = function (book) {
+            debugger;
+
       	
       	    book.remove("users",$scope.currentUser.get("username"));
       	    book.save(null, {
@@ -485,7 +505,9 @@
   		    });
         }
 	
-    $scope.removeWord = function(word){
+        $scope.removeWord = function (word) {
+            debugger;
+
       	
     $scope.selectedBook.remove("words",word);
       	
@@ -502,7 +524,9 @@
   		});
     }
 
-      $scope.removeBook = function(removedBook){
+        $scope.removeBook = function (removedBook) {
+            debugger;
+
       	
       	var tempImages = removedBook.get('images');
 	
@@ -527,7 +551,9 @@
 		 }
 
   		},
-  		error: function(myObject, error) {
+          error: function (myObject, error) {
+              debugger;
+
     		// The delete failed.
     		// error is a Parse.Error with an error code and message.
     				  alert("error removing book");
@@ -539,7 +565,9 @@
 
      	
       }
-      $scope.removeImageFromParse = function(removedImage){
+        $scope.removeImageFromParse = function (removedImage) {
+            debugger;
+
       	
       	  var Image = Parse.Object.extend("Image");
       var query = new Parse.Query(Image);
@@ -568,7 +596,9 @@
 	});
       }
       
-      $scope.removeImage = function(removedImage){
+        $scope.removeImage = function (removedImage) {
+                      debugger;
+
       	
       	$scope.selectedBook.remove("images",removedImage);
       	
@@ -649,7 +679,8 @@
       	
       
       }*/
-      $scope.validateEdit = function(){
+        $scope.validateEdit = function () {
+            debugger;
       	 if ($scope.editForm.$valid) {
 			 $scope.addBook();
     	} 
@@ -661,7 +692,7 @@
       	
       }
       $scope.editBook = function(){
-      	
+          debugger;
   	var fileUploadControl = $("#editImageFile")[0];
       	var parseFile;
       	$scope.fileName = $scope.editCover.slice(12);
@@ -708,7 +739,7 @@
       	
       }
       $scope.addBook = function() {
-      	
+          debugger;
       	
       	for (var i = 0; i < $scope.allBooks.length; i++) {
 		if ($scope.allBooks[i].get("title") == $scope.name)
@@ -988,22 +1019,13 @@ function activaTab(tab){
 		 		<div class = "row">
 		 		
 		 		<div class = "col-md-6">
-		 		
-		 		
-		 		
-		 		
-		 		
-		 		
-		 		
-		 		
+		 				 		
 		 		<h5>Title:</h5>
 				    <input type="text" class="form-control" name="name"  ng-class="{ 'error': attempted && bookAddForm.name.$invalid }" ng-model="name" required placeholder="Example: Harry Potter" />
 
 				<h5>Author:</h5>
 				    <input type="text"  class="form-control" name="author" ng-class="{ 'error': attempted && bookAddForm.author.$invalid }" ng-model="author" required placeholder="Example: J. K. Rowling" />
 
-				
-				
 				<h5>Select Subject:</h5>
 				<select name="subj" class = "form-control" ng-class="{'error':attempted && bookAddForm.subj.$invalid}" style="width: 220px;" 
         				ng-model="pickedSubject" 
@@ -1018,16 +1040,6 @@ function activaTab(tab){
             				required> 
       					<option value="">Select Grade</option> 
     				</select>
-    				
-      				
-      
-		 		
-      			
-      			
-      				
-      				<p></p>
-      				<p></p>
-      				
 
 
       				<input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="validateBook()"/>
