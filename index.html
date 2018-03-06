@@ -5,19 +5,19 @@
     <meta charset="utf-8" />
     <title></title>
     <!--<base href="/">-->
-    <!--<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
+    <script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
+    <!--<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-cookies.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 
     <script>
         Parse.initialize("hm3HmqcHxgfMQxP2SF0Ue0at67HFqqxeYq5ZxKoR", "nweYdxbTDxFnWp85o2xxqNu6Gl8zDKnaZyxGWkAe");
@@ -108,6 +108,7 @@
                     $('#imageCover').attr('src', e.target.result);
                 }
                 debugger;
+
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -862,7 +863,7 @@
                                             <center>
                                                 <img id="imageCover" ng-src="{{defaultImage}}" style="width: 80%;" />
                                             </center>
-                                            <input type="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" required />
+                                            <input type="file" fileinput="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" />
 
                                         </div>
                                     </div>
