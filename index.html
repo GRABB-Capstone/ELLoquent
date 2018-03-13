@@ -5,13 +5,19 @@
     <meta charset="utf-8" />
     <title></title>
     <!--<base href="/">-->
-
     <script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!--<script src="https://npmcdn.com/parse@1.9.2/dist/parse.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 
     <script>
         Parse.initialize("hm3HmqcHxgfMQxP2SF0Ue0at67HFqqxeYq5ZxKoR", "nweYdxbTDxFnWp85o2xxqNu6Gl8zDKnaZyxGWkAe");
@@ -63,7 +69,6 @@
         .form-control {
             margin-bottom: 15px;
         }
-        
     </style>
 
     <script>
@@ -103,6 +108,7 @@
                     $('#imageCover').attr('src', e.target.result);
                 }
                 debugger;
+
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -160,18 +166,19 @@
                 debugger;
                 var user = Parse.User.logIn($scope.username, $scope.password, {
                     success: function (user) {
+                        debugger;
+
                         $scope.loggedIn = true;
                         $scope.currentUser = user;
-                        $cookies.put('user', 'hello', {
-                            path: '/'
-                        });
+                        //$cookies.put('user', 'hello', {
+                        //    path: '/'
+                        //});
 
                         $scope.filterBooks();
                         $scope.myFilterBooks();
                         $scope.jumpToBrowse();
                         $scope.password = "";
                         $scope.username = "";
-
                         $scope.$apply();
                     },
                     error: function (user, error) {
@@ -186,16 +193,13 @@
                 var Book = Parse.Object.extend("Book");
                 var query = new Parse.Query(Book);
 
-                if ($scope.filterSubjects != "Any")
-                {
+                if ($scope.filterSubjects != "Any") {
                     query.equalTo("subject", $scope.filterSubjects);
                 }
-                if ($scope.filterGrades != "Any")
-                {
+                if ($scope.filterGrades != "Any") {
                     query.equalTo("gradeLevel", $scope.filterGrades);
                 }
-                if ($scope.filterDifficulty != "Any")
-                {
+                if ($scope.filterDifficulty != "Any") {
                     query.equalTo("difficulty", $scope.filterDifficulty);
                 }
 
@@ -223,16 +227,13 @@
                 var Book = Parse.Object.extend("Book");
                 var query = new Parse.Query(Book);
 
-                if ($scope.myFilterSubjects != "Any")
-                {
+                if ($scope.myFilterSubjects != "Any") {
                     query.equalTo("subject", $scope.myFilterSubjects);
                 }
-                if ($scope.myFilterGrades != "Any")
-                {
+                if ($scope.myFilterGrades != "Any") {
                     query.equalTo("grade", $scope.myFilterGrades);
                 }
-                if ($scope.filterDifficulty != "Any")
-                {
+                if ($scope.filterDifficulty != "Any") {
                     query.equalTo("difficulty", $scope.myFilterDifficulty);
                 }
                 query.equalTo("owner", $scope.currentUser);
@@ -258,11 +259,13 @@
 
             $scope.validateBook = function () {
                 debugger;
-                if ($scope.bookAddForm.$valid) {
+                $scope.attempted = true;
+
+                if ($scope.bookAddForm.$valid)
+                {
                     $scope.addBook();
                 }
                 else {
-                    $scope.attempted = true;
                     alert('Not Valid Entry, please fill out all fields');
                 }
             }
@@ -273,25 +276,33 @@
                 $scope.name = "";
                 $scope.author = "";
                 $scope.grade = "";
-                $scope.pickedGrade = "";
-                $scope.pickedSubject = "";
+                $scope.pickedGrade = null;
+                $scope.pickedSubject = null;
+                $scope.pickedDifficulty = null;
                 $scope.cover = "";
                 $scope.defaultImage = "images/noimage.png";
                 $('#imageCover').attr('src', "images/noimage.png");
             }
 
-            $scope.addBook = function ()
-            {
-                var fileUploadControl = $("#imageFile")[0];
+            $scope.addBook = function () {
+
                 var parseFile;
-
+                var fileUploadControl = $("#imageFile")[0];
                 $scope.fileName = $scope.cover.slice(12);
+                if (fileUploadControl.files.length > 0) {
 
-                if (fileUploadControl.files.length > 0)
-                {
                     var file = fileUploadControl.files[0];
                     var name = $scope.fileName;
-                    parseFile = new Parse.File(name, file);
+                    parseFile = new Parse.File(file.name, file);
+
+                    if (parseFile == undefined || parseFile == null || parseFile == "") {
+                        alert('You must upload a book cover picture!');
+                        return;
+                    }
+                }
+                else {
+                    alert('You must upload a book cover picture!');
+                    return;
                 }
 
                 var Book = Parse.Object.extend("Book");
@@ -302,29 +313,31 @@
                 book.set("subject", $scope.pickedSubject);
                 book.set("difficulty", $scope.pickedDifficulty);
                 book.set("coverPicture", parseFile);
-                book.set("owner", $scope.user);
-                debugger;
+                book.set("owner", $scope.currentUser);
 
-                //book.save(null, {
-                //    success: function (savedBook) {
+                book.save(null, {
+                    success: function (savedBook) {
 
-                //        $scope.filterBooks();
+                        $scope.myFilterBooks();
+                        //$scope.addToUser(savedBook);
+                        //$scope.trig(savedBook);
 
-                //        $scope.addToUser(savedBook);
+                        $scope.name = "";
+                        $scope.author = "";
+                        $scope.grade = "";
+                        $scope.pickedGrade = null;
+                        $scope.pickedSubject = null;
+                        $scope.pickedDifficulty = null;
+                        $scope.cover = "";
+                        $scope.$apply();
 
-                //        $scope.trig(savedBook);
-                //        $scope.name = "";
-                //        $scope.author = "";
-                //        $scope.grade = "";
-                //        $scope.pickedGrade = "";
-                //        $scope.pickedSubject = "";
-                //        $scope.cover = "";
-                //        $scope.$apply();
-                //    },
-                //    error: function (savedBook, error) {
-                //        alert('Failed to create new object, with error code: ' + error.message);
-                //    }
-                //});
+                        alert('Book added to database!');
+
+                    },
+                    error: function (savedBook, error) {
+                        alert('Failed to create new object, with error code: ' + error.message);
+                    }
+                });
             };
 
             $scope.updateWords = function () {
@@ -346,8 +359,7 @@
                 });
             }
 
-            $scope.updateImages = function ()
-            {
+            $scope.updateImages = function () {
                 debugger;
                 var Image = Parse.Object.extend("Image");
                 var query = new Parse.Query(Image);
@@ -438,12 +450,10 @@
 
             $scope.addWord = function () {
                 debugger;
-                if ($scope.selectedBook.get("words").includes($scope.word))
-                {
+                if ($scope.selectedBook.get("words").includes($scope.word)) {
                     alert("Word Already Exists");
                 }
-                else
-                {
+                else {
                     $scope.selectedBook.addUnique("words", $scope.word);
                     $scope.selectedBook.save(null, {
                         success: function (savedImage) {
@@ -533,8 +543,7 @@
                 activaTab('menu1');
             }
 
-            $scope.activaTab = function activaTab(tab)
-            {
+            $scope.activaTab = function activaTab(tab) {
                 debugger;
                 $('.nav-tabs a[href="#' + tab + '"]').tab('show');
             }
@@ -553,8 +562,7 @@
                 });
             }
 
-            $scope.removeWord = function (word)
-            {
+            $scope.removeWord = function (word) {
                 debugger;
 
                 $scope.selectedBook.remove("words", word);
@@ -569,8 +577,7 @@
                 });
             }
 
-            $scope.removeBook = function (removedBook)
-            {
+            $scope.removeBook = function (removedBook) {
                 debugger;
 
                 var tempImages = removedBook.get('images');
@@ -601,8 +608,7 @@
                 });
             }
 
-            $scope.removeImageFromParse = function (removedImage)
-            {
+            $scope.removeImageFromParse = function (removedImage) {
                 debugger;
 
                 var Image = Parse.Object.extend("Image");
@@ -626,8 +632,7 @@
                 });
             }
 
-            $scope.removeImage = function (removedImage)
-            {
+            $scope.removeImage = function (removedImage) {
                 debugger;
                 $scope.selectedBook.remove("images", removedImage);
 
@@ -666,8 +671,7 @@
                 if ($scope.editForm.$valid) {
                     $scope.addBook();
                 }
-                else
-                {
+                else {
                     alert('Not Valid Entry, please fill out all fields');
                 }
                 return;
@@ -678,8 +682,7 @@
                 var fileUploadControl = $("#editImageFile")[0];
                 var parseFile;
                 $scope.fileName = $scope.editCover.slice(12);
-                if (fileUploadControl.files.length > 0)
-                {
+                if (fileUploadControl.files.length > 0) {
                     var file = fileUploadControl.files[0];
                     var name = $scope.fileName;
                     parseFile = new Parse.File(name, file);
@@ -690,8 +693,7 @@
                 $scope.selectedBook.set("grade", $scope.editPickedGrade);
                 $scope.selectedBook.set("subject", $scope.editPickedSubject);
 
-                if ($scope.editCover)
-                {
+                if ($scope.editCover) {
                     $scope.selectedBook.set("bookPhoto", parseFile);
                 }
 
@@ -706,7 +708,7 @@
             }
 
             var init = function () {
-                var user = $cookies.get('user');
+                //var user = $cookies.get('user');
                 $scope.username = "nick";
                 $scope.password = "nick";
                 $scope.login();
@@ -811,7 +813,7 @@
                                     <div class="mygrid-wrapper-div">
 
                                         <table class="table table-hover">
-                                            <tr>
+                                            <tr style="border-left: solid; border-color: lightgray; border-width: 1px;">
                                                 <th>Cover</th>
                                                 <th>Title</th>
                                                 <th>Author</th>
@@ -820,7 +822,7 @@
                                                 <th>Subject</th>
                                                 <th></th>
                                             </tr>
-                                            <tr ng-repeat="book in allBooks">
+                                            <tr ng-repeat="book in allBooks" style="border-left: solid; border-color: lightgray; border-width: 1px;">
                                                 <td><img ng-src="{{book.get('coverPicture').url()}}" style="height:192px;" />	</td>
                                                 <td>{{book.get("name")}}</td>
                                                 <td>{{book.get("author")}}</td>
@@ -841,7 +843,7 @@
                             <h1 style="text-align: center;">Add a Book</h1>
 
                             <div class="container">
-                                <!--<form name="bookAddForm">
+                                <form name="bookAddForm">
 
                                     <div class="row">
                                         <div class="col-md-6 form-group">
@@ -874,63 +876,13 @@
 
                                             <h4>Book Cover:</h4>
                                             <center>
-                                                <img id="imageCover" ng-src="{{defaultImage}}" style="width: 80%;" />
+                                                <img id="imageCover" ng-src="{{defaultImage}}" style="height: 192px;" />
                                             </center>
-                                            <input type="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" required />
+                                            <input type="file" fileinput="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" />
 
                                         </div>
                                     </div>
 
-                                </form>-->
-
-                                <form name="bookAddForm">
-
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-
-                                            <h5>Title:</h5>
-                                            <input type="text" class="form-control" name="name" ng-class="{ 'error': attempted && bookAddForm.name.$invalid }" ng-model="name" required placeholder="Example: Harry Potter" />
-
-                                            <h5>Author:</h5>
-                                            <input type="text" class="form-control" name="author" ng-class="{ 'error': attempted && bookAddForm.author.$invalid }" ng-model="author" required placeholder="Example: J. K. Rowling" />
-
-                                            <h5>Select Subject:</h5>
-                                            <select name="subj" class="form-control" ng-class="{'error':attempted && bookAddForm.subj.$invalid}" style="width: 220px;"
-                                                    ng-model="pickedSubject"
-                                                    ng-options="subject for subject in subjectsPick"
-                                                    required>
-                                                <option value="">Select Subject</option>
-                                            </select>
-                                            <h5>Select Grade:</h5>
-                                            <select name="grade" class="form-control" ng-class="{'error':attempted &&  bookAddForm.grade.$invalid}" style="width: 220px;"
-                                                    ng-model="pickedGrade"
-                                                    ng-options="grade for grade in gradesPick"
-                                                    required>
-                                                <option value="">Select Grade</option>
-                                            </select>
-
-
-                                            <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="validateBook()" />
-
-
-
-                                        </div>
-
-                                        <div class="col-md-6">
-
-                                            <h5>Book Cover:</h5>
-                                            <center>
-                                                <img id="imageCover" ng-src="{{defaultImage}}" style="height:192px" />
-                                            </center>
-                                            <input type="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" required />
-
-                                        </div>
-
-
-
-
-                                    </div>
                                 </form>
 
 
