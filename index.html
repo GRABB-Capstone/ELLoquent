@@ -135,6 +135,10 @@
         .selectable {
 
         }
+
+        .selected {
+            background-color: rgb(170, 225, 255) !important;
+        }
     </style>
 
     <script>
@@ -231,6 +235,7 @@
             $scope.classroom = null;
             $scope.classroomStudents = [];
             $scope.studet = null;
+            $scope.classroomBooks = [];
             
 
             $scope.cover = "";
@@ -623,18 +628,20 @@
                 personalBook.save(null, {
                     success: function (savedBook) {
                         debugger;
-
+                        $scope.myFilterBooks();
                         /* For each of this user's classrooms, make sure an intermediate is made between the book and classroom */
-                        for (j = 0; j < classrooms.length; j++) {
+                        for (j = 0; j < $scope.classrooms.length; j++) {
                             var ClassroomBookIntermediate = Parse.Object.extend("ClassroomBookIntermediate");
                             var classroomBookIntermediate = new ClassroomBookIntermediate();
 
-                            classroomBookIntermediate.set("Classroom", classrooms[j]);
+                            classroomBookIntermediate.set("Classroom", $scope.classrooms[j]);
                             classroomBookIntermediate.set("Book", savedBook);
                             /* "isActive" is false because the book should be activated within the classroom management page */
                             classroomBookIntermediate.set("isActive", false);
+                            debugger;
 
-                            clasroomBookIntermediate.save(null, {
+                            classroomBookIntermediate.save(null, {
+                                success: function (result) { debugger; },
                                 error: function (error) { alert("Error: " + error.code + " " + error.message); }
                             });
                         }
@@ -998,6 +1005,7 @@
                 $scope.classroom = classroom;
                 $scope.activaTab('manageClassroom');
                 $scope.classroomStudents = [];
+                $scope.classroomBooks = [];
 
                 var ClassroomUserIntermediate = Parse.Object.extend("ClassroomUserIntermediate");
                 var query = new Parse.Query(ClassroomUserIntermediate);
@@ -1032,18 +1040,53 @@
                 var query = new Parse.Query(ClassroomBookIntermediate);
 
                 query.equalTo("Classroom", classroom);
-                query.equalTo("isActive", true);
 
-                /* Set the results to userBooks so that it can be displayed in the personal books table */
-                for (i = 0; i < results.length; i++) {
-                    var ClassroomBookIntermediate = Parse.Object.extend("ClassroomBookIntermediate");
-                    var query = new Parse.Query(ClassroomBookIntermediate);
-                    query.equalTo("Book", globalBook);
-                    query.equalTo("isActive", true);
-                }
+                query.find({
+                    success: function (inters) {
+                        debugger;
 
-                $scope.$apply();
+                        for (i = 0; i < inters.length; i++) {
+                            var inter = inters[i];
+                            var book = inter.get("Book");
+                            $scope.addToClassroomBooks(inter, book);
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+
                 debugger;
+            }
+
+            $scope.addToClassroomBooks = function (inter, book) {
+                book.fetch({
+                    success: function (fetchedBook) {
+                        $scope.classroomBooks.push({
+                            "book": fetchedBook,
+                            "inter": inter,
+                        });
+                        debugger;
+                        $scope.$apply();
+                        debugger;
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+            }
+
+            $scope.toggleClassroomBook = function (classroomBook) {
+                classroomBook.inter.set("isActive", !classroomBook.inter.get("isActive"));
+                classroomBook.inter.save(null, {
+                    success: function (result) {
+                        classroomBook.inter = result;
+                        debugger;
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
             }
 
             $scope.viewStudentProfile = function (student) {
@@ -1472,14 +1515,14 @@
                                             <th>Difficulty</th>
                                             <th>Subject</th>
                                         </tr>
-                                        <tr class="selectable" ng-repeat="book in userBooks">
-                                            <td style="border-left: solid; border-color: lightgray; border-width: 1px;"><input type="checkbox" ng-model=""/></td>
-                                            <td><img ng-src="{{book.get('coverPicture').url()}}" style="width:50px;" /></td>
-                                            <td>{{book.get("name")}}</td>
-                                            <td>{{book.get("author")}}</td>
-                                            <td>{{book.get("gradeLevel")}}</td>
-                                            <td>{{book.get("difficulty")}}</td>
-                                            <td>{{book.get("subject")}}</td>
+                                        <tr class="selectable" ng-repeat="classroomBook in classroomBooks" ng-class="{'selected': classroomBook.inter.get('isActive')}" ng-click="toggleClassroomBook(classroomBook)" style="cursor: pointer;">
+                                            <td style="border-left: solid; border-color: lightgray; border-width: 1px;"><input type="checkbox" ng-model="classroomBook.inter.get('isActive')" ng-click="toggleClassroomBook(classroomBook)" style="cursor: pointer;" /></td>
+                                            <td><img ng-src="{{classroomBook.book.get('coverPicture').url()}}" style="width:50px;" /></td>
+                                            <td>{{classroomBook.book.get("name")}}</td>
+                                            <td>{{classroomBook.book.get("author")}}</td>
+                                            <td>{{classroomBook.book.get("gradeLevel")}}</td>
+                                            <td>{{classroomBook.book.get("difficulty")}}</td>
+                                            <td>{{classroomBook.book.get("subject")}}</td>
                                         </tr>
                                     </table>
                                 </div>
