@@ -1066,9 +1066,7 @@
                             "book": fetchedBook,
                             "inter": inter,
                         });
-                        debugger;
                         $scope.$apply();
-                        debugger;
                     },
                     error: function (error) {
                         alert("Error: " + error.code + " " + error.message);
@@ -1099,7 +1097,7 @@
             var init = function () {
                 //var user = $cookies.get('user');
                 $scope.username = "nick";
-                $scope.password = "nick";
+                $scope.password = "nick1";
                 $scope.login();
             };
             init();
@@ -1551,7 +1549,58 @@
 
                         <div id="studentProfile" class="tab-pane fade" ng-class="student">
                             <div class="header" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
-                                <div class="tab-title">{{student.get("username")}}</div>
+                                <div class="tab-title" style="height:120px;">
+                                    <div style="float: left;">
+                                        <img ng-src="{{student.get('ProfilePic').url()}}" style="height:100px;" />
+                                    </div>
+                                    <div>
+                                        {{student.get("username")}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="row myBlock" style="font-size: 30px; border-top-left-radius: 0px; border-top-right-radius: 0px;">Student Details</div>
+                                    <div class="row mygrid-wrapper-div">
+                                        <table class="table table-hover" style="font-size: 16px;">
+                                            <tr><td style="border-left: solid; border-color: lightgray; border-width: 1px;">
+                                                    <div class="col-md-3" style="font-weight: bold;">
+                                                        Username:
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        {{student.get("username")}}
+                                                    </div>
+                                            </td></tr>
+
+                                            <tr><td style="border-left: solid; border-color: lightgray; border-width: 1px;">
+                                                    <div class="col-md-3" style="font-weight: bold;">
+                                                        Email:
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        {{student.get("email")}}
+                                                    </div>
+                                            </td></tr>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="row myBlock" style="font-size: 30px; border-top-left-radius: 0px; border-top-right-radius: 0px;">Results</div>
+                                    <div class="row mygrid-wrapper-div">
+                                        <table class="table table-hover">
+                                            <tr style="background-color: rgb(133, 214, 255);">
+                                                <th style="border-left: solid; border-color: lightgray; border-width: 1px;">Game</th>
+                                                <th>Book</th>
+                                                <th>Question</th>
+                                                <th>Options</th>
+                                                <th>Student Answer</th>
+                                                <th>Grade</th>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
