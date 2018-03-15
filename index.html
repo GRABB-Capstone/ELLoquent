@@ -37,7 +37,9 @@
         }
 
         .mygrid-wrapper-div {
-            overflow: scroll;
+            overflow-y: scroll;
+            max-height: 800px;
+            min-height: 0px;
         }
 
         .right {
@@ -54,20 +56,84 @@
         }
 
         .myBlock {
-            border-style: solid;
+            /*border-style: solid;*/
             border-bottom-style: none;
-            border-width: 1px;
-            border-color: lightgray;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            /*border-width: 1px;
+            border-color: lightgray;*/
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
             padding: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: rgb(170, 225, 255);
         }
 
         .form-control {
             margin-bottom: 15px;
+        }
+
+        th {
+            border: none !important;
+        }
+
+        td {
+            border-color: rgb(92, 184, 228) !important;
+            border-bottom: solid;
+            border-bottom-width: 1px;
+            border-top: none !important;
+            /*margin-top: -1px !important;*/
+            vertical-align: middle !important;
+        }
+        tr {
+            background-color: white;
+        }
+            tr:hover {
+                background: rgb(170, 225, 255) !important;
+            }
+
+        .btn-primary {
+            background-color: rgb(0, 114, 188) !important;
+        }
+        .btn-secondary {
+            background-color: rgb(69, 206, 208) !important;
+        }
+
+        li.active a {
+            background-color: rgb(170, 225, 255) !important;
+            border-color: rgb(92, 184, 228) !important;
+            border-bottom-color: transparent !important;
+        }
+
+        ul {
+            border-color: rgb(92, 184, 228) !important;
+        }
+
+        .tab-title {
+            background-color: rgb(92, 184, 228) !important;
+            border-radius: 20px;
+            padding: 10px;
+            /*margin-top: 10px;
+            margin-bottom: 10px;*/
+            text-align: center;
+            font-size: 48px;
+            color: white;
+        }
+
+        .header {
+            background-color: rgb(92, 184, 228) !important;
+            margin-top: 20px;
+            border-radius: 20px;
+        }
+
+        .contentBlock {
+            background-color: rgb(170, 225, 255) !important;
+            border-radius: 13px;
+            padding-top: 15px;
+        }
+
+        .selectable {
+
         }
     </style>
 
@@ -77,6 +143,8 @@
         window.onload = function () {
 
             $('#editBook').hide();
+            $('#manageClassroomTab').hide();
+            $("#studentProfileTab").hide();
             $("#imageFile").change(function () {
                 readURL(this);
             });
@@ -159,6 +227,11 @@
             $scope.grade;
             $scope.user;
             $scope.friends = [];
+            $scope.classrooms = [];
+            $scope.classroom = null;
+            $scope.classroomStudents = [];
+            $scope.studet = null;
+            
 
             $scope.cover = "";
 
@@ -176,6 +249,7 @@
 
                         $scope.filterBooks();
                         $scope.myFilterBooks();
+                        $scope.getClassrooms();
                         $scope.jumpToBrowse();
                         $scope.password = "";
                         $scope.username = "";
@@ -188,8 +262,10 @@
                 });
             }
 
+            /* Filters books based on the filter at the top of the global library of books */
             $scope.filterBooks = function () {
                 debugger;
+                /* Create a book object and add the filters to the book query */
                 var Book = Parse.Object.extend("Book");
                 var query = new Parse.Query(Book);
 
@@ -203,8 +279,14 @@
                     query.equalTo("difficulty", $scope.filterDifficulty);
                 }
 
+                /* Make sure the book is meant for the global library */
+                query.equalTo("isPublic", true);
+                query.equalTo("isActive", true); 
+
+                /* Call the database to find the global books that fit the filter criteria */
                 query.find({
                     success: function (results) {
+                        /* Set the results to allBooks so that it can be displayed in the global library table */
                         $scope.allBooks = results;
                         $scope.$apply();
                     },
@@ -214,6 +296,7 @@
                 });
             }
 
+            /* Resets the global book library's filters when "reset filter" button is clicked */
             $scope.resetFilter = function () {
                 debugger;
                 $scope.filterSubjects = "Any";
@@ -222,26 +305,36 @@
                 $scope.filterBooks();
             }
 
+            /* Filters books based on the filter at the top of the personal library of books */
             $scope.myFilterBooks = function () {
                 debugger;
+                /* Create a book object and add the filters to the book query */
                 var Book = Parse.Object.extend("Book");
                 var query = new Parse.Query(Book);
 
+                /* Create a book object and add the filters to the book query */
                 if ($scope.myFilterSubjects != "Any") {
                     query.equalTo("subject", $scope.myFilterSubjects);
                 }
                 if ($scope.myFilterGrades != "Any") {
-                    query.equalTo("grade", $scope.myFilterGrades);
+                    query.equalTo("gradeLevel", $scope.myFilterGrades);
                 }
-                if ($scope.filterDifficulty != "Any") {
+                if ($scope.myFilterDifficulty != "Any") {
                     query.equalTo("difficulty", $scope.myFilterDifficulty);
                 }
-                query.equalTo("owner", $scope.currentUser);
 
+                /* Make sure it only displays the books owned by the user and is not a global book */
+                query.equalTo("owner", $scope.currentUser);
+                query.equalTo("isPublic", false);
+                query.equalTo("isActive", true);
+                debugger;
+                /* Call the database to find the global books that fit the filter criteria */
                 query.find({
                     success: function (results) {
+
                         $scope.userBooks = results;
                         $scope.$apply();
+                        debugger;
                     },
                     error: function (error) {
                         alert("Error: " + error.code + " " + error.message);
@@ -249,6 +342,7 @@
                 });
             }
 
+            /* Resets the personal book library's filters when "reset filter" button is clicked */
             $scope.myResetFilter = function () {
                 debugger;
                 $scope.myFilterSubjects = "Any";
@@ -257,19 +351,81 @@
                 $scope.myFilterBooks();
             }
 
+            /* Before allowing the user to submit a new book on the "Add books" tab, all the fields must be filled first */
             $scope.validateBook = function () {
                 debugger;
                 $scope.attempted = true;
 
+                /* If all the fields are filled, the book can be added to the DB */
                 if ($scope.bookAddForm.$valid)
                 {
                     $scope.addBook();
                 }
+                /* Otherwise, the form will indicate which fields still need to be filled out */
                 else {
                     alert('Not Valid Entry, please fill out all fields');
                 }
             }
 
+            /* Add a new book to the DB */
+            $scope.addBook = function () {
+
+                /* First make sure there is a picture to upload. I am sure this process could be done much better... */
+                var parseFile;
+                var fileUploadControl = $("#imageFile")[0];
+                $scope.fileName = $scope.cover.slice(12);
+                if (fileUploadControl.files.length > 0) {
+
+                    var file = fileUploadControl.files[0];
+                    var name = $scope.fileName;
+                    parseFile = new Parse.File(file.name, file);
+
+                    /* If a picture does not exist, prompt the user to upload one */
+                    if (parseFile == undefined || parseFile == null || parseFile == "") {
+                        alert('You must upload a book cover picture!');
+                        return;
+                    }
+                }
+                /* If a picture does not exist, prompt the user to upload one */
+                else {
+                    alert('You must upload a book cover picture!');
+                    return;
+                }
+
+                /* Prepare the book to be added to the DB based on the input fields */
+                var Book = Parse.Object.extend("Book");
+                var book = new Book();
+                book.set("name", $scope.name);
+                book.set("author", $scope.author);
+                book.set("gradeLevel", $scope.pickedGrade);
+                book.set("subject", $scope.pickedSubject);
+                book.set("difficulty", $scope.pickedDifficulty);
+                book.set("coverPicture", parseFile);
+                book.set("owner", $scope.currentUser);
+                book.set("isPublic", false);
+                book.set("isActive", true);
+                debugger;
+                /* Save the book to the DB */
+                book.save(null, {
+                    success: function (savedBook) {
+                        /* Update the personal library of books and clear the input fields */
+                        $scope.myFilterBooks();
+                        //$scope.addToUser(savedBook);
+                        $scope.trig(savedBook);
+
+                        $scope.$apply();
+
+                        alert('Book added to database!');
+                        $scope.refreshAddBooks();
+
+                    },
+                    error: function (savedBook, error) {
+                        alert('Failed to create new object, with error code: ' + error.message);
+                    }
+                });
+            };
+
+            /* When the tab is clicked or once a book is added to the DB, the form should be cleared */
             $scope.refreshAddBooks = function () {
                 debugger;
                 $scope.attempted = false;
@@ -283,62 +439,6 @@
                 $scope.defaultImage = "images/noimage.png";
                 $('#imageCover').attr('src', "images/noimage.png");
             }
-
-            $scope.addBook = function () {
-
-                var parseFile;
-                var fileUploadControl = $("#imageFile")[0];
-                $scope.fileName = $scope.cover.slice(12);
-                if (fileUploadControl.files.length > 0) {
-
-                    var file = fileUploadControl.files[0];
-                    var name = $scope.fileName;
-                    parseFile = new Parse.File(file.name, file);
-
-                    if (parseFile == undefined || parseFile == null || parseFile == "") {
-                        alert('You must upload a book cover picture!');
-                        return;
-                    }
-                }
-                else {
-                    alert('You must upload a book cover picture!');
-                    return;
-                }
-
-                var Book = Parse.Object.extend("Book");
-                var book = new Book();
-                book.set("name", $scope.name);
-                book.set("author", $scope.author);
-                book.set("gradeLevel", $scope.pickedGrade);
-                book.set("subject", $scope.pickedSubject);
-                book.set("difficulty", $scope.pickedDifficulty);
-                book.set("coverPicture", parseFile);
-                book.set("owner", $scope.currentUser);
-
-                book.save(null, {
-                    success: function (savedBook) {
-
-                        $scope.myFilterBooks();
-                        //$scope.addToUser(savedBook);
-                        //$scope.trig(savedBook);
-
-                        $scope.name = "";
-                        $scope.author = "";
-                        $scope.grade = "";
-                        $scope.pickedGrade = null;
-                        $scope.pickedSubject = null;
-                        $scope.pickedDifficulty = null;
-                        $scope.cover = "";
-                        $scope.$apply();
-
-                        alert('Book added to database!');
-
-                    },
-                    error: function (savedBook, error) {
-                        alert('Failed to create new object, with error code: ' + error.message);
-                    }
-                });
-            };
 
             $scope.updateWords = function () {
                 debugger;
@@ -359,6 +459,7 @@
                 });
             }
 
+            /* It seems like this is not used anywhere. It may have some kind of use later on */
             $scope.updateImages = function () {
                 debugger;
                 var Image = Parse.Object.extend("Image");
@@ -383,6 +484,7 @@
                 });
             }
 
+            /* It seems like this is not used anywhere. It may have some kind of use later on */
             $scope.updateBooks = function () {
                 debugger;
                 var Book = Parse.Object.extend("Book");
@@ -399,6 +501,7 @@
                 });
             }
 
+            /* This was used for adding images to the DB associated with each book. This should now be modified to add images to each individual vocab word */
             $scope.addImage = function () {
                 debugger;
                 var imageUploadControl = $("#image")[0];
@@ -448,44 +551,152 @@
                 });
             }
 
+            /* Add a vocab word to a book within the Edit Book Details page */
             $scope.addWord = function () {
                 debugger;
-                if ($scope.selectedBook.get("words").includes($scope.word)) {
-                    alert("Word Already Exists");
-                }
-                else {
-                    $scope.selectedBook.addUnique("words", $scope.word);
-                    $scope.selectedBook.save(null, {
-                        success: function (savedImage) {
-                            $scope.word = "";
-                            $scope.$apply();
-                        },
-                        error: function (savedImage, error) {
-                            alert('Failed to create new object, with error code: ' + error.message);
-                        }
-                    });
-                }
-            }
 
-            $scope.logout = function () {
-                $scope.loggedIn = false;
-                $scope.currentUser = null;
-            }
+                /* Set up the vocab object based on the textbox input */
+                var Vocab = Parse.Object.extend("Vocab");
+                var vocab = new Vocab();
+                vocab.set("name", $scope.word);
+                vocab.set("definition", "");
 
-            $scope.addToUser = function (book) {
-                debugger;
-                book.addUnique("users", $scope.currentUser.get("username"));
-                book.save(null, {
-                    success: function (savedBook) {
-                        $scope.myFilterBooks();
+                /* Save the vocab word to the DB */
+                vocab.save(null, {
+                    success: function (savedVocab) {
+                        /* Once the vocab word is saved, there must be a BookVocabIntermediate created to link the book and the vocab word */
+                        var BookVocabIntermediate = Parse.Object.extend("BookVocabIntermediate");
+                        var bookVocabIntermediate = new BookVocabIntermediate();
+                        bookVocabIntermediate.set("Book", $scope.selectedBook);
+                        bookVocabIntermediate.set("Vocab", savedVocab);
+                        bookVocabIntermediate.set("isActive", true);
+
+                        /* Save the intermediate to the DB */
+                        bookVocabIntermediate.save(null, {
+                            /* Add the vocab word to the page */
+                            success: function (savedBookVocabIntermediate) {
+                                $scope.bookVocabWords.push(savedVocab);
+                                $scope.$apply();
+                            },
+                            error: function (savedBook, error) {
+                                alert('Failed to create new object, with error code: ' + error.message);
+                            }
+                        });
                     },
                     error: function (savedBook, error) {
                         alert('Failed to create new object, with error code: ' + error.message);
                     }
                 });
-                $scope.myFilterBooks();
             }
 
+            /* Logout the current user */
+            $scope.logout = function () {
+                $scope.loggedIn = false;
+                $scope.currentUser = null;
+            }
+
+            /* Sets the selectedBook variable to the book the user just clicked to add to their personal library.
+             * A modal is called within the HTML to verify the user wants to add the book to their personal library */
+            $scope.verifyAddBookToPersonalLibrary = function (book) {
+                $scope.selectedBook = book;
+            }
+
+            /* Add a global book to the user's personal library
+             * NOTE: This function is obviously a monster. I will do my best to explain what is happening */
+            $scope.addToUser = function (globalBook) {
+                debugger;
+                /* Copy all the global book's contents to a new object, except the owner will be the current user
+                 * and the "isPublic" field will be set to false, since it is a personal book */
+                var Book = Parse.Object.extend("Book");
+                var personalBook = new Book();
+                personalBook.set("name", globalBook.get("name"));
+                personalBook.set("author", globalBook.get("author"));
+                personalBook.set("gradeLevel", globalBook.get("gradeLevel"));
+                personalBook.set("subject", globalBook.get("subject"));
+                personalBook.set("difficulty", globalBook.get("difficulty"));
+                personalBook.set("coverPicture", globalBook.get("coverPicture"));
+                personalBook.set("owner", $scope.currentUser);
+                personalBook.set("isPublic", false);
+                personalBook.set("isActive", true);
+
+                /* Save the book to the DB */
+                personalBook.save(null, {
+                    success: function (savedBook) {
+                        debugger;
+
+                        /* For each of this user's classrooms, make sure an intermediate is made between the book and classroom */
+                        for (j = 0; j < classrooms.length; j++) {
+                            var ClassroomBookIntermediate = Parse.Object.extend("ClassroomBookIntermediate");
+                            var classroomBookIntermediate = new ClassroomBookIntermediate();
+
+                            classroomBookIntermediate.set("Classroom", classrooms[j]);
+                            classroomBookIntermediate.set("Book", savedBook);
+                            /* "isActive" is false because the book should be activated within the classroom management page */
+                            classroomBookIntermediate.set("isActive", false);
+
+                            clasroomBookIntermediate.save(null, {
+                                error: function (error) { alert("Error: " + error.code + " " + error.message); }
+                            });
+                        }
+
+                        /* All the vocab words must now be created and saved to the DB. We must first get all the BookVocabIntermediate's
+                         * for the global book being copied. This will allow us to see all of it's vocab words */
+                        var BookVocabIntermediate = Parse.Object.extend("BookVocabIntermediate");
+                        var query = new Parse.Query(BookVocabIntermediate);
+                        query.equalTo("Book", globalBook);
+                        query.equalTo("isActive", true);
+
+                        query.find({
+                            success: function (inters) {
+                                debugger;
+                                /* For each of the intermediates, we are going to get the Vocab word it references */
+                                for (i = 0; i < inters.length; i++) {
+                                    var Vocab = inters[i].get("Vocab");
+                                    
+                                    Vocab.fetch({
+                                        success: function (vocab) {
+                                            debugger;
+                                            /* We are only going to copy and create new vocab words based on active vocab words from the global book */
+                                            if (vocab.get("isActive")) {
+                                                var NewVocab = Parse.Object.extend("Vocab");
+                                                var newVocab = new NewVocab();
+
+                                                newVocab.set("name", vocab.get("name"));
+                                                newVocab.set("definition", vocab.get("definition"));
+                                                newVocab.set("image", vocab.get("image"));
+                                                newVocab.set("isActive", true);
+
+                                                newVocab.save(null, {
+                                                    success: function (savedVocab) {
+                                                        debugger;
+
+                                                        /* After saving the vocab word, we must link it to the book through a new VocabBookIntermediate */
+                                                        var NewBookVocabIntermediate = Parse.Object.extend("BookVocabIntermediate");
+                                                        var newBookVocabIntermediate = new NewBookVocabIntermediate();
+
+                                                        newBookVocabIntermediate.set("Book", savedBook);
+                                                        newBookVocabIntermediate.set("Vocab", savedVocab);
+                                                        newBookVocabIntermediate.set("isActive", true);
+
+                                                        newBookVocabIntermediate.save(null, {
+                                                            success: function (newInter) {
+                                                                debugger;
+                                                            },
+                                                            error: function (error) {alert("Error: " + error.code + " " + error.message);}});},
+                                                    error: function (error) {alert("Error: " + error.code + " " + error.message);}});}},
+                                        error: function (error) {alert("Error: " + error.code + " " + error.message);}});}},
+                            error: function (error) { alert("Error: " + error.code + " " + error.message);}
+                        });
+                        $scope.myFilterBooks();
+                        alert(savedBook.get("name") + " has been added to your personal library!");
+                    },
+                    error: function (savedBook, error) {
+                        alert('Failed to create new object, with error code: ' + error.message);
+                    }
+                });
+            }
+
+            /* It seems like this is not used anywhere. It may have some kind of use later on */
             $scope.updateUserBooks = function () {
                 debugger;
                 $scope.userBooks = [];
@@ -500,28 +711,64 @@
                 }
             }
 
+            /* Initializes the Edit Book Details page */
             $scope.trig = function (selBook) {
                 debugger;
+
                 $scope.editCover = "";
-                $scope.selectedBookTitle = selBook.get("title");
+                $scope.selectedBookTitle = selBook.get("name");
                 $scope.selectedBook = selBook;
-                $scope.selectedBookURL = selBook.get('bookPhoto').url();
-                $scope.editName = $scope.selectedBook.get('title');
+                $scope.selectedBookURL = selBook.get('coverPicture').url();
+                $scope.editName = $scope.selectedBook.get('name');
                 $scope.editAuthor = $scope.selectedBook.get('author');
-                $scope.editPickedGrade = $scope.selectedBook.get('grade');
+                $scope.editPickedGrade = $scope.selectedBook.get('gradeLevel');
                 $scope.editPickedSubject = $scope.selectedBook.get('subject');
+                $scope.editPickedDifficulty = $scope.selectedBook.get('difficulty');
+                $scope.bookVocabWords = [];
 
-                $('#editImageCover').attr('src', selBook.get('bookPhoto').url());
+                $('#editImageCover').attr('src', selBook.get('coverPicture').url());
 
-                activaTab('menu1');
+                /* Get all the vocab words for this book. First must grab the BookVocabIntermediate */
+                var BookVocabIntermediate = Parse.Object.extend("BookVocabIntermediate");
+                var query = new Parse.Query(BookVocabIntermediate);
+                query.equalTo("Book", selBook);
+                query.equalTo("isActive", true);
+                debugger;
+                query.find({
+                    success: function (results) {
+                        /* Once we have the BookVocabIntermediate, we must process each vocab word by fetching it's content */
+                        for (i = 0; i < results.length; i++) {
+
+                            var Vocab = results[i].get("Vocab");
+                            Vocab.fetch({
+                                success: function (vocab) {
+                                    /* Push each vocab word into the array for processing by the HTML */
+                                    $scope.bookVocabWords.push(vocab);
+                                    $scope.$apply();
+                                },
+                                error: function (error) {
+                                    alert("Error: " + error.code + " " + error.message);
+                                }
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+
+                $scope.activaTab('menu1');
             }
 
+            /* Changes the view to the "Browse Content" tab */
             $scope.jumpToBrowse = function () {
                 debugger;
                 $scope.filterBooks();
-                activaTab('content');
+                $scope.activaTab('menu2');
             }
 
+            
+            /* It seems like this is not used anywhere. It may have some kind of use later on */
             $scope.jumpToEdit = function (bookName) {
                 debugger;
 
@@ -543,71 +790,74 @@
                 activaTab('menu1');
             }
 
+            /* Activates the view based on the tab parameter */
             $scope.activaTab = function activaTab(tab) {
                 debugger;
                 $('.nav-tabs a[href="#' + tab + '"]').tab('show');
             }
 
-            $scope.removeFromUser = function (book) {
-                debugger;
-
-                book.remove("users", $scope.currentUser.get("username"));
-                book.save(null, {
-                    success: function (savedImage) {
-                        $scope.myFilterBooks();
-                    },
-                    error: function (savedImage, error) {
-                        alert('Failed to create new object, with error code: ' + error.message);
-                    }
-                });
-            }
-
+            /* Removes a word from the list of vocab words for the book being edited */
             $scope.removeWord = function (word) {
                 debugger;
 
-                $scope.selectedBook.remove("words", word);
+                /* Update the BookVocabIntermediate to make it inactive */
+                var BookVocabIntermediate = Parse.Object.extend("BookVocabIntermediate");
+                var query = new Parse.Query(BookVocabIntermediate);
+                query.equalTo("Vocab", word);
+                query.equalTo("Book", $scope.selectedBook);
 
-                $scope.selectedBook.save(null, {
-                    success: function (savedImage) {
+                query.find({
+                    success: function (results) {
+                        /* For each BookVocabIntermediate (realistically should only be 1), inactivate it */
+                        for (i = 0; i < results.length; i++) {
+                            results[i].set("isActive", false);
+                            results[i].save(null, {
+                                success: function (inter) {
+                                    debugger;
+                                    /* Remove the word from the list of words being displayed */
+                                    var index = $scope.bookVocabWords.indexOf(word);
+                                    if (index > -1) {
+                                        $scope.bookVocabWords.splice(index, 1);
+                                    }
+                                    $scope.$apply();
+                                },
+                                error: function (error) {
+                                    alert('Failed to update BookVocabIntermediate, Code ' + error.code + ": " + error.message);
+                                }
+                            });
+                        }
 
                     },
-                    error: function (savedImage, error) {
-                        alert('Failed to create new object, with error code: ' + error.message);
+                    error: function (error) {
+                        alert('Failed to get BookVocabIntermediate, Code ' + error.code + ": " + error.message);
                     }
                 });
             }
 
+            /* Remove book from user's local library */
             $scope.removeBook = function (removedBook) {
                 debugger;
-
-                var tempImages = removedBook.get('images');
-
-                removedBook.destroy({
-                    success: function (myObject) {
-
+                /* Simply set the book's status as being deleted */
+                removedBook.set("isActive", false);
+                removedBook.save(null, {
+                    success: function (book) {
+                        debugger;
+                        /* Make sure to clear out any variables the book may be a part of */
                         $scope.selectedBookTitle = "No Book Selected";
                         $scope.selectedBookURL = "images/noimage.png";
                         $scope.selectedBook = null;
-
-                        $scope.filterBooks();
                         $scope.myFilterBooks();
+                        $scope.activaTab('menu2');
                         $scope.$apply();
-                        $scope.jumpToBrowse();
-
-                        if (tempImages != null) {
-                            for (var i = 0; i < tempImages.length; i++) {
-                                $scope.removeImageFromParse(tempImages[i]);
-                            }
-                        }
+                        alert("Book has been deleted from your library!");
                     },
-                    error: function (myObject, error) {
-                        debugger;
-
-                        alert("error removing book");
+                    error: function (error) {
+                        alert('Failed to update Book, Code ' + error.code + ": " + error.message);
                     }
                 });
             }
 
+            /* This is currently not used, I'll keep it here in case it is helpful later on */
             $scope.removeImageFromParse = function (removedImage) {
                 debugger;
 
@@ -632,6 +882,7 @@
                 });
             }
 
+            /* This is currently not used, it had to do with uploading images for each individual vocab word */
             $scope.removeImage = function (removedImage) {
                 debugger;
                 $scope.selectedBook.remove("images", removedImage);
@@ -666,6 +917,7 @@
                 });
             }
 
+            /* This seems to not be used, it can be used to validate the form in "Edit Book Details */
             $scope.validateEdit = function () {
                 debugger;
                 if ($scope.editForm.$valid) {
@@ -681,30 +933,124 @@
                 debugger;
                 var fileUploadControl = $("#editImageFile")[0];
                 var parseFile;
-                $scope.fileName = $scope.editCover.slice(12);
+                //$scope.fileName = $scope.editCover.slice(12);
                 if (fileUploadControl.files.length > 0) {
                     var file = fileUploadControl.files[0];
-                    var name = $scope.fileName;
-                    parseFile = new Parse.File(name, file);
+                    //var name = $scope.fileName;
+                    parseFile = new Parse.File(file.name, file);
                 }
 
-                $scope.selectedBook.set("title", $scope.editName);
+                $scope.selectedBook.set("name", $scope.editName);
                 $scope.selectedBook.set("author", $scope.editAuthor);
-                $scope.selectedBook.set("grade", $scope.editPickedGrade);
+                $scope.selectedBook.set("gradeLevel", $scope.editPickedGrade);
                 $scope.selectedBook.set("subject", $scope.editPickedSubject);
+                $scope.selectedBook.set("difficulty", $scope.editPickedDifficulty);
 
-                if ($scope.editCover) {
-                    $scope.selectedBook.set("bookPhoto", parseFile);
+                if (parseFile != "" || parseFile != null || parseFile != undefined) {
+                    $scope.selectedBook.set("coverPicture", parseFile);
                 }
+                debugger;
 
                 $scope.selectedBook.save(null, {
                     success: function (savedBook) {
-                        $scope.jumpToBrowse();
+                        $scope.myFilterBooks();
+                        $scope.activaTab("menu2");
+                        $scope.$apply();
+                        alert("Book details have been updated!");
                     },
                     error: function (savedBook, error) {
                         alert('Failed to create new object, with error code: ' + error.message);
                     }
                 });
+            }
+
+            $scope.getClassrooms = function () {
+                var ClassroomUserIntermediate = Parse.Object.extend("ClassroomUserIntermediate");
+                var query = new Parse.Query(ClassroomUserIntermediate);
+                query.equalTo("user", $scope.currentUser);
+                query.equalTo("isActive", true);
+
+                query.find({
+                    success: function (results) {
+                        for (i = 0; i < results.length; i++) {
+                            var Classroom = results[i].get("classroom");
+                            Classroom.fetch({
+                                success: function (classroom) {
+                                    /* Push each classroom into the array for processing by the HTML */
+                                    $scope.classrooms.push(classroom);
+                                    $scope.$apply();
+                                },
+                                error: function (error) {
+                                    alert("Error: " + error.code + " " + error.message);
+                                }
+                            });
+                        }
+
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+            }
+
+            $scope.manageClassroom = function (classroom) {
+                debugger;
+                $scope.classroom = classroom;
+                $scope.activaTab('manageClassroom');
+                $scope.classroomStudents = [];
+
+                var ClassroomUserIntermediate = Parse.Object.extend("ClassroomUserIntermediate");
+                var query = new Parse.Query(ClassroomUserIntermediate);
+                query.equalTo("isActive", true);
+                //query.equalTo("isTeacher", false);
+
+                query.find({
+                    success: function (results) {
+                        for (i = 0; i < results.length; i++) {
+                            var Student = results[i].get("user");
+                            Student.fetch({
+                                success: function (student) {
+                                    /* Push each classroom into the array for processing by the HTML */
+                                    $scope.classroomStudents.push(student);
+                                    $scope.$apply();
+                                },
+                                error: function (error) {
+                                    alert("Error: " + error.code + " " + error.message);
+                                }
+                            });
+                        }
+
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
+                    }
+                });
+
+                /* YOU NEED TO MAKE SURE TO GET ALL THE BOOKS FOR A PARTICULAR CLASSROOM FROM THE INTERMEDIATES
+                 * USE THE ISACTIVE ON THE INTERMEDIATE TO DETERMINE IF THE CHECKBOX FOR THE BOOK IS CHECKED */
+                var ClassroomBookIntermediate = Parse.Object.extend("ClassroomBookIntermediate");
+                var query = new Parse.Query(ClassroomBookIntermediate);
+
+                query.equalTo("Classroom", classroom);
+                query.equalTo("isActive", true);
+
+                /* Set the results to userBooks so that it can be displayed in the personal books table */
+                for (i = 0; i < results.length; i++) {
+                    var ClassroomBookIntermediate = Parse.Object.extend("ClassroomBookIntermediate");
+                    var query = new Parse.Query(ClassroomBookIntermediate);
+                    query.equalTo("Book", globalBook);
+                    query.equalTo("isActive", true);
+                }
+
+                $scope.$apply();
+                debugger;
+            }
+
+            $scope.viewStudentProfile = function (student) {
+                $scope.student = student;
+
+                $scope.activaTab("studentProfile");
+                $scope.$apply();
             }
 
             var init = function () {
@@ -724,7 +1070,6 @@
     <div ng-controller="ElloquentController">
 
         <div class="container">
-
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -738,6 +1083,23 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeBook(selectedBook)">Delete Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="addToLibraryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Are you sure you want to add this book to your library?</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addToUser(selectedBook)">Add To My Library!</button>
                         </div>
                     </div>
                 </div>
@@ -771,50 +1133,58 @@
 
                 <div class="row">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#content" id="myTab" ng-click="filterBooks()">Browse Content</a></li>
+                        <li class="active"><a data-toggle="tab" href="#content" id="myTab" ng-click="filterBooks()">Browse Global Library</a></li>
                         <li><a data-toggle="tab" href="#home" ng-click="refreshAddBooks()">Add Books</a></li>
                         <li id="editBook"><a data-toggle="tab" href="#menu1">Edit Book</a></li>
                         <li><a data-toggle="tab" href="#menu2">My Books</a></li>
+                        <li><a data-toggle="tab" href="#manageClassrooms">My Classrooms</a></li>
+                        <li id="manageClassroomTab"><a data-toggle="tab" href="#manageClassroom">Manage Classroom</a></li>
+                        <li id="studentProfileTab"><a data-toggle="tab" href="#studentProfile"></a></li>
+
                     </ul>
                 </div>
 
                 <div class="row">
                     <div class="tab-content">
                         <div id="content" class="tab-pane fade in active">
-                            <h1 style="text-align: center;">Browse Content </h1>
+
 
                             <div class="container">
 
-                                <div class="row myBlock">
-                                    <div style="flex: 2;">
-                                        <div style="display: flex;">
-                                            <button type="submit" style="flex: 1; margin: 5px;" class="btn" id="filter" value="filter" ng-click="filterBooks()">Filter!</button>
-                                            <button type="submit" style="flex: 1; margin: 5px;" class="btn" id="resetFilter" value="restFilter" ng-click="resetFilter()">Reset Filter</button>
+                                <div class="row header">
+                                    <div class="tab-title">Browse Global Library</div>
+
+                                    <div class="myBlock">
+                                        <div style="flex: 2;">
+                                            <div style="display: flex;">
+                                                <button type="submit" style="flex: 1; margin: 5px;" class="btn btn-primary" id="filter" value="filter" ng-click="filterBooks()">Filter!</button>
+                                                <button type="submit" style="flex: 1; margin: 5px;" class="btn btn-secondary" id="resetFilter" value="restFilter" ng-click="resetFilter()">Reset Filter</button>
+                                            </div>
+
+                                        </div>
+
+                                        <div style="flex: 3; margin: 5px;">
+                                            <label for="repeatSelect"> Filter by Grade: </label>
+                                            <select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]"></select>
+                                        </div>
+                                        <div style="flex: 3; margin: 5px;">
+                                            <label for="repeatSelect"> Filter by Difficulty: </label>
+                                            <select class="form-control" ng-model="filterDifficulty" ng-options="subject for subject in difficulty" ng-init="filterDifficulty = difficulty[0]"></select>
+                                        </div>
+                                        <div style="flex: 3; margin: 5px;">
+                                            <label for="repeatSelect"> Filter by Subject: </label>
+                                            <select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]"></select>
                                         </div>
 
                                     </div>
-
-                                    <div style="flex: 3; margin: 5px;">
-                                        <label for="repeatSelect"> Filter by Grade: </label>
-                                        <select class="form-control" ng-model="filterGrades" ng-options="grade for grade in grades" ng-init="filterGrades = grades[0]"></select>
-                                    </div>
-                                    <div style="flex: 3; margin: 5px;">
-                                        <label for="repeatSelect"> Filter by Difficulty: </label>
-                                        <select class="form-control" ng-model="filterDifficulty" ng-options="subject for subject in difficulty" ng-init="filterDifficulty = difficulty[0]"></select>
-                                    </div>
-                                    <div style="flex: 3; margin: 5px;">
-                                        <label for="repeatSelect"> Filter by Subject: </label>
-                                        <select class="form-control" ng-model="filterSubjects" ng-options="subject for subject in subjects" ng-init="filterSubjects = subjects[0]"></select>
-                                    </div>
-
                                 </div>
 
                                 <div class="row">
                                     <div class="mygrid-wrapper-div">
 
                                         <table class="table table-hover">
-                                            <tr style="border-left: solid; border-color: lightgray; border-width: 1px;">
-                                                <th>Cover</th>
+                                            <tr style="background-color: rgb(133, 214, 255);">
+                                                <th style="border-left: solid; border-color: rgb(92, 184, 228); border-width: 1px;">Cover</th>
                                                 <th>Title</th>
                                                 <th>Author</th>
                                                 <th>Grade</th>
@@ -822,14 +1192,14 @@
                                                 <th>Subject</th>
                                                 <th></th>
                                             </tr>
-                                            <tr ng-repeat="book in allBooks" style="border-left: solid; border-color: lightgray; border-width: 1px;">
+                                            <tr ng-repeat="book in allBooks" style="border-left: solid; border-color: rgb(92, 184, 228); border-width: 1px;">
                                                 <td><img ng-src="{{book.get('coverPicture').url()}}" style="height:192px;" />	</td>
                                                 <td>{{book.get("name")}}</td>
                                                 <td>{{book.get("author")}}</td>
                                                 <td>{{book.get("gradeLevel")}}</td>
                                                 <td>{{book.get("difficulty")}}</td>
                                                 <td>{{book.get("subject")}}</td>
-                                                <td><button type="submit" class="btn" id="addToUser" ng-click="addToUser(book)">Add to my Library!</button></td>
+                                                <td><button type="button" class="btn btn-primary" id="addToUser" ng-click="verifyAddBookToPersonalLibrary(book)" data-toggle="modal" data-target="#addToLibraryModal">Add to my Library!</button></td>
                                             </tr>
                                         </table>
 
@@ -840,191 +1210,195 @@
 
                         <div id="home" class="tab-pane fade">
 
-                            <h1 style="text-align: center;">Add a Book</h1>
+                            <div class="header">
+                                <div class="tab-title"> Create A New Book</div>
 
-                            <div class="container">
-                                <form name="bookAddForm">
+                                <div class="container contentBlock">
+                                    <form name="bookAddForm">
 
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <input type="text" class="form-control" name="name" ng-class="{ 'error': attempted && bookAddForm.name.$invalid }" ng-model="name" required placeholder="Title" />
-                                            <input type="text" class="form-control" name="author" ng-class="{ 'error': attempted && bookAddForm.author.$invalid }" ng-model="author" required placeholder="Author" />
-                                            <select name="subj" class="form-control" ng-class="{'error':attempted && bookAddForm.subj.$invalid}"
-                                                    ng-model="pickedSubject"
-                                                    ng-options="subject for subject in subjectsPick"
-                                                    required>
-                                                <option value="">Select Subject</option>
-                                            </select>
-                                            <select name="grade" class="form-control" ng-class="{'error':attempted &&  bookAddForm.grade.$invalid}"
-                                                    ng-model="pickedGrade"
-                                                    ng-options="grade for grade in gradesPick"
-                                                    required>
-                                                <option value="">Select Grade</option>
-                                            </select>
-                                            <select name="difficulty" class="form-control" ng-class="{'error':attempted &&  bookAddForm.difficulty.$invalid}"
-                                                    ng-model="pickedDifficulty"
-                                                    ng-options="difficulty for difficulty in difficultyPick"
-                                                    required>
-                                                <option value="">Select Difficulty</option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <input type="text" class="form-control" name="name" ng-class="{ 'error': attempted && bookAddForm.name.$invalid }" ng-model="name" required placeholder="Title" />
+                                                <input type="text" class="form-control" name="author" ng-class="{ 'error': attempted && bookAddForm.author.$invalid }" ng-model="author" required placeholder="Author" />
+                                                <select name="subj" class="form-control" ng-class="{'error':attempted && bookAddForm.subj.$invalid}"
+                                                        ng-model="pickedSubject"
+                                                        ng-options="subject for subject in subjectsPick"
+                                                        required>
+                                                    <option value="">Select Subject</option>
+                                                </select>
+                                                <select name="grade" class="form-control" ng-class="{'error':attempted &&  bookAddForm.grade.$invalid}"
+                                                        ng-model="pickedGrade"
+                                                        ng-options="grade for grade in gradesPick"
+                                                        required>
+                                                    <option value="">Select Grade</option>
+                                                </select>
+                                                <select name="difficulty" class="form-control" ng-class="{'error':attempted &&  bookAddForm.difficulty.$invalid}"
+                                                        ng-model="pickedDifficulty"
+                                                        ng-options="difficulty for difficulty in difficultyPick"
+                                                        required>
+                                                    <option value="">Select Difficulty</option>
+                                                </select>
 
-                                            <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="validateBook()" />
+                                                <input class="btn btn-primary btn-block" type="submit" id="submit" value="Submit" ng-click="validateBook()" />
 
+                                            </div>
+
+                                            <div class="col-md-6">
+
+                                                <h4>Book Cover:</h4>
+                                                <center>
+                                                    <img id="imageCover" ng-src="{{defaultImage}}" style="height: 192px;" />
+                                                </center>
+                                                <input type="file" fileinput="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" />
+
+                                            </div>
                                         </div>
 
-                                        <div class="col-md-6">
-
-                                            <h4>Book Cover:</h4>
-                                            <center>
-                                                <img id="imageCover" ng-src="{{defaultImage}}" style="height: 192px;" />
-                                            </center>
-                                            <input type="file" fileinput="file" id="imageFile" name="cover" ng-class="{'error':attempted  && bookAddForm.cover.$invalid}" ng-model="cover" />
-
-                                        </div>
-                                    </div>
-
-                                </form>
-
-
+                                    </form>
+                                </div>
                             </div>
+
+
                         </div>
 
                         <div id="menu1" class="tab-pane fade">
                             <div class="container">
 
                                 <div class="row">
-                                    <div class=col-md-4>
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <h3>Edit Book Details </h3>
+                                    <div class=col-md-6>
+                                        <div class="row">
+                                            <h3>Edit Book Details </h3>
 
-                                                <form name="editForm">
+                                            <form name="editForm">
 
-                                                    <h5>Book Cover:</h5>
-                                                    <img id="editImageCover" ng-src="{{selectedBook.get('bookPhoto').url()}}" style="width:192px;" />
-                                                    <input id="editImageFile" type="file" ng-model="editCover" />
+                                                <h5 style="font-weight: bold">Book Cover:</h5>
+                                                <img id="editImageCover" ng-src="{{selectedBook.get('bookPhoto').url()}}" style="height:250px;" />
+                                                <input id="editImageFile" type="file" ng-model="editCover" />
 
-                                                    <h5>Book Title:</h5>
-                                                    <input class="form-control" name="editName" ng-class="{ 'error': editForm.editName.$invalid }" type="text" ng-model="editName" required />
-                                                    <h5>Author:</h5>
-                                                    <input class="form-control" name="editAuthor" ng-class="{ 'error': editForm.editAuthor.$invalid }" type="text" ng-model="editAuthor" required />
+                                                <h5 style="font-weight: bold">Book Title:</h5>
+                                                <input class="form-control" name="editName" ng-class="{ 'error': editForm.editName.$invalid }" type="text" ng-model="editName" required />
 
-                                                    <h5>Select Grade Level:</h5>
-                                                    <select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick"></select>
+                                                <h5 style="font-weight: bold">Author:</h5>
+                                                <input class="form-control" name="editAuthor" ng-class="{ 'error': editForm.editAuthor.$invalid }" type="text" ng-model="editAuthor" required />
 
-                                                    <h5>Select Subject:</h5>
-                                                    <select class="form-control" ng-model="editPickedSubject" ng-options="subject for subject in subjectsPick"></select>
+                                                <h5 style="font-weight: bold">Select Grade Level:</h5>
+                                                <select class="form-control" ng-model="editPickedGrade" ng-options="grade for grade in gradesPick"></select>
 
-                                                    <input class="btn btn-primary btn-block" type="submit" id="submit" value="Save Book Details" ng-click="editBook()" ng-disabled="!editName || !editAuthor || !editPickedGrade || !editPickedSubject" />
+                                                <h5 style="font-weight: bold">Select Subject:</h5>
+                                                <select class="form-control" ng-model="editPickedSubject" ng-options="subject for subject in subjectsPick"></select>
 
-                                                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal" ng-disabled="!selectedBook">
-                                                        Delete Book
-                                                    </button>
+                                                <h5 style="font-weight: bold">Select Difficulty:</h5>
+                                                <select class="form-control" ng-model="editPickedDifficulty" ng-options="difficulty for difficulty in difficultyPick"></select>
 
-                                                    <input class="btn btn-warning btn-block" type="submit" id="backToBrowse" value="Cancel Edit" ng-click="jumpToBrowse();" />
-                                                </form>
-                                            </div>
+                                                <input class="btn btn-primary btn-block" type="submit" id="submit" value="Save Book Details" ng-click="editBook()" ng-disabled="!editName || !editAuthor || !editPickedGrade || !editPickedSubject" />
+
+                                                <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal" ng-disabled="!selectedBook">
+                                                    Delete Book
+                                                </button>
+
+                                                <input class="btn btn-warning btn-block" type="submit" id="backToBrowse" value="Cancel Edit" ng-click="jumpToBrowse();" />
+                                            </form>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="col-md-12">
+                                    <div class="col-md-6">
 
-                                            <div class="row">
-                                                <h3>Current Words </h3>
+                                        <div class="row">
+                                            <h3>Current Words </h3>
 
-                                                <h5>Add Word:</h5>
-                                                <input class="form-control" type="text" placeholder="Example: Technology" ng-model="word" />
-                                                <input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook" />
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="mygrid-wrapper-div">
-                                                    <table class="table table-hover">
-                                                        <tr>
-                                                            <th>Words</th>
-                                                            <th>Remove</th>
-                                                        </tr>
-
-                                                        <tr ng-repeat="word in selectedBook.get('words') track by $index">
-                                                            <td>{{word}}</td>
-                                                            <td>
-                                                                <button type="submit" class="btn" id="removeWord" ng-click="removeWord(word)">X</button>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-
+                                            <h5>Add Word:</h5>
+                                            <input class="form-control" type="text" placeholder="Example: Technology" ng-model="word" />
+                                            <input class="btn btn-primary btn-block" type="submit" id="addWord" value="Add Word" ng-click="addWord()" ng-disabled="!word || !selectedBook" />
                                         </div>
+
+                                        <div class="row">
+                                            <div class="mygrid-wrapper-div">
+                                                <table class="table table-hover">
+                                                    <tr>
+                                                        <th>Words</th>
+                                                        <th>Image</th>
+                                                        <th>Remove</th>
+                                                    </tr>
+
+                                                    <tr ng-repeat="vocabWord in bookVocabWords track by $index">
+                                                        <td>{{vocabWord.get("name")}}</td>
+                                                        <td><img ng-src="{{vocabWord.get('image').url()}}" style="max-height:50px;" />	</td>
+                                                        <td>
+                                                            <button type="submit" class="btn" id="removeWord" ng-click="removeWord(vocabWord)">X</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="col-md-12">
+                                    <!--<div class="col-md-4">
 
-                                            <div class="row">
-                                                <h3>Current Images</h3>
+                        <div class="row">
+                            <h3>Current Images</h3>
 
-                                                <h5>Add Image:</h5>
-                                                <input class="form-control" type="file" id="image" ng-model="image" />
-                                                <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  !selectedBook" />
-                                            </div>
+                            <h5>Add Image:</h5>
+                            <input class="form-control" type="file" id="image" ng-model="image" />
+                            <input class="btn btn-primary btn-block" type="submit" id="addImage" value="Add Image" ng-click="addImage()" ng-disabled="!image||  !selectedBook" />
+                        </div>
 
-                                            <div class="row">
-                                                <div class="mygrid-wrapper-div">
-                                                    <table class="table table-hover">
-                                                        <tr>
-                                                            <th>Image</th>
-                                                            <th>Remove</th>
-                                                        </tr>
-                                                        <tr ng-repeat="im in selectedBook.get('images')">
-                                                            <td><img ng-src="{{im}}" style="width:192px;" />	</td>
-                                                            <td>
-                                                                <button type="submit" class="btn" id="removeImage" ng-click="removeImage(im)">X</button>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
+                        <div class="row">
+                            <div class="mygrid-wrapper-div">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                    <tr ng-repeat="im in selectedBook.get('images')">
+                                        <td><img ng-src="{{im}}" style="width:192px;" />	</td>
+                                        <td>
+                                            <button type="submit" class="btn" id="removeImage" ng-click="removeImage(im)">X</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
 
-                                        </div>
-                                    </div>
+                </div>-->
                                 </div>
                             </div>
                         </div>
 
                         <div id="menu2" class="tab-pane fade">
-                            <h1 style="text-align: center;">My Library</h1>
-
                             <div class="container">
+                                <div class="row header">
+                                    <div class="tab-title">My Library</div>
 
-                                <div class="row myBlock">
-                                    <div style="flex: 2;">
-                                        <div style="display: flex;">
-                                            <button type="submit" style="flex: 1; margin: 5px;" class="btn" id="filter" value="filter" ng-click="myFilterBooks()">Filter!</button>
-                                            <button type="submit" style="flex: 1; margin: 5px;" class="btn" id="resetFilter" value="restFilter" ng-click="myResetFilter()">Reset Filter</button>
+                                    <div class="myBlock">
+                                        <div style="flex: 2;">
+                                            <div style="display: flex;">
+                                                <button type="submit" style="flex: 1; margin: 5px;" class="btn btn-primary" id="filter" value="filter" ng-click="myFilterBooks()">Filter!</button>
+                                                <button type="submit" style="flex: 1; margin: 5px;" class="btn btn-secondary" id="resetFilter" value="restFilter" ng-click="myResetFilter()">Reset Filter</button>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div style="flex: 3; margin: 5px;">
-                                        <label for="repeatSelect"> Filter by Grade: </label>
-                                        <select class="form-control" ng-model="myFilterGrades" ng-options="grade for grade in grades" ng-init="myFilterGrades = grades[0]"></select>
-                                    </div>
-                                    <div style="flex: 3; margin: 5px;">
-                                        <label for="repeatSelect"> Filter by Difficulty: </label>
-                                        <select class="form-control" ng-model="myFilterDifficulty" ng-options="subject for subject in difficulty" ng-init="myFilterDifficulty = difficulty[0]"></select>
-                                    </div>
-                                    <div style="flex: 3; margin: 5px;">
-                                        <label for="repeatSelect"> Filter by Subject: </label>
-                                        <select class="form-control" ng-model="myFilterSubjects" ng-options="subject for subject in subjects" ng-init="myFilterSubjects = subjects[0]"></select>
-                                    </div>
+                                        <div style="flex: 3; margin: 5px;">
+                                            <label for="repeatSelect"> Filter by Grade: </label>
+                                            <select class="form-control" ng-model="myFilterGrades" ng-options="grade for grade in grades" ng-init="myFilterGrades = grades[0]"></select>
+                                        </div>
+                                        <div style="flex: 3; margin: 5px;">
+                                            <label for="repeatSelect"> Filter by Difficulty: </label>
+                                            <select class="form-control" ng-model="myFilterDifficulty" ng-options="subject for subject in difficulty" ng-init="myFilterDifficulty = difficulty[0]"></select>
+                                        </div>
+                                        <div style="flex: 3; margin: 5px;">
+                                            <label for="repeatSelect"> Filter by Subject: </label>
+                                            <select class="form-control" ng-model="myFilterSubjects" ng-options="subject for subject in subjects" ng-init="myFilterSubjects = subjects[0]"></select>
+                                        </div>
 
+                                    </div>
                                 </div>
+
 
                                 <div class="row">
                                     <div class="mygrid-wrapper-div">
                                         <table class="table table-hover">
-                                            <tr>
+                                            <tr style="background-color: rgb(133, 214, 255);">
                                                 <th style="border-left: solid; border-color: lightgray; border-width: 1px;">Cover</th>
                                                 <th>Title</th>
                                                 <th>Author</th>
@@ -1040,7 +1414,7 @@
                                                 <td>{{book.get("gradeLevel")}}</td>
                                                 <td>{{book.get("difficulty")}}</td>
                                                 <td>{{book.get("subject")}}</td>
-                                                <td><button type="submit" class="btn" id="addWord" value="jumpWord" ng-click="trig(book)">Edit</button></td>
+                                                <td><button type="submit" class="btn btn-primary" id="addWord" value="jumpWord" ng-click="trig(book)">Edit</button></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -1048,6 +1422,97 @@
 
                             </div>
                         </div>
+
+                        <div id="manageClassrooms" class="tab-pane fade">
+
+                            <div class="container">
+                                <div class="row header" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                                    <div class="tab-title">Browse Classrooms</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mygrid-wrapper-div">
+                                        <table class="table table-hover">
+                                            <tr style="background-color: rgb(133, 214, 255);">
+                                                <th style="border-left: solid; border-color: lightgray; border-width: 1px;">Classroom</th>
+                                                <th>Grade Level</th>
+                                                <th>Students</th>
+                                                <th></th>
+                                            </tr>
+                                            <tr ng-repeat="classroom in classrooms">
+                                                <td style="border-left: solid; border-color: lightgray; border-width: 1px;">{{classroom.get("name")}}</td>
+                                                <td>{{classroom.get("gradeLevel")}}</td>
+                                                <td>{{classroom.get("gradeLevel")}}</td>
+                                                <td><button type="submit" class="btn btn-primary" id="addWord" value="jumpWord" ng-click="manageClassroom(classroom)" style="width: 100%;">Manage</button></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="manageClassroom" class="tab-pane fade" ng-class="classroom">
+                            <div class="header" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                                <div class="tab-title">{{classroom.get("name")}}</div>
+
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row myBlock" style="font-size: 30px; border-top-left-radius: 0px; border-top-right-radius: 0px;">Library</div>
+                                <div class="row mygrid-wrapper-div">
+                                    <table class="table table-hover">
+                                        <tr style="background-color: rgb(133, 214, 255);">
+                                            <th style="border-left: solid; border-color: lightgray; border-width: 1px;">Visible</th>
+                                            <th>Cover</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Grade</th>
+                                            <th>Difficulty</th>
+                                            <th>Subject</th>
+                                        </tr>
+                                        <tr class="selectable" ng-repeat="book in userBooks">
+                                            <td style="border-left: solid; border-color: lightgray; border-width: 1px;"><input type="checkbox" ng-model=""/></td>
+                                            <td><img ng-src="{{book.get('coverPicture').url()}}" style="width:50px;" /></td>
+                                            <td>{{book.get("name")}}</td>
+                                            <td>{{book.get("author")}}</td>
+                                            <td>{{book.get("gradeLevel")}}</td>
+                                            <td>{{book.get("difficulty")}}</td>
+                                            <td>{{book.get("subject")}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row myBlock" style="font-size: 30px; border-top-left-radius: 0px; border-top-right-radius: 0px;">Students</div>
+                                <div class="row mygrid-wrapper-div">
+                                    <table class="table table-hover">
+                                        <tr style="background-color: rgb(133, 214, 255);">
+                                            <th style="border-left: solid; border-color: lightgray; border-width: 1px;">Picture</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="student in classroomStudents">
+                                            <td style="border-left: solid; border-color: lightgray; border-width: 1px;"><img ng-src="{{student.get('ProfilePic').url()}}" style="width:50px;" /></td>
+                                            <td>{{student.get("username")}}</td>
+                                            <td>{{student.get("email")}}</td>
+                                            <td><button class="btn btn-primary" ng-click="viewStudentProfile(student)">View Profile</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="studentProfile" class="tab-pane fade" ng-class="student">
+                            <div class="header" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                                <div class="tab-title">{{student.get("username")}}</div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
